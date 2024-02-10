@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {NavigationContainer} from "@react-navigation/native";
-import {navigationRef} from "./src/navigation/utils";
-import MainNavigator from "./src/navigation/mainNavigator";
-import {SafeAreaView} from "react-native-safe-area-context";
+import {NavigationContainer} from '@react-navigation/native';
+import {navigationRef} from './src/navigation/utils';
+import MainNavigator from './src/navigation/mainNavigator';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
@@ -12,11 +12,11 @@ Sentry.init({
 
 function App(): JSX.Element {
   return (
-      <SafeAreaView style={{flex: 1}}>
-          <NavigationContainer ref={navigationRef}>
-              <MainNavigator/>
-          </NavigationContainer>
-      </SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
+      <NavigationContainer ref={navigationRef}>
+        <MainNavigator />
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 
