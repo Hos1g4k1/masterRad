@@ -1,9 +1,11 @@
-import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
 import {colors} from '../theme/colors';
 import styles from './style';
 import HomeScreen from '../features/HomeScreen';
 import {HOME_SCREEN_TITLE} from './translations';
-const Stack = createStackNavigator();
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 const MainStackNavigator = () => {
   return (

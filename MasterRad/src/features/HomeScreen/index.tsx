@@ -1,14 +1,38 @@
-import {Text, TouchableOpacity, View} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
+import CelsiusDegree from '../../components/CelsiusDegree';
+import {Row} from '../../components/Flex';
+import ExtremeTemp from '../../components/ExtremeTemp';
+import Text from '../../components/Text';
+import Spacing from '../../components/Spacing';
 
 const HomeScreen = () => {
+  const renderLocationInfo = () => {
+    return (
+      <View style={{alignItems: 'center'}}>
+        <Text variation="headline3" color="white">
+          My location
+        </Text>
+        <Text variation="body2" color="white">
+          Belgrade
+        </Text>
+        <CelsiusDegree degree={14} variation="headline4" />
+        <Text variation="body2" color="white">
+          Cloudy
+        </Text>
+        <Row>
+          <ExtremeTemp variation="body2" temp={19} title="H" />
+          <ExtremeTemp variation="body2" temp={7} title="L" />
+        </Row>
+      </View>
+    );
+  };
+
   return (
-    <View style={{flex: 1, backgroundColor: 'red'}}>
-      <TouchableOpacity
-        onPress={() => {
-          throw new Error('My first Sentry error');
-        }}>
-        <Text>LALALALA</Text>
-      </TouchableOpacity>
+    <View style={{flex: 1, backgroundColor: 'gray'}}>
+      <Spacing size={3} top>
+        {renderLocationInfo()}
+      </Spacing>
     </View>
   );
 };
