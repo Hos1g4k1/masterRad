@@ -11,7 +11,6 @@ type Props = {
 
 const Text = ({variation, style, children, color}: Props) => {
   const textVariation = textVariations[variation];
-  console.log({textVariation});
   return (
     <RNText
       style={{
