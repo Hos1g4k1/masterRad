@@ -1,10 +1,11 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Button, View} from 'react-native';
 import CelsiusDegree from '../../components/CelsiusDegree';
 import {Row} from '../../components/Flex';
 import ExtremeTemp from '../../components/ExtremeTemp';
 import Text from '../../components/Text';
 import Spacing from '../../components/Spacing';
+import {getForecast} from './redux/forecast/api';
 
 const HomeScreen = () => {
   const renderLocationInfo = () => {
@@ -33,6 +34,16 @@ const HomeScreen = () => {
       <Spacing size={3} top>
         {renderLocationInfo()}
       </Spacing>
+      <Button
+        onPress={() =>
+          getForecast().then(res =>
+            console.log({
+              x: res.data.location,
+            }),
+          )
+        }
+        title="Lalalal"
+      />
     </View>
   );
 };
