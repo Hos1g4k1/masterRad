@@ -4,7 +4,7 @@ import {textVariations, textVariationsTypes} from '../../types/textVariations';
 
 type Props = {
   title: string;
-  temp: number;
+  temp: number | undefined;
   variation: textVariationsTypes;
 };
 
