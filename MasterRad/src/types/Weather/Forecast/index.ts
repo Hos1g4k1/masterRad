@@ -48,8 +48,28 @@ type ForecastDayType = {
   hour: Array<HourType>;
 };
 
-type ForecastDaysType = {
-  forecastday: Array<ForecastDayType>;
+export type ForecastHourType = {
+  chanceOfRain: number;
+  chanceOfSnow: number;
+  cloud: number;
+  condition: ConditionType;
+  feelslikeC: number;
+  humidity: number;
+  isDay: number;
+  precipMm: number;
+  pressureMb: number;
+  snowCm: number;
+  tempC: number;
+  windKph: number;
+  time: string;
+};
+export type ForecastDayDayType = {
+  day: ForecastDayType;
+  hour: Array<ForecastHourType>;
+};
+
+export type ForecastDaysType = {
+  forecastday: Array<ForecastDayDayType>;
 };
 
 export type ForecastType = {
