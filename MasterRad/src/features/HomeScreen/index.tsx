@@ -1,13 +1,36 @@
-import React from 'react';
-import {Button, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {ScrollView, View} from 'react-native';
 import CelsiusDegree from '../../components/CelsiusDegree';
 import {Row} from '../../components/Flex';
 import ExtremeTemp from '../../components/ExtremeTemp';
 import Text from '../../components/Text';
 import Spacing from '../../components/Spacing';
-import {getForecast} from './redux/forecast/api';
+import {useSelector} from 'react-redux';
+import {
+  selectCurrentDayForecast,
+  selectCurrentWeather,
+  selectForecastForNextThreeDays,
+  selectLocation,
+} from './redux/forecast/selectors';
+import {useAppDispatch} from '../../store';
+import {fetchForecast} from './redux/forecast/modules';
+import DayWeatherList from './components/DayWeatherList';
+import {getRoundTemp} from '../../utils/temperature';
+import ForecastByDay from './components/ForecastByDay';
+import TempByHourGraph from './components/TempByHourGraph';
+import {colors} from '../../theme/colors';
 
 const HomeScreen = () => {
+  const location = useSelector(selectLocation);
+  const forecast = useSelector(selectCurrentDayForecast);
+  const currentWeather = useSelector(selectCurrentWeather);
+  const futureForecast = useSelector(selectForecastForNextThreeDays);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchForecast({location: 'Belgrade'}));
+  }, []);
+
   const renderLocationInfo = () => {
     return (
       <View style={{alignItems: 'center'}}>
@@ -15,36 +38,50 @@ const HomeScreen = () => {
           My location
         </Text>
         <Text variation="body2" color="white">
-          Belgrade
+          {location?.name}
         </Text>
-        <CelsiusDegree degree={14} variation="headline4" />
+        <CelsiusDegree
+          degree={getRoundTemp(currentWeather?.tempC)}
+          variation="headline4"
+          uri={`https:${forecast?.condition.icon}`}
+        />
         <Text variation="body2" color="white">
-          Cloudy
+          {forecast?.condition.text}
         </Text>
-        <Row>
-          <ExtremeTemp variation="body2" temp={19} title="H" />
-          <ExtremeTemp variation="body2" temp={7} title="L" />
+        <Row style={{paddingTop: 8}}>
+          <ExtremeTemp
+            variation="body2"
+            temp={getRoundTemp(forecast?.maxtempC)}
+            title="H"
+          />
+          <ExtremeTemp
+            variation="body2"
+            temp={getRoundTemp(forecast?.mintempC)}
+            title="L"
+          />
         </Row>
       </View>
     );
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: 'gray'}}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={{flex: 1, backgroundColor: 'gray', height: '100%'}}>
       <Spacing size={3} top>
         {renderLocationInfo()}
       </Spacing>
-      <Button
-        onPress={() =>
-          getForecast().then(res =>
-            console.log({
-              x: res.data.location,
-            }),
-          )
-        }
-        title="Lalalal"
-      />
-    </View>
+      <Spacing size={2} horizontal vertical style={{flex: 1, marginTop: 32}}>
+        <DayWeatherList />
+      </Spacing>
+      <TempByHourGraph />
+      <Spacing size={4} top style={{flex: 1}}>
+        <ForecastByDay
+          data={futureForecast}
+          title="Forecast in the next three days"
+        />
+      </Spacing>
+    </ScrollView>
   );
 };
 
