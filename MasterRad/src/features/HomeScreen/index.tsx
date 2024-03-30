@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ScrollView, View} from 'react-native';
+import {Button, ScrollView, View} from 'react-native';
 import CelsiusDegree from '../../components/CelsiusDegree';
 import {Row} from '../../components/Flex';
 import ExtremeTemp from '../../components/ExtremeTemp';
@@ -18,7 +18,8 @@ import DayWeatherList from './components/DayWeatherList';
 import {getRoundTemp} from '../../utils/temperature';
 import ForecastByDay from './components/ForecastByDay';
 import TempByHourGraph from './components/TempByHourGraph';
-import {colors} from '../../theme/colors';
+import analyticsEventBus from '../../utils/AnalyticsEventBus/AnalyticsEventBus';
+import {SCREEN_VIEW_EVENT} from '../../utils/AnalyticsTrackers/AnalyticsEventsNames';
 
 const HomeScreen = () => {
   const location = useSelector(selectLocation);
@@ -71,6 +72,15 @@ const HomeScreen = () => {
       <Spacing size={3} top>
         {renderLocationInfo()}
       </Spacing>
+      <Button
+        title="EVENT"
+        onPress={() => {
+          analyticsEventBus.log({
+            eventName: SCREEN_VIEW_EVENT,
+            screenName: 'Home',
+          });
+        }}
+      />
       <Spacing size={2} horizontal vertical style={{flex: 1, marginTop: 32}}>
         <DayWeatherList />
       </Spacing>
