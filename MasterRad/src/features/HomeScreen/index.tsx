@@ -20,6 +20,7 @@ import ForecastByDay from './components/ForecastByDay';
 import TempByHourGraph from './components/TempByHourGraph';
 import analyticsEventBus from '../../utils/AnalyticsEventBus/AnalyticsEventBus';
 import {SCREEN_VIEW_EVENT} from '../../utils/AnalyticsTrackers/AnalyticsEventsNames';
+import {goToSearchScreen} from '../../navigation/actions';
 
 const HomeScreen = () => {
   const location = useSelector(selectLocation);
@@ -72,15 +73,7 @@ const HomeScreen = () => {
       <Spacing size={3} top>
         {renderLocationInfo()}
       </Spacing>
-      <Button
-        title="EVENT"
-        onPress={() => {
-          analyticsEventBus.log({
-            eventName: SCREEN_VIEW_EVENT,
-            screenName: 'Home',
-          });
-        }}
-      />
+      <Button title="SEARCH" onPress={goToSearchScreen} />
       <Spacing size={2} horizontal vertical style={{flex: 1, marginTop: 32}}>
         <DayWeatherList />
       </Spacing>

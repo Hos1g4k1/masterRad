@@ -4,6 +4,7 @@ import styles from './style';
 import HomeScreen from '../features/HomeScreen';
 import {HOME_SCREEN_TITLE} from './translations';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import SearchScreen from '../features/Search';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,11 @@ const MainStackNavigator = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
+        options={{title: HOME_SCREEN_TITLE}}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
         options={{title: HOME_SCREEN_TITLE}}
       />
     </Stack.Navigator>
