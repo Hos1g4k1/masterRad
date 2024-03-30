@@ -15,8 +15,6 @@ type Props = {
 const TempByHourGraph = ({}: Props) => {
   const hourlyData = useSelector(selectForecastDataForTheNextTwentyFourHours);
 
-  console.log(hourlyData[0]);
-
   //TODO Make graph for wind and precip
   //Make options for user to select which one he's interested in
 

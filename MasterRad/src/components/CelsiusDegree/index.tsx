@@ -20,6 +20,7 @@ const CelsiusDegree = ({degree, variation, uri}: Props) => {
           fontSize: textVariation.fontSize,
           fontWeight: textVariation.fontWeight,
           color: 'white',
+          marginTop: 8,
         }}>
         {degreeText}
       </Text>
