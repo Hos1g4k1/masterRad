@@ -198,13 +198,13 @@ Mane ovog tipa mobilnih aplikacija su:
     \label{fig:nativnaAplikacija}
 \end{figure}
 
-\subsection{Veb mobilne aplikacije}
-Veb mobilne aplikacije (eng. web mobile applications) su pristupačne preko internet pretraživača i ne zahtevaju preuzimanje i instalaciju na uređaj kao tradicionalne aplikacije. One su dizajnirane da budu kompatibilne sa različitim platformama i pružaju jedinstveno iskustvo korisnicima na različitim uređajima. One predstavljaju korisnu opciju za aplikacije koje zahtevaju brzu dostupnost i lako održavanje, ali kada je u pitanju duboka integracija sa uređajem i složene interakcije, ovaj tip aplikacije često zaostaje za mogućnostima koje pružaju nativne aplikacije. Prednosti veb mobilnih aplikacija:
+\subsection{Veb aplikacije}
+Veb aplikacije (eng. web applications) su pristupačne preko internet pretraživača i ne zahtevaju preuzimanje i instalaciju na uređaj kao tradicionalne aplikacije. One su dizajnirane da budu kompatibilne sa različitim platformama i pružaju jedinstveno iskustvo korisnicima na različitim uređajima. One predstavljaju korisnu opciju za aplikacije koje zahtevaju brzu dostupnost i lako održavanje, ali kada je u pitanju duboka integracija sa uređajem i složene interakcije, ovaj tip aplikacije često zaostaje za mogućnostima koje pružaju nativne aplikacije. Prednosti veb mobilnih aplikacija:
 
 \begin{itemize}
     \item Ovaj tip mobilnih aplikacija će raditi na bilo kom uređaju koji ima veb pretraživač. Ova osobina uklanja potrebu za posebnim verzijama za različite operativne sisteme.
     \item Ovaj tip mobilnih aplikacija razvija se samo jednom za sve platforme, čime se troškovi razvoja i ažuriranja značajno smanjuju u odnosu na nativne aplikacije.
-    \item Korisnici veb mobilnih aplikacija imaće pristup najnovijim izmenama onog momenta kada te izmene budu puštene na produkciju. Ovo znači da se uklanja potreba za preuzimanjem ažururanja, što znatno olakšava distribuciju i održavanje.
+    \item Korisnici veb aplikacija imaće pristup najnovijim izmenama onog momenta kada te izmene budu puštene na produkciju. Ovo znači da se uklanja potreba za preuzimanjem ažururanja, što znatno olakšava distribuciju i održavanje.
 \end{itemize}
 Mane ovog tipa mobilnih aplikacija su:
 \begin{itemize}
@@ -215,9 +215,54 @@ Mane ovog tipa mobilnih aplikacija su:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.5]{docs/images/chapterTwo/nativnaAplikacija.png}
-    \caption{Komunikacija nativne aplikacije i operativnog sistema}
-    \label{fig:nativnaAplikacija}
+    \includegraphics[scale=0.5]{docs/images/chapterTwo/vebMobilnaAplikacija.png}
+    \caption{Komunikacija veb aplikacije aplikacije i operativnog sistema}
+    \label{fig:vebMobilnaAplikacija}
+\end{figure}
+
+\subsection{Progresivne veb mobilne aplikacije}
+
+Progresivne veb aplikacije (eng. Progressive Web Applications (PWA)) su vrsta aplikacija koje kombinuju najbolje osobine tradicionalnih veb aplikacija i native mobilnih aplikacija. One se izvršavaju u veb pretraživaču, ali pružaju korisničko iskustvo koje je blisko iskustvu koje pružaju nativne mobilne aplikacije. PWA su dizajnirane da budu brze, pouzdane, čak i u uslovima loše internet konekcije. Osnovne prednosti ovog tipa aplikacija su:
+
+\begin{itemize}
+    \item Zahvaljujući servisnim radnicima (eng. service workers), progresivne veb aplikacije mogu raditi offline ili na slabim mrežnim konekcijama, pružajući osnovnu funkcionalnost kada nema internet konekcije.
+    \item Korisnici mogu "instalirati" progresivne veb aplikacije na svoje uređaje, omogućavajući im da pristupe aplikaciji sa početnog ekrana, slično kao kod nativnih aplikacija.
+    \item Progresivne veb aplikacije imaju podršku za notifikacija (eng. push notification), što omogućava bolje zadržavanje korisnika (eng. retention).
+    \item Progresivne veb aplikacije zahtevaju HTTPS\footnote{eng. Hypertext transfer protocol secure} za pokretanje, što omogućava sigurniju razmenu podataka između korisnika i aplikacije.
+\end{itemize}
+Mane ovog tipa mobilnih aplikacija su:
+\begin{itemize}
+    \item Iako progresivne veb aplikacije imaju pristup nekim hardverskim funkcijama, one ne mogu potpuno iskoristiti sve kapacitete uređaja kao što to mogu nativne aplikacije.
+    \item Ovaj tip aplikacija nije jednako podržan na svim platformama, s iOS uređajima koji imaju određena ograničenja u pogledu funkcionalnosti u odnosu na Android uređaje.
+    \item Razvoj ovog tipa mobilnih aplikacija može biti složeniji od tradicionalnih veb aplikacija zbog potrebe za implementacijom servisnih radnika i upravljanjem keširanim podacima za offline rad.
+\end{itemize}
+
+U poređenju sa tradicionalnim web aplikacijama, PWA pružaju bolje korisničko iskustvo, veću pouzdanost i više funkcionalnosti koje su bliske native iskustvu, čineći ih izuzetno privlačnim izborom za razvoj aplikacija koje treba da budu efikasne i dostupne širom različitih platformi i uslova povezivanja.
+
+\subsection{Hibridne mobilne aplikacije}
+Hibridne mobilne aplikacije (eng. crossplatform mobile application) predstavljaju spoj nativnih i veb tehnologija, omogućavajući razvoj aplikacija koje se mogu instalirati na uređaj, ali se izvršavaju u veb kontejneru. Ove aplikacije koriste kombinaciju HTML, CSS, i JavaScript za izradu korisničkog interfejsa, dok istovremeno koriste mostove (eng. bridge) poput Cordova ili Ionic za pristup native funkcijama uređaja. OVaj tip aplikacije biće implementiran u okviru ovog rada pa ćemo imati prilike detaljnije da se upoznamo sa karaktiristikama istih. Osnovne prednosti ovog tipa mobilnih aplikacija su:
+
+Smanjene performanse: Zbog dodatnog sloja apstrakcije i oslanjanja na web tehnologije, performanse hibridnih aplikacija mogu biti lošije u odnosu na native aplikacije, posebno za zahtevne zadatke.
+Kompromis u korisničkom iskustvu: Iako se trude da imitiraju izgled i osećaj native aplikacija, hibridne aplikacije često ne mogu potpuno replicirati fluidnost i odziv native sučelja.
+Zavisnost od trećih strana: Hibridne aplikacije zavise od platformi kao što su Cordova ili Ionic, što može dovesti do problema ako se ti alati ne ažuriraju redovno ili ne podržavaju najnovije verzije operativnih sistema.
+
+\begin{itemize}
+    \item Razvoj se vrši koristeći veb tehnologije koje su mnogim programerima već poznate, što smanjuje vreme i troškove razvoja.
+    \item Jedan kod može se koristiti za više platformi (iOS, Android, Windows Phone), što dodatno smanjuje troškove i olakšava održavanje.
+    \item Kroz različite biblioteke, hibridne mobilne aplikacije mogu koristiti hardver uređaja (kamere, GPS, senzore i druge funkcije).
+\end{itemize}
+Mane ovog tipa mobilnih aplikacija su:
+\begin{itemize}
+    \item Zbog dodatnog sloja apstrakcije i oslanjanja na veb tehnologije, performanse hibridnih aplikacija mogu biti lošije u odnosu na nativne aplikacije, posebno za zahtevne zadatke. Ovo je idealan razlog zbog koga bi trebalo razmotriti implementiranje sistema za praćenje performansi na početku razvoja aplikacije.
+    \item Iako se ne trude da imitiraju izgled i osećaj nativnih aplikacija, hibridne mobilne aplikacije često ne mogu potpuno replicirati fludinost i odziv nativnog korisničkog interfejsa.
+    \item Ovaj tip mobilnij aplikacija zavisi od platformi kao što su Cordova ili Ionic, što može dovesti do problema ako se ti alati ne ažuriraju redovno ili ne podržavaju najnovije verzije operativnih sistema.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{docs/images/chapterTwo/vebMobilnaAplikacija.png}
+    \caption{Komunikacija veb aplikacije aplikacije i operativnog sistema}
+    \label{fig:vebMobilnaAplikacija}
 \end{figure}
 
 % ------------------------------------------------------------------------------
