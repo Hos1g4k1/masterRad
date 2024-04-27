@@ -44,17 +44,17 @@
 \bib{matfmaster-primer}
 
 % Ime kandidata na srpskom jeziku (u odabranom pismu)
-\autor{Petar P. Petrović}
+\autor{Lazar Čeliković}
 % Naslov teze na srpskom jeziku (u odabranom pismu)
-\naslov{Master iz matematike ili računarstva čiji je naslov jako dugačak}
+\naslov{Upravljanje razvojem mobilnih aplikacija sa fokusom na performanse i kvalitet}
 % Godina u kojoj je teza predana komisiji
-\godina{2015}
+\godina{2024}
 % Ime i afilijacija mentora (u odabranom pismu)
-\mentor{dr Mika \textsc{Mikić}, redovan profesor\\ Univerzitet u Beogradu, Matematički fakultet}
+\mentor{dr Vladimir \textsc{Filipović}, redovan profesor\\ Univerzitet u Beogradu, Matematički fakultet}
 % Ime i afilijacija prvog člana komisije (u odabranom pismu)
-\komisijaA{dr Ana \textsc{Anić}, vanredni profesor\\ University of Disneyland, Nedođija}
+\komisijaA{dr Aleksandar \textsc{Kartelj}, vanredni profesor\\ Univerzitet u Beogradu, Matematički fakultet}
 % Ime i afilijacija drugog člana komisije (u odabranom pismu)
-\komisijaB{dr Laza \textsc{Lazić}, docent\\ Univerzitet u Beogradu, Matematički fakultet}
+\komisijaB{dr Staša \textsc{Vujučić Stanković}, docent\\ Univerzitet u Beogradu, Matematički fakultet}
 % Ime i afilijacija trećeg člana komisije (opciono)
 % \komisijaC{}
 % Ime i afilijacija četvrtog člana komisije (opciono)
@@ -64,11 +64,11 @@
 
 % Apstrakt na srpskom jeziku (u odabranom pismu)
 \apstr{%
-\pangrami
+Mobilne aplikacije i aplikacije generalno često se razvijaju sa primarnim ciljem da se pokrije što je moguće više funkcionalnosti, dok se koncepti kao što su performanse zanemaruju dok problem ne postane evidentan. U ovom radu se razmatra pristup koji ove koncepte stavlja u središte i implementira ih na samom početku razvojnog ciklusa. Rad prikazuje kako postavljanje sistema za merenje performansi, poslovnih metrika i analizu grešaka olakšava dalji razvoj u kasnijim stadijumima projekta. Rešenje koje ćemo analizirati razvijeno je uz pomoć razvojnog okruženja ReactNative uz podršku RTKQ biblioteke sa menadžovanje stanja podataka. Rad prikazuje detalje implementacije ovih sistema kao i benefite koje dobijamo korišćenjem istih. Pomenuti koncepti biće prikazani i analizirani na primeru mobilne aplikacije za vremensku prognozu.
 }
 
 % Ključne reči na srpskom jeziku (u odabranom pismu)
-\kljucnereci{analiza, geometrija, algebra, logika, računarstvo, astronomija}
+\kljucnereci{mobilna aplikacija, performanse, dogadjaji, računarstvo, programiranje}
 
 \begin{document}
 % ==============================================================================
@@ -80,7 +80,6 @@
 % Strana sa podacima o mentoru i članovima komisije
 \komisija
 % Strana sa posvetom (u odabranom pismu)
-\posveta{Mami, tati i dedi}
 % Strana sa podacima o disertaciji na srpskom jeziku
 \apstrakt
 % Sadržaj teze
@@ -165,15 +164,32 @@ Možemo praviti i nabrajanja:
 \pangrami
 
 % ------------------------------------------------------------------------------
-\chapter{Razrada}
-\label{chp:razrada}
+\chapter{Pregled tehnologija za razvoj mobilnih aplikacija}
+\label{chp:pregledTehnologijaZaRazvojMobilnihAplikacija}
 
 % ------------------------------------------------------------------------------
+Mobilne aplikacije su doživele neverovatnu evoluciju od svog početka. Svedoci smo kako su one iz jednostavnih alata za komunikaciju ili zabavu prerastle u složene sisteme koji nam pomažu u svakodnevnom životu. Danas, aplikacije nisu samo način da ostanemo povezani s drugima, već i sredstvo za upravljanje finansijama, učenje novih veština, pa čak i za praćenje zdravlja i fitnessa. Razvoj tehnologija poput veštačke inteligencije i mašinskog učenja dodatno je unapredio funkcionalnost i intuitivnost aplikacija, pružajući korisnicima personalizovano iskustvo koje je prethodnih godina bilo nezamislivo. Ovaj napredak ne samo da je promenio način na koji interagujemo sa našim uređajima, već je i potpuno preoblikovao digitalni pejzaž, otvarajući nove mogućnosti za razvoj i inovacije u budućnosti. Ovaj napredak mobilnih aplikacija pratio je i razvoj tehnologija koje se koriste u izradi istih. Kroz vreme, došli smo do većeg broja tipova mobilnih aplikacija kao i do velikog broja radnih okvira koji nam omogućavaju lakši razvoj i održavanje aplikacija na kojima radimo.
 
-\pangrami
+\section{Tipovi mobilnih aplikacija}
 
-\pangrami
+Mobilne aplikacije mogu se kategorisati u nekoliko osnovnih tipova, svaki sa svojim specifičnim funkcijama i ciljevima. Delimo ih na nativne aplikacije(eng. native mobile applications), veb aplikacije (eng. web mobile applications), hibridne mobilne aplikacije i progrsivne veb alikacije (eng. progressive web applications - (PWA)). Svaki od ovih tipova ima svoje prednosti i mane, te izbor tipa aplikacije zavisi od specifičnih potreba i ciljeva projekta. U nastavku rada ćemo analizirati svaku od pomenutih kategorija.
 
+\subsection{Nativne mobilne aplikacije}
+
+Nativne mobilne aplikacije (eng. native mobile applications) su programi razvijeni za specifičan operativni sistem, kao što je iOS ili Android, koristeći programerske jezike koji su specifični za svaku od platformi. Tako imamo Swift i Objective C za iOS ili Kotlin i Javu za Android. Ove aplikacije se instaliraju direktno na mobilni uređaj preko prodavnice aplikacija na uređaju i optimizovane su da pružaju maksimalnu efikasnost i iskoristivost hardverskih karakteristika uređaja. Prednsoti ovog tipa mobilnih aplikacija su:
+
+\begin{itemize}
+    \item Budući da je ovaj tip aplikacija optimizovan za specifičnu platformu, po pravilu se mogu izvući neuporedivo više performanse u poređenju sa ostalim tipovima.
+    \item Fluidne animacije i intuitivan interfejs koji potiče od samog operativnog sistema rezultuju poboljšanim korisničkim iskustvom.
+    \item Mogućnost pristupa punom setu hardverskih i softverskih funkcija samog uređaja kao što su kamera, GPS, senzori
+    \item Nativne mobilne aplikacije se objavljuju na prodavnicama aplikacija kao sto su Play prodavnica (eng. Play Store) i App prodavnica (eng. App store). Tokom ovog procesa se vrši detaljno ispitivanje aplikacija i na ovaj način se povećava sigurnost.
+\end{itemize}
+Mane ovog tipa mobilnih aplikacija su:
+\begin{itemize}
+    \item Razvijanje posebne aplikacija za svaki operativni sistem povećava troškove kao i vreme koje je potrebno da se aplikacija pusti u korišćenje
+    \item Različiti operativni sistemi često iziskuju različite programske jezike za razvoj, što može otežati pronalaženje razvojnih timova.
+    \item Svaka promena ili ažuriranje aplikacija zahteva odvojeno slanje na odobrenje prodavnicu aplikacija za svaki operativni sistem. Ovaj proces je često vremenski zahtevan.
+\end{itemize}
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
