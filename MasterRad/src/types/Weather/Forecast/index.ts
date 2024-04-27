@@ -66,6 +66,7 @@ export type ForecastHourType = {
 export type ForecastDayDayType = {
   day: ForecastDayType;
   hour: Array<ForecastHourType>;
+  date: string;
 };
 
 export type ForecastDaysType = {

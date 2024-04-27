@@ -14,7 +14,7 @@ const addTrackers = (
 };
 
 export const initAnalyticsTrackers = () => {
-  addEventNames(Events.SCREEN_VIEW_EVENT);
+  addEventNames(Events.SCREEN_VIEW_EVENT, Events.CLICKED_GRAPH_TYPE_EVENT);
 
   const DEBUG_TRACKERS = [ConsoleTracker];
   addTrackers(DEBUG_TRACKERS, 'debug');

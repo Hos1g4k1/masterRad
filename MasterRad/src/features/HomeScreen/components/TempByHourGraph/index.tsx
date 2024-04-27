@@ -8,11 +8,19 @@ import {LineChart} from 'react-native-chart-kit';
 import Spacing from '../../../../components/Spacing';
 import {Row} from '../../../../components/Flex';
 import {colors} from '../../../../theme/colors';
+import analyticsEventBus from '../../../../utils/AnalyticsEventBus/AnalyticsEventBus';
+import {CLICKED_GRAPH_TYPE_EVENT} from '../../../../utils/AnalyticsTrackers/AnalyticsEventsNames';
 
 type Props = {
   data: Array<number>;
   labels: Array<string>;
 };
+
+enum GRAPH_TYPE {
+  TEMPERATURE = 'Temperature',
+  WIND = 'Wind',
+  PRECIPITATION = 'Precipitation',
+}
 
 const TempByHourGraph = ({}: Props) => {
   const hourlyData = useSelector(selectForecastDataForTheNextTwentyFourHours);
@@ -21,13 +29,13 @@ const TempByHourGraph = ({}: Props) => {
     labels: Array<string>;
     suffix: string;
   } | null>(null);
-  const [currentOption, setCurrentOption] = useState('temp');
+  const [currentOption, setCurrentOption] = useState(GRAPH_TYPE.TEMPERATURE);
 
   useEffect(() => {
     let curData = [];
     let curLabels = [];
     switch (currentOption) {
-      case 'wind':
+      case GRAPH_TYPE.WIND:
         curData = hourlyData
           ?.map(x => x.windKph)
           .filter((_, index) => index % 2 === 1);
@@ -36,7 +44,7 @@ const TempByHourGraph = ({}: Props) => {
           .filter((_, index) => index % 2 === 1);
         setData({data: curData, labels: curLabels, suffix: ' km/h'});
         break;
-      case 'temp':
+      case GRAPH_TYPE.TEMPERATURE:
         curData = hourlyData
           ?.map(x => getRoundTemp(x.tempC))
           .filter((_, index) => index % 2 === 1);
@@ -99,22 +107,50 @@ const TempByHourGraph = ({}: Props) => {
     <Row style={{marginVertical: 8, justifyContent: 'space-between'}}>
       <Spacing size={1} right>
         <Button
-          color={currentOption === 'temp' ? colors.primary : colors.white}
+          color={
+            currentOption === GRAPH_TYPE.TEMPERATURE
+              ? colors.primary
+              : colors.white
+          }
           title="Temperature"
-          onPress={() => setCurrentOption('temp')}
+          onPress={() => {
+            setCurrentOption(GRAPH_TYPE.TEMPERATURE);
+            analyticsEventBus.log({
+              eventName: CLICKED_GRAPH_TYPE_EVENT,
+              type: 'Temperature',
+            });
+          }}
         />
       </Spacing>
       <Spacing size={1} right>
         <Button
-          color={currentOption === 'wind' ? colors.primary : colors.white}
+          color={
+            currentOption === GRAPH_TYPE.WIND ? colors.primary : colors.white
+          }
           title="Wind"
-          onPress={() => setCurrentOption('wind')}
+          onPress={() => {
+            setCurrentOption(GRAPH_TYPE.WIND);
+            analyticsEventBus.log({
+              eventName: CLICKED_GRAPH_TYPE_EVENT,
+              type: 'Wind',
+            });
+          }}
         />
       </Spacing>
       <Button
-        color={currentOption === 'percip' ? colors.primary : colors.white}
-        title="Percipation"
-        onPress={() => setCurrentOption('percip')}
+        color={
+          currentOption === GRAPH_TYPE.PRECIPITATION
+            ? colors.primary
+            : colors.white
+        }
+        title="Precipitation"
+        onPress={() => {
+          setCurrentOption(GRAPH_TYPE.PRECIPITATION);
+          analyticsEventBus.log({
+            eventName: CLICKED_GRAPH_TYPE_EVENT,
+            type: 'Precipitation',
+          });
+        }}
       />
     </Row>
   );

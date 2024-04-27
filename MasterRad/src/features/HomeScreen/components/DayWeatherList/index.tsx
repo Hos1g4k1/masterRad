@@ -11,12 +11,20 @@ import {getRoundTemp} from '../../../../utils/temperature';
 const DayWeatherList = () => {
   const hourlyData = useSelector(selectForecastDataForTheNextTwentyFourHours);
 
+  const formatHour = (hour: number) => {
+    if (hour < 10) {
+      return `0${hour}h`;
+    } else {
+      return `${hour}h`;
+    }
+  };
+
   const renderItem = ({item}: {item: ForecastHourType}) => {
     const hour = dayjs(item.time).hour();
     const deg = '\u00b0';
     return (
       <View style={styles.listItemStyle}>
-        <Text>{hour}h</Text>
+        <Text>{formatHour(hour)}</Text>
         <Image
           source={{uri: `https:${item.condition.icon}`}}
           width={40}

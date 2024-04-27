@@ -18,9 +18,8 @@ import DayWeatherList from './components/DayWeatherList';
 import {getRoundTemp} from '../../utils/temperature';
 import ForecastByDay from './components/ForecastByDay';
 import TempByHourGraph from './components/TempByHourGraph';
-import analyticsEventBus from '../../utils/AnalyticsEventBus/AnalyticsEventBus';
-import {SCREEN_VIEW_EVENT} from '../../utils/AnalyticsTrackers/AnalyticsEventsNames';
 import {goToSearchScreen} from '../../navigation/actions';
+import styles from './style';
 
 const HomeScreen = () => {
   const location = useSelector(selectLocation);
@@ -69,12 +68,13 @@ const HomeScreen = () => {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      style={{flex: 1, backgroundColor: 'gray', height: '100%'}}>
+      style={styles.scrollViewStyle}
+      contentContainerStyle={styles.contentContainerStyle}>
       <Spacing size={3} top>
         {renderLocationInfo()}
       </Spacing>
       <Button title="SEARCH" onPress={goToSearchScreen} />
-      <Spacing size={2} horizontal vertical style={{flex: 1, marginTop: 32}}>
+      <Spacing size={2} horizontal vertical style={styles.dayWeatherListStyle}>
         <DayWeatherList />
       </Spacing>
       <TempByHourGraph />

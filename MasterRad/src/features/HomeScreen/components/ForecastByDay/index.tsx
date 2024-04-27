@@ -7,7 +7,7 @@ import styles from './styles';
 import {getRoundTemp} from '../../../../utils/temperature';
 import {colors} from '../../../../theme/colors';
 import Spacing from '../../../../components/Spacing';
-import {Row} from '../../../../components/Flex';
+import Flex, {Row} from '../../../../components/Flex';
 import ExtremeTemp from '../../../../components/ExtremeTemp';
 
 type Props = {
@@ -43,24 +43,14 @@ const ForecastByDay = ({data, title}: Props) => {
     item: ForecastDayDayType;
     index: number;
   }) => {
-    const dayName = dayjs(item.date).add(1, 'day').format('dddd');
+    const dayName = dayjs(item.date).format('dddd');
 
     return (
-      <Spacing
-        size={2}
-        horizontal
-        bottom
-        style={{flex: 1, justifyContent: 'center'}}>
-        <View
-          style={{
-            borderWidth: 0.5,
-            borderColor: colors.white,
-          }}
-        />
-        <Row style={{flex: 1}}>
+      <Spacing size={2} horizontal bottom style={styles.mainContainer}>
+        <View style={styles.subContainer} />
+        <Row>
           <Spacing size={1} top style={{flex: 4}}>
-            <Text
-              style={{color: colors.white, fontWeight: 'bold', fontSize: 15}}>
+            <Text style={styles.textStyle}>
               {index === 0 ? 'Today' : dayName}
             </Text>
           </Spacing>
@@ -83,7 +73,7 @@ const ForecastByDay = ({data, title}: Props) => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <Flex style={styles.bottomMargin}>
       <Spacing size={2} horizontal bottom>
         {renderTitle(title)}
       </Spacing>
@@ -93,7 +83,7 @@ const ForecastByDay = ({data, title}: Props) => {
         estimatedItemSize={1000}
         showsVerticalScrollIndicator={false}
       />
-    </View>
+    </Flex>
   );
 };
 

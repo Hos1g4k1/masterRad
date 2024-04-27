@@ -6,4 +6,12 @@ export interface ScreenViewEvent
   screenName: string;
 }
 
-export type AEvents = ScreenViewEvent | AnalyticsEventInterface;
+export interface ClickedGraphTypeEvent
+  extends AnalyticsEventInterface<typeof EventNames.CLICKED_GRAPH_TYPE_EVENT> {
+  type: string;
+}
+
+export type AEvents =
+  | ScreenViewEvent
+  | AnalyticsEventInterface
+  | ClickedGraphTypeEvent;

@@ -24,7 +24,7 @@ const MainStackNavigator = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{title: HOME_SCREEN_TITLE}}
+        options={{title: HOME_SCREEN_TITLE, headerShown: false}}
       />
       <Stack.Screen
         name="Search"
