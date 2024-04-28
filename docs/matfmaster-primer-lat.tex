@@ -287,7 +287,18 @@ Kada korisnik pokrene React Native aplikaciju, sam uređaj će kreirati tri glav
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.4]{docs/images/chapterTwo/reactNativeArchitecture.png}
+    \includegraphics[scale=0.4]{docs/images/chapterThree/reactNativeArchitecture.png}
+    \caption{Arhitektura React Native radnog okvira}
+    \label{fig:reactNativeArchitecture}
+\end{figure}
+
+\section{Most u React Native radnom okviru}
+
+U arhitekturi radnog okvira React Native, most (eng. bridge) igra ključnu ulogu u omogućavanju komunikacije između JavaScript niti i nativnih delova aplikacije koji se izvršavaju na glavnoj niti. Ovaj most funkcioniše kao posrednik koji prenosi informacije između dve sredine koje inače ne bi mogle direktno da komuniciraju zbog različitih programskih jezika (JavaScript sa jedne i Objective-C i Java sa druge strane). Komunikacija se obalja razmenom JSON poruka izmedju ova dva okruženja. JavaScript kod se izvršava u svom okruženju, dok se nativne komponente upravljaju kroz specifične platforme kao što su iOS ili Android. Most omogućava asinhronu komunikaciju između ova dva okruženja prenošenjem poruka, što znači da informacije mogu preći iz jednog okruženja u drugo bez blokiranja glavne niti ili usporavanja aplikacije. Kada JavaScript kod zahteva pristup nativnim funkcionalnostima (kao što su pristup kameri ili GPS-u) ili kada treba da se ažurira korisnički interfejs, most prenosi ove zahteve iz JavaScript-a u nativni sistem, i obratno, prenosi odgovore nazad. Ovaj mehanizam omogućava React Native aplikacijama da koriste prednosti kako veb tehnologija, tako i nativnih performansi, iako ponekad može predstavljati usko grlo u performansama ako se prevelik broj zahteva mora preneti preko mosta.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{docs/images/chapterThree/.png}
     \caption{Arhitektura React Native radnog okvira}
     \label{fig:reactNativeArchitecture}
 \end{figure}
