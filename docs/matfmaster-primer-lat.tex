@@ -285,6 +285,13 @@ Kada korisnik pokrene React Native aplikaciju, sam uređaj će kreirati tri glav
     \item Nit u senci (eng. Shadow Thread) - ova nit poznata je jos i kao nit rasoreda (eng. Layout Thread) . Odgovornost ove niti jeste da preračunava pozicije elemenata i da generiše stablo za prikazivanje koje je kodirano u JavaScript niti. Kada se ovo izračunavanje završi ti podaci se šalju glavnoj niti koja vrši prikazivanje. Njena uloga jeste da oslobodi glavnu nit ovog posla, koji može biti veoma zahtevan. Ovaj pristup nam omogućava da imamo fluidno korisničko iskustvo.
 \end{itemize}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{docs/images/chapterTwo/reactNativeArchitecture.png}
+    \caption{Arhitektura React Native radnog okvira}
+    \label{fig:reactNativeArchitecture}
+\end{figure}
+
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
