@@ -263,6 +263,28 @@ Mane ovog tipa mobilnih aplikacija su:
     \label{fig:hibridnaMobilnaAplikacija}
 \end{figure}
 
+\chapter{Osnove radnog okvira React Native}
+
+React Native (eng. React Native) predstavlja JavaScript radni okvir (eng. framework) za kreiranje mobilnih aplikacija za iOS i Android operativne sisteme. Zasnovan je na React radnom okviru, sa izmenom da targetuje mobilne uređaje. Dakle, ovaj radni okvir omogućava nam da kreiramo mobilne aplikacije koje imaju nativni izgled kao i korisničko iskustvo, a sve to korišćenjem dobro poznatih veb tehnologija. React Native razvijen je 2015. godine od strane kompanije Meta Inc., ranije poznata kao Facebook Inc. Od tada, sam radni okvir se dosta izmenio i postao je jedan od najpopularnijih alata za ravoj mobilnih aplikacija.
+
+\section{Kako React Native zapravo radi}
+
+Osnovna ideja iza ovog radnog okvira jeste da kombinuje dve zasebne celine - JavaScript kod sa jedne i nativni kod sa druge strane (Java/Kotlin za Android i Ojective-C/Swift za iOS) i učini da njih dve međusobno sarađuju. Nativni kod će se izvršavati na samom uređaju, dok će za JavaScript kod biti neophodna virtuelna mašina. Ovo nam nije problematično na iOS uređajima iz razloga što oni poseduju ugrađeni JavaScript pokretač nazvan JavaScriptCore. Android uređaji nemaju ugrađen ovaj pokretač, međutim React Native se brine za to i on donosi isto za Android uređaje. Napomenućemo ovde da ovo rezultuje time da se veličina same aplikacije povećava za Android.
+
+\subsection{Komunikacija između uređaja i JavaScript-a}
+
+Kako se programski jezici koji se koriste na samim uređajima razlikuju od JavaScript programskog jezika neophodno je da se kreira neki protokol kako bi oni mogli međusobno da komuniciraju. Ovo se postiže preko formata koji obe strane razumeju, a to je JSON. Sva komunikacija između ovih delova sistema obavlja se preko mosta (eng. Bridge).
+
+\subsection{Niti korišćene u React Native radnom okviru}
+
+Kada korisnik pokrene React Native aplikaciju, sam uređaj će kreirati tri glavne niti i ostale ukoliko za istim postoji potreba. Niti koje će biti kreirane su Glavna nit (eng. Main Thread), JavaScript nit (eng. JavaScript thread) i nit u senci (eng. Shadow Thread).
+
+\begin{itemize}
+    \item Glavna nit (eng. Main Thread) - ova nit poznata je i kao nit korisničkog interfejsa. To je osnovna nit svaki iOS ili Android aplikacije i predstavlja glavnu nativnu nit na kojoj će se naša aplikacije izvršavati. Njena odgovornost jeste da obrađuje korisničke interakcije sa uređajem kao i da ažurira sam korisnički interfejs na ekranu uređaja. U React Native radnom okviru sve nativne komponente se renderuju na ovoj niti i iz ovog razloga je veoma bitno da se izbegavaju složene operacije na ovoj niti kako ne bi došlo do blokiranja korisničkog interfejsa i smanjenja performansi.
+    \item JavaScript nit (eng. JavaScript Thread) - na ovoj niti će se izvršavati sav JavaScript i React kod naše aplikacije. Ona obrađuje logiku aplikacije, API pozive, vrši proračune i upravlja stanjem aplikacije. Ova nit je ključna za sve što nije povezano sa korisničkim interfejsom. Ova nit radi zasebno od glavne niti što nam omogućava da radimo kompleksna izračunavanja bez da blokiramo glavnu nit. 
+    \item Nit u senci (eng. Shadow Thread) - ova nit poznata je jos i kao nit rasoreda (eng. Layout Thread) . Odgovornost ove niti jeste da preračunava pozicije elemenata i da generiše stablo za prikazivanje koje je kodirano u JavaScript niti. Kada se ovo izračunavanje završi ti podaci se šalju glavnoj niti koja vrši prikazivanje. Njena uloga jeste da oslobodi glavnu nit ovog posla, koji može biti veoma zahtevan. Ovaj pristup nam omogućava da imamo fluidno korisničko iskustvo.
+\end{itemize}
+
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
