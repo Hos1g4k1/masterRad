@@ -39,6 +39,7 @@
 % Pomoćni paket koji generiše nasumičan tekst u kojem se javljaju sva slova
 % azbuke (nema potrebe koristiti ovo u pravim disertacijama)
 \usepackage[latinica]{pangrami}
+\usepackage{subfig}
 
 % Datoteka sa literaturom u BibTex tj. BibLaTeX/Biber formatu
 \bib{matfmaster-primer}
@@ -330,6 +331,46 @@ U poglavlju koje sledi u nastavku bliže ćemo se upoznati sa aplikacijom za vre
 \section{Korisnički interfejs aplikacije}
 
 U ovoj sekciji ćemo se detaljno upoznati sa korisničkim interfejsom aplikacije. Kada razmislimo malo o tome, korisnički interfejs jeste jedan od najznačajnijih delova same aplikacije. Vrlo je bitno da isti bude jednostavan za korišćenje, intuitivan, ali i prijatan za oko, odnosno lepo dizajniran. Sve ove osobine korisničkog interfejsa osiguraće nam da naši korisnici koriste aplikaciju iznova. U ovom konkretnom slučaju imamo aplikaciju koja se sastoji od dva ekrana. Prvi ekran jeste taj na kome se pokazuju svi parametri vremenske prognoze, dok je drugi ekran odgovoran za pretragu destinacije za koju nam je potrebna vremenska prognoza.
+
+\begin{figure}%
+    \centering
+    \subfloat[\centering Glavni ekran aplikacije]{{\includegraphics[width=5cm]{docs/images/chapterFour/mainScreen.png} }}%
+    \qquad
+    \subfloat[\centering Ekran za pretragu destinacije]{{\includegraphics[width=5cm]{docs/images/chapterFour/searchScreen.png} }}%
+    \label{fig:example}%
+\end{figure}
+
+\newpage
+\subsection{Ekran za vremensku prognozu}
+
+Glavni ekran aplikacije predstavlja ekran sa svim parametrika vremenske prognoze. Sastoji se od pet sekcija. U nastavku ćemo analizirati svaku.
+
+\begin{enumerate}
+    \item Prva sekcija predstavlja podatke o trenutnoj lokaciji i temperaturi. Takođe, tu imamo podatke u maksimalnoj i minimalnoj dnevnoj temperaturi kao i o tome kakvo je vreme napolju.
+    \item Nakon ovoga nalazi se dugme koje nas navigira na ekran za pretragu destinacija.
+    \item Zatim, imamo listu koja prikazuje temperature na datoj lokaciji u naredna dvadeset četiri časa. U pitanju je horizontalna, skrolabilna optimizovana lista. U kasnijim poglavljima ćemo dodatno govoriti o ovim optimizacijama.
+    \item Ispod se nalazi komponenta koja prikazuje grafike kretanja određenih parametara kroz vreme. Posmatra se period od dvadeset četiri časa i korisnik je u mogućnosti da selektuje parametar koji ga interesuje.
+    \item Na kraju, imamo sekciju koja predstavlja vremensku prognozu za naredne dane. Realizovana je takođe kao optimizovana lista, sa izmenom da je sada vertikalna lista u pitanju.
+\end{enumerate}
+
+\subsection{Ekran za pretragu destinacije}
+
+Drugi ekran u našoj aplikaciji služi za pretragu destinacije na kojoj korisnik želi da pogleda vremensku prognozu. Što se tiče korisničkog interfejsa na ovom ekranu, možemo videti da je malo jednostavniji u odnosu na prvi ekran. Kao što vidimo sa slike, izdvajaju se dve glavne celine.
+
+\begin{enumerate}
+    \item Na samom vrhu ekrana nalazi se navigacijsko zaglavlje koje je izmenjeno tako da bude komponenta za unos teksta. Ovde korisnik preko tastature unosi željenu lokaciju i preko aplikacijskog programskog interfejsa (eng. Application Programming Interface - API) dohvatamo niz lokacija za uneti teskt.
+    \item Uloga druge sekcije jeste da se prikažu podaci koje nam je API vratio. Realizovana je takođe kao optimizovana lista.
+\end{enumerate}
+
+\subsection{WeatherAPI}
+
+U svrhe dohvatanja podataka potrebnih za izradu ove aplikacije korišćen je WeatherAPI. U pitanju je API koji nam daje nekoliko krajnjih tačaka (eng. endpoint). Konkretno, mi smo koristili dva. 
+
+\begin{enumerate}
+    \item Forecast API - ovaj API nam služi za dohvatanje podataka o vremenskoj prognozi. Odgovor servera sastoji se iz tri celine. Podaci o trenutnoj lokaciji, podaci o trenutnom vremenu i podaci o vremenskoj prognozi za naredne dane.
+    \item Search API - uloga ove krajnje tačke jeste da nam vrati sve lokacije koje počinju nekim prefiksom koji je korisnik uneo. 
+\end{enumerate}
+
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
