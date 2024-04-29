@@ -294,15 +294,42 @@ Kada korisnik pokrene React Native aplikaciju, sam uređaj će kreirati tri glav
 
 \section{Most u React Native radnom okviru}
 
-U arhitekturi radnog okvira React Native, most (eng. bridge) igra ključnu ulogu u omogućavanju komunikacije između JavaScript niti i nativnih delova aplikacije koji se izvršavaju na glavnoj niti. Ovaj most funkcioniše kao posrednik koji prenosi informacije između dve sredine koje inače ne bi mogle direktno da komuniciraju zbog različitih programskih jezika (JavaScript sa jedne i Objective-C i Java sa druge strane). Komunikacija se obalja razmenom JSON poruka izmedju ova dva okruženja. JavaScript kod se izvršava u svom okruženju, dok se nativne komponente upravljaju kroz specifične platforme kao što su iOS ili Android. Most omogućava asinhronu komunikaciju između ova dva okruženja prenošenjem poruka, što znači da informacije mogu preći iz jednog okruženja u drugo bez blokiranja glavne niti ili usporavanja aplikacije. Kada JavaScript kod zahteva pristup nativnim funkcionalnostima (kao što su pristup kameri ili GPS-u) ili kada treba da se ažurira korisnički interfejs, most prenosi ove zahteve iz JavaScript-a u nativni sistem, i obratno, prenosi odgovore nazad. Ovaj mehanizam omogućava React Native aplikacijama da koriste prednosti kako veb tehnologija, tako i nativnih performansi, iako ponekad može predstavljati usko grlo u performansama ako se prevelik broj zahteva mora preneti preko mosta.
+U arhitekturi radnog okvira React Native, most (eng. bridge) igra ključnu ulogu u omogućavanju komunikacije između JavaScript niti i nativnih delova aplikacije koji se izvršavaju na glavnoj niti. Ovaj most funkcioniše kao posrednik koji prenosi informacije između dve sredine koje inače ne bi mogle direktno da komuniciraju zbog različitih programskih jezika (JavaScript sa jedne i Objective-C i Java sa druge strane). Komunikacija se obalja asinhronom razmenom JSON poruka izmedju ova dva okruženja. JavaScript kod se izvršava u svom okruženju, dok se nativne komponente upravljaju kroz specifične platforme kao što su iOS ili Android. Most omogućava asinhronu komunikaciju između ova dva okruženja prenošenjem poruka, što znači da informacije mogu preći iz jednog okruženja u drugo bez blokiranja glavne niti ili usporavanja aplikacije. Kada JavaScript kod zahteva pristup nativnim funkcionalnostima (kao što su pristup kameri ili GPS-u) ili kada treba da se ažurira korisnički interfejs, most prenosi ove zahteve iz JavaScript-a u nativni sistem, i obratno, prenosi odgovore nazad. Ovaj mehanizam omogućava React Native aplikacijama da koriste prednosti kako veb tehnologija, tako i nativnih performansi, iako ponekad može predstavljati usko grlo u performansama ako se prevelik broj zahteva mora preneti preko mosta.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.4]{docs/images/chapterThree/.png}
-    \caption{Arhitektura React Native radnog okvira}
-    \label{fig:reactNativeArchitecture}
+    \includegraphics[scale=0.5]{docs/images/chapterThree/reactNativeBridge.png}
+    \caption{Funkcionisanje mosta}
+    \label{fig:reactNativeBridge}
 \end{figure}
 
+\subsection{Primer rada mosta}
+
+Sada ćemo proći kroz primer kako most izvodi komunikaciju između nativnog dela i JavaScript dela mobilne aplikacije.
+
+\begin{enumerate}
+    \item Okida se nativni događaj. Recimo da je u pitanju klik na dugme.
+    \item Serijalizovana poruka šalje se sa nativne strane kroz most sa svim neophodnim podacima
+    \item JavaScript prima poruku, deserijalizuje je i odlučuje šta je sledeći korak koji je potrebno preduzeti. U ovom slučaju to je akcija koja je pridružena dugmetu.
+    \item Šalje se poruka sa JavaScript strane kroz most sa svim potrebnim informacijama vezanima za traženu akciju.
+    \item Nativna strana prima poruku, deserijalizuje je i vrši ponovno renderovanje korisničkog interfejsa.
+\end{enumerate}
+
+\subsection{Nedostaci mosta}
+
+Asinhrona priroda prenosa poruka između nativnog i JavaScript dela mobilne aplikacija dovodi do problema koji se manifestuju u ivičnim slučajevima. Na primer, pretpostavimo da imamo polje za unos teksta gde korisnik unosi broj kartice. Želimo da formatiramo taj unos tako što ćemo ubaciti prazan karakter posle svakog četvrtog karaktera u kartici. Ova logika biće implementirana na JavaScript strani. Problem koji se ovde uočava jeste taj da kada korisnik pritisne peti broj po redu nativna strana aplikacije to javlja JS strani. Broj se nadovezuje na prethodni broj kartice i to se javlja nativnoj strani koja će ovo prikazati. Ovo dovodi do toga da će prvo biti renderovan broj bez razmaka, a tek kasnije će se izvršiti formatiranje i preko mosta će biti poslata sledeća poruka koja će nativnoj strani reći da treba da renderuje i razmak. Naravno, ukoliko most nije previše opterećen u tom momentu korisnik ne bi mogao da primeti ovo. Međutim, u situaciji kada se ogroman broj operacija izvršava paralelno ovo je vrlo moguća situacija. Drugi problem koji možemo da primerimo jeste da se svaka poruka mora serijalizovati na jednoj i deserijalizovati na drugoj strani, što dovodi do povećane potrošnje resursa.
+
+\subsection{Rešenja prethodno pomenutih problema}
+
+React Native tim adresirao je prethodne probleme i pristupio kreiranju načina da se isti prevaziđu. Kao rezultat toga od verzije 0.68 u mogućnosti smo da koristimo skroz novu arhitekturu koja odbacuje mehanizam mosta i počinje da koristi JavaScript interfejs (eng. JavaScript Interface - JSI). JSI predstavlja sloj opšte upotrebe koji može biti ugrađen u bilo koji JS pokretač i pomoću njega možemo kreirati direktnu konekciju ka nativnim interfejsima. Ovaj napredak postignut je tako što su nativni Java ili Obj-C metodi izloženi JS-u preko objekta domaćina (eng. HostObject). JS će čuvati referencu na ovaj objekat i preko njega će pristupati nativnim interfejsima.
+
+\chapter{Aplikacija za vremensku prognozu}
+
+U poglavlju koje sledi u nastavku bliže ćemo se upoznati sa aplikacijom za vremensku prognozu koja će se koristiti za demonstraciju koncepata koje analiziramo u okviru ovog master rada, kao i sa ključnim tehnologijama korišćenim u izradi iste.
+
+\section{Korisnički interfejs aplikacije}
+
+U ovoj sekciji ćemo se detaljno upoznati sa korisničkim interfejsom aplikacije. Kada razmislimo malo o tome, korisnički interfejs jeste jedan od najznačajnijih delova same aplikacije. Vrlo je bitno da isti bude jednostavan za korišćenje, intuitivan, ali i prijatan za oko, odnosno lepo dizajniran. Sve ove osobine korisničkog interfejsa osiguraće nam da naši korisnici koriste aplikaciju iznova. U ovom konkretnom slučaju imamo aplikaciju koja se sastoji od dva ekrana. Prvi ekran jeste taj na kome se pokazuju svi parametri vremenske prognoze, dok je drugi ekran odgovoran za pretragu destinacije za koju nam je potrebna vremenska prognoza.
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
