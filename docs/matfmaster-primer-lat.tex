@@ -392,6 +392,14 @@ Kao što se vidi na slici, korisnički interfejs alata Sentry pruža nam potpunu
 
 Nakon što smo uspešno integrisali sistem za praćenje performansi i postavili sve metrike koje želimo da pratimo neophodno je postaviti sistem za obavestavanje. Naime, vrlo je nepraktično da neko konstantno proverava sve metrike koje se prate i da reaguje ukoliko naiđe na nešto problematično. Ovakav pristup zahtevao bi da neko konstantno prolazi i gleda metrike kao i da zna tačno kako iste treba da se ponašaju. Jasno je da je ovakav pristup dugoročno neodrživ. Sentry ovo prevazilazi konceptom obavestenja ili uzbune (eng. Alert). Naime, mi kao korisnik alata možemo da definišemo granicu kada je neka metrika na nezadovoljavajućem nivou i da kazemo alatu da ukoliko ista ikada padne ispod te granice da se podigne uzbuna i da nas obavesti o problemu. Na ovaj način bismo morali jednom da postavimo ove okidače i da reagujemo samo kada se podigne uzbuna. U međuvremenu, praktično bismo mogli da zaboravimo na ove metrike.
 
+\begin{figure}[!h]
+    \centering
+    \subfloat{{\includegraphics[scale=0.4]{docs/images/chapterFive/addRuleOne.png} }}%
+    \qquad
+    \subfloat{{\includegraphics[scale=0.4]{docs/images/chapterFive/addRuleTwo.png} }}%
+    \label{fig:addRule}%
+\end{figure}
+
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
