@@ -428,7 +428,16 @@ U ovoj sekciji detaljno ćemo se upoznati sa alatom Sentry. On predstavlja veoma
 
 Prvi korak ka korišćenju ovog sistema jeste integracija istog u našu aplikaciju. Ovaj korak je vrlo jednostavan i detaljno je objašnjen u dokumentaciji samog servisa. Za sam početak, neophodno je da se instalira biblioteka preko paketnog menadžera (eng. package manager). Nakon instalacije, potrebno je konfigurisati Sentry u glavnom fajlu aplikacije, gde se inicijalizuje Sentry sa odgovarajućim DSN (eng. Data Source Name) koji povezuje aplikaciju sa Sentry projektnim okruženjem. Ova konfiguracija omogućava Sentry-ju da automatski hvata izuzetke i greške u aplikaciji, kao i da pruža opcionalne funkcionalnosti poput ručnog slanja izveštaja o greškama, praćenje performansi i analizu korisničkih sesija. Unutar same konfiguracije bitno je podesiti procenat transakcija koje želimo da prosleđujemo na Sentry. Ovo se postiže uzorkovanjem i koristi se opcija \textit{tracesSampleRate} koja uzima vrednosti od 0 do 1 i predstavlja procenat transakcija koje se šalju na servis. Nula označava 0 procenata, dok 1 označava 100 procenata. Drugi bitan parametar konfiguracije jesu sve integracije koje su nam potrebne. Ovo predstavlja vezu između biblioteka koje koristimo u aplikaciji i Sentry alata. Na primer, u našoj aplikaciji je potrebno da se doda integracija za navigacione transakcije kako bi Sentry znao kako da obradi iste.
 
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.5]{docs/images/chapterFive/Screenshot 2024-05-01 at 12.44.52.png}
+    \caption{Sentry integracija u kodu}
+    \label{fig:sentryIntegration}
+\end{figure}
 
+\subsection{Metrike alata Sentry za merenje performansi aplikacije}
+
+Kada smo uspesno odradili integraciju alata Sentry sa našom aplikacijom, vreme je da pogledamo šta sve imamo na raspolaganju.
 
 
 % ------------------------------------------------------------------------------
