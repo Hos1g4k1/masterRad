@@ -343,11 +343,11 @@ U ovoj sekciji ćemo se detaljno upoznati sa korisničkim interfejsom aplikacije
 \newpage
 \subsection{Ekran za vremensku prognozu}
 
-Glavni ekran aplikacije predstavlja ekran sa svim parametrika vremenske prognoze. Sastoji se od pet sekcija. U nastavku ćemo analizirati svaku.
+Glavni ekran aplikacije predstavlja ekran sa svim parametrima vremenske prognoze. Sastoji se od pet sekcija. U nastavku ćemo analizirati svaku.
 
 \begin{enumerate}
     \item Prva sekcija predstavlja podatke o trenutnoj lokaciji i temperaturi. Takođe, tu imamo podatke u maksimalnoj i minimalnoj dnevnoj temperaturi kao i o tome kakvo je vreme napolju.
-    \item Nakon ovoga nalazi se dugme koje nas navigira na ekran za pretragu destinacija.
+    \item Nakon ovoga nalazi se dugme koje nas navigira na ekran za pretragu drugih destinacija na kojima želimo da vidimo vremensku prognozu.
     \item Zatim, imamo listu koja prikazuje temperature na datoj lokaciji u naredna dvadeset četiri časa. U pitanju je horizontalna, skrolabilna optimizovana lista. U kasnijim poglavljima ćemo dodatno govoriti o ovim optimizacijama.
     \item Ispod se nalazi komponenta koja prikazuje grafike kretanja određenih parametara kroz vreme. Posmatra se period od dvadeset četiri časa i korisnik je u mogućnosti da selektuje parametar koji ga interesuje.
     \item Na kraju, imamo sekciju koja predstavlja vremensku prognozu za naredne dane. Realizovana je takođe kao optimizovana lista, sa izmenom da je sada vertikalna lista u pitanju.
@@ -370,6 +370,36 @@ U svrhe dohvatanja podataka potrebnih za izradu ove aplikacije korišćen je Wea
     \item Forecast API - ovaj API nam služi za dohvatanje podataka o vremenskoj prognozi. Odgovor servera sastoji se iz tri celine. Podaci o trenutnoj lokaciji, podaci o trenutnom vremenu i podaci o vremenskoj prognozi za naredne dane.
     \item Search API - uloga ove krajnje tačke jeste da nam vrati sve lokacije koje počinju nekim prefiksom koji je korisnik uneo. 
 \end{enumerate}
+
+\newpage
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{docs/images/chapterFour/forecastAPI.png}
+    \caption{API za vremensku prognozu}
+    \label{fig:forecastAPI}
+\end{figure}
+
+\chapter{Sistem za merenje performansi aplikacije}
+
+U savremenom razvoju softvera, efikasnost i performanse jedan su od ključnih aspekata za uspeh na tržištu. Uspeh naše aplikacije direktno zavisi od zadovoljstva korisnika, a to zadovoljstvo nemoguće je postići ukoliko aplikacija nije performantna. Ovo jeste razlog za razmatranje i uvođenje sistema za merenje performansi koji nam može pružiti jasnu sliku o ponašanju aplikacije u različitim uslovima. 
+\newline
+U ovom poglavlju upoznaćemo se sa različitim sistemima za merenje performansi i detaljnije se zadržati na sistemu Sentry. Proćićemo neophodne korake za integraciju ovog sistema u našu aplikaciju, a zatim se upoznati sa svime što nam isti pruža. Takođe, bavićemo se optimizovanim listama kao jedinom od ključnih koncepata u razvoju mobilne aplikacije.
+
+\section{Alati za merenje performansi}
+
+Kao što smo prethodno naveli, postoji veliki broj dostupnih platformi koje nam omogućavaju da integrišemo merenje performansi u našu aplikaciju. Pre nego što se upustimo u taj korak neophodno je upoznati se sa svima i odlučiti koji od tih alata najviše odgovara našim potrebama. U nastavku ove sekcije upoznaćemo se sa nekoliko najpopularnijih alata.
+
+\subsection{React Native Performance Monitor}
+
+React Native Performance Monitor je ugrađeni alat koji dolazi u okviru React native radnog okvira. On nam pruža osnovne informacije o performansama koje uključuju:
+
+\begin{enumerate}
+    \item Praćenje broja frejmova u sekundi (eng. Frame Per Second - FPS) - možemo pratiti dva seta FPS metrika. Jedan jeste za JavaScript nit, dok je drugi za glavnu, odnosno nit korisničkog interfejsa. Ovo nam omogućava da u realnom vremenu pratimo ove metrike i identifikujemo zbog čega dolazi do para performansi u nekom određenom momentu. Optimalno je da obe ove metrike budu blizu 60 FPS.
+    \item Upotreba memorije - druga metrika koju možemo pratiti jeste količina radne memorije koju aplikacija koristi. Ovo nam je idealno za pronalaženje curenja memorije ili drugih problema vezanih za upravljanje memorijom.
+\end{enumerate}
+
+Iako je React Native Performance Monitor koristan za osnovno praćenje performansi aplikacije, on nije dovoljno detaljan i ne pruža nam dublji uvid u performanse aplikacije.
 
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
