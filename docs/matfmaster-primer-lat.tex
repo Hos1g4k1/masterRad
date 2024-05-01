@@ -410,16 +410,27 @@ Iako je React Native Performance Monitor koristan za osnovno praćenje performan
 
 \subsection{Fliper}
 
-
 Fliper (eng. Flipper) je platforma za debagovanje koja je posebno dizajnirana za mobilne aplikacije, uključujući one razvijene pomoću React Native radnog okvira. Jedan od ključnih dodataka unutar Flipera jeste \textit{performance monitoring} dodatak koji omogućava programerima detaljan uvid u performanse aplikacije. Ovaj dodatak pruža kompletan set alata za analizu kako se aplikacija ponaša u realnom vremenu, omogućavajući programerima da identifikuju sporije delove aplikacije, analiziraju upotrebu resursa i dijagnostikuju probleme koji utiču na performanse. Uz mogućnost vizualnog prikaza performansi, kao što su FPS (eng. Frame Per Second) grafici i merni podaci o memoriji, Fliper nudi jednostavan i intuitivan interfejs za praćenje ključnih performansi aplikacije. Takođe, alat podržava razne dodatke koji se mogu lako integrisati i koristiti za specifične potrebe projekta, što Fliper čini nezamenjivim alatom u arsenalu modernih mobilnih developera.
 
-\begin{figure}%
+\begin{figure}[!h]
     \centering
-    \subfloat[\centering Glavni ekran aplikacije]{{\includegraphics[width=5cm]{docs/images/cha/mainScreen.png} }}%
+    \subfloat[\centering Osnovne metrike]{{\includegraphics[width=5cm]{docs/images/chapterFive/flipperBasic.png} }}%
     \qquad
-    \subfloat[\centering Ekran za pretragu destinacije]{{\includegraphics[width=5cm]{docs/images/chapterFour/searchScreen.png} }}%
+    \subfloat[\centering Merenje FPS-a]{{\includegraphics[width=5cm]{docs/images/chapterFive/fliperPerf.png} }}%
     \label{fig:example}%
 \end{figure}
+
+\section{Sentry}
+
+U ovoj sekciji detaljno ćemo se upoznati sa alatom Sentry. On predstavlja veoma snažan alat za nadgledanje grešaka i merenje performansi i veoma je popularan među programerima koji se bave optimizacijom i održavanjem zdravlja aplikacije u realnom vremenu. U kontekstu merenja performansi mobilnih aplikacija, Sentry nudi napredne funkcionalnosti koje programerima omogućavaju da precizno detektuju i analiziraju izvore problema koji utiču na korisničko iskustvo. Ovaj alat ne samo da automatski hvata greške unutar aplikacije, već pruža i detaljne uvide u performanse aplikacija, beležeći vremena odziva, broj grešaka i kroz analizu transakcija omogućava duboko razumevanje performansi aplikacije. Pomoću ovog alata, timovi mogu brzo reagovati na probleme, optimizovati aplikacije i značajno poboljšati stabilnost i brzinu aplikacija.
+
+\subsection{Intregracija sistema Sentry}
+
+Prvi korak ka korišćenju ovog sistema jeste integracija istog u našu aplikaciju. Ovaj korak je vrlo jednostavan i detaljno je objašnjen u dokumentaciji samog servisa. Za sam početak, neophodno je da se instalira biblioteka preko paketnog menadžera (eng. package manager). Nakon instalacije, potrebno je konfigurisati Sentry u glavnom fajlu aplikacije, gde se inicijalizuje Sentry sa odgovarajućim DSN (eng. Data Source Name) koji povezuje aplikaciju sa Sentry projektnim okruženjem. Ova konfiguracija omogućava Sentry-ju da automatski hvata izuzetke i greške u aplikaciji, kao i da pruža opcionalne funkcionalnosti poput ručnog slanja izveštaja o greškama, praćenje performansi i analizu korisničkih sesija. Unutar same konfiguracije bitno je podesiti procenat transakcija koje želimo da prosleđujemo na Sentry. Ovo se postiže uzorkovanjem i koristi se opcija \textit{tracesSampleRate} koja uzima vrednosti od 0 do 1 i predstavlja procenat transakcija koje se šalju na servis. Nula označava 0 procenata, dok 1 označava 100 procenata. Drugi bitan parametar konfiguracije jesu sve integracije koje su nam potrebne. Ovo predstavlja vezu između biblioteka koje koristimo u aplikaciji i Sentry alata. Na primer, u našoj aplikaciji je potrebno da se doda integracija za navigacione transakcije kako bi Sentry znao kako da obradi iste.
+
+
+
+
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
