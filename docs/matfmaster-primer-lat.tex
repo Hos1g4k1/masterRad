@@ -40,7 +40,7 @@
 % azbuke (nema potrebe koristiti ovo u pravim disertacijama)
 \usepackage[latinica]{pangrami}
 \usepackage{subfig}
-
+\usepackage{float}
 % Datoteka sa literaturom u BibTex tj. BibLaTeX/Biber formatu
 \bib{matfmaster-primer}
 
@@ -94,75 +94,6 @@ Mobilne aplikacije i aplikacije generalno često se razvijaju sa primarnim cilje
 % ------------------------------------------------------------------------------
 \chapter{Uvod}
 % ------------------------------------------------------------------------------
-\pangrami
-
-\section{Primeri korišćenja klasičnih \LaTeX{} elemenata}
-% Primeri citiranja
-Ovo je rečenica u kojoj se javlja citat \cite{PetrovicMikic2015}.
-Još jedan citat \cite{GuSh:243}.
-% Primeri navodnika
-Isprobavamo navodnike: "Rekao je da mu se javimo sutra".
-% Primer referisanja na tabelu (koja se javlja kasnije)
-U tabeli \ref{tbl:rezultati} koja sledi prikazani su rezultati eksperimenta.
-% Primer kraćeg ćiriličkog teksta
-{\cir Ово је пример ћириличког текста који се јавља у латиничком документу.}
-U ovoj rečenici se javlja jedna reč na {\cir ћирилици}.
-% Primer korišćenja fusnota
-Iza ove rečenice sledi fusnota.\footnote{Ovo je fusnota.}
-
-% Primer dužeg ćirličkog teksta
-\begin{cirilica}
-  Ово је мало дужи блок текста исписан ћириличким писмом у оквиру
-  латиничког документа. Фијуче ветар у шибљу, леди пасаже и куће иза
-  њих и гунђа у оџацима.
-\end{cirilica}
-
-% Primer korišćenja tabele
-\begin{table}
-\centering
-\caption{Rezultati}
-\label{tbl:rezultati}
-\begin{tabular}{c>{\centering}p{2cm}c}
-\toprule
-1 & 2 & 3\\\midrule
-4 & 5 & 6\\\cmidrule(rl){1-2}
-7 & 8 & 8\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% Primer korišćenja slike
-\begin{figure}[!ht]
-  \centering
-  \label{fig:grafikon}
-  \includegraphics[width=0.5\textwidth]{graph.png}
-  \caption{Grafikon}
-\end{figure}
-
-
-% Primer jednostavnije matematičke formule
-Evo i jedan primer matematičke formule: $e^{i\pi} + 1 = 0$. 
-% Primer referisanja na sliku
-Na slici \ref{fig:grafikon} prikazan je jedan grafikon.
-
-% primer kompleksnije matematičke formule
-$$
-\int_a^b f(x)\ \mathrm{d}x \ =_{def}\ \lim_{\max{\Delta x_k \rightarrow 0}} \sum_{k=1}^n f(x_k^*)\Delta x_k
-$$
-
-% primer referisanja na poglavlja i strane poglavlja
-Više detalja biće dato u glavi \ref{chp:razrada} na strani \pageref{chp:razrada}.
-
-% primer liste
-Možemo praviti i nabrajanja:
-\begin{enumerate}
-\item Analiza 1
-\item Linearna algebra
-\item Analitička geometrija
-\item Osnovi programiranja
-\end{enumerate}
-
-\pangrami
 
 % ------------------------------------------------------------------------------
 \chapter{Pregled tehnologija za razvoj mobilnih aplikacija}
@@ -426,19 +357,40 @@ U ovoj sekciji detaljno ćemo se upoznati sa alatom Sentry. On predstavlja veoma
 
 \subsection{Intregracija sistema Sentry}
 
-Prvi korak ka korišćenju ovog sistema jeste integracija istog u našu aplikaciju. Ovaj korak je vrlo jednostavan i detaljno je objašnjen u dokumentaciji samog servisa. Za sam početak, neophodno je da se instalira biblioteka preko paketnog menadžera (eng. package manager). Nakon instalacije, potrebno je konfigurisati Sentry u glavnom fajlu aplikacije, gde se inicijalizuje Sentry sa odgovarajućim DSN (eng. Data Source Name) koji povezuje aplikaciju sa Sentry projektnim okruženjem. Ova konfiguracija omogućava Sentry-ju da automatski hvata izuzetke i greške u aplikaciji, kao i da pruža opcionalne funkcionalnosti poput ručnog slanja izveštaja o greškama, praćenje performansi i analizu korisničkih sesija. Unutar same konfiguracije bitno je podesiti procenat transakcija koje želimo da prosleđujemo na Sentry. Ovo se postiže uzorkovanjem i koristi se opcija \textit{tracesSampleRate} koja uzima vrednosti od 0 do 1 i predstavlja procenat transakcija koje se šalju na servis. Nula označava 0 procenata, dok 1 označava 100 procenata. Drugi bitan parametar konfiguracije jesu sve integracije koje su nam potrebne. Ovo predstavlja vezu između biblioteka koje koristimo u aplikaciji i Sentry alata. Na primer, u našoj aplikaciji je potrebno da se doda integracija za navigacione transakcije kako bi Sentry znao kako da obradi iste.
+Prvi korak ka korišćenju ovog sistema jeste integracija istog u našu aplikaciju. Ovaj korak je vrlo jednostavan i detaljno je objašnjen u dokumentaciji samog servisa. Za sam početak, neophodno je da se instalira biblioteka preko paketnog menadžera (eng. package manager). Nakon instalacije, potrebno je konfigurisati Sentry u glavnom fajlu aplikacije, gde se inicijalizuje Sentry sa odgovarajućim DSN (eng. Data Source Name) koji povezuje aplikaciju sa Sentry projektnim okruženjem. Ova konfiguracija omogućava Sentry-ju da automatski hvata izuzetke i greške u aplikaciji, kao i da pruža opcionalne funkcionalnosti poput ručnog slanja izveštaja o greškama, praćenje performansi i analizu korisničkih sesija. Unutar same konfiguracije bitno je podesiti procenat transakcija koje želimo da prosleđujemo na Sentry. Ovo se postiže uzorkovanjem i koristi se opcija \textit{tracesSampleRate} koja uzima vrednosti od 0 do 1. Drugi bitan parametar konfiguracije jesu sve integracije koje su nam potrebne. Ovo predstavlja vezu između biblioteka koje koristimo u aplikaciji i Sentry alata. Na primer, u našoj aplikaciji je potrebno da se doda integracija za navigacione transakcije kako bi Sentry znao kako da obradi iste.
 
-\begin{figure}[!h]
+\begin{figure}[h]
     \centering
-    \includegraphics[scale=0.5]{docs/images/chapterFive/Screenshot 2024-05-01 at 12.44.52.png}
+    \includegraphics[scale=0.5]{docs/images/chapterFive/sentryIntegration.png}
     \caption{Sentry integracija u kodu}
     \label{fig:sentryIntegration}
 \end{figure}
 
 \subsection{Metrike alata Sentry za merenje performansi aplikacije}
 
-Kada smo uspesno odradili integraciju alata Sentry sa našom aplikacijom, vreme je da pogledamo šta sve imamo na raspolaganju.
+Kada smo uspesno odradili integraciju alata Sentry sa našom aplikacijom, vreme je da pogledamo šta sve imamo na raspolaganju. Ekran koji ćemo videti kada u okviru alata Sentry navigiramo na odeljak za performanse izgleda kao na slici u nastavku.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{docs/images/chapterFive/sentryPerfMetrics.png}
+    \caption{Metrike za performanse koje nam pruža alat Sentry}
+    \label{fig:sentryIntegration}
+\end{figure}
+
+Sada ćemo da analiziramo dostupne metrike i da vidimo šta one u stvari predstavljaju.
+
+\begin{enumerate}
+    \item Vreme inicijalnog pokretanja (eng. Cold Startup time) - jedna od primarnih performansnih metrika u razvoju mobilnih aplikacije jeste vreme inicialnog pokretanja. Ova metrika meri vreme potrebno da se aplikacija pokrene i postane potpuno funkcionalna nakon što je korisnik pokrenuo aplikaciju s potpuno neaktivnog ili "hladnog" stanja, odnosno kada aplikacija nije u memoriji uređaja. Ovo uključuje vreme potrebno za učitavanje aplikacije u memoriju, inicijalizaciju aplikacije, učitavanje početnih resursa i prikaz prvog ekrana korisniku. Brže vreme pokretanja može značajno poboljšati percepciju aplikacije od strane korisnika, smanjujući frustraciju i povećavajući zadovoljstvo. Pored samog korisničkog iskustva, ova metrika se u praksi koristi i za definisanje uskih grla prilikom pokretanja aplikacije. Često se tu dovlače resursi i vrše kalkulacije koje nisu potrebne za samo pokretanje aplikacije i neophodno ih je odložiti za kasnije. Kao referentna vrednost za produkcijske verzije aplikacija uzima se 400ms.
+    \item Vreme reaktiviranja aplikacije (eng. Warm startup time) - ova metrika predstavlja vreme da se aplikacija reaktivira i postane potpuno funkcionalna iz tzv. "toplog" stanja, kada je aplikacija već delimično učitana u memoriji uređaja, ali nije aktivna. Ovo može uključiti situacije kada je aplikacija minimizirana ili kada korisnik prebacuje između aplikacija. Ova metrika time se fokusira na brzinu kojom aplikacija može ponovo postati aktivna i spremna za interakciju, što je ključni faktor za korisničko iskustvo, posebno u situacijama kada korisnici očekuju brz odgovor aplikacije nakon prekida korišćenja. Praćenje i optimizacija ove metrike su važni za poboljšanje fluidnosti i responzivnosti aplikacije, što može značajno uticati na zadovoljstvo korisnika i percepciju performansi aplikacije. Developeri koriste ovu metriku za identifikaciju problema u upravljanju resursima ili kodnim blokovima koji mogu usporiti reaktivaciju aplikacije, te rade na njihovom otklanjanju kako bi optimizovali ukupno korisničko iskustvo.
+    \item Spori kadrovi (eng. Slow frames) - dobre performanse aplikacijese često poistovećuju sa fluidnim radom iste. To se, pored posmatranja golim okom, može izmeriti i jedna od metrika koja se koristi za to jeste broj sporih kadrova. Odnosi se na broj kadrova (eng. frames) u animacijama ili prikazivanju sadržaja na ekranu koji se ne izvršavaju u optimalnom vremenskom intervalu, što dovodi do zaostajanja (eng. lagging) i seckanja (eng. stuttering). Tipično, aplikacije bi trebalo da održavaju stopu od 60 sličica po sekundi (eng. fps) za glatko i prirodno korisničko iskustvo. Kadrovi koji se izvršavaju sporije od ove stope klasifikuju se kao "spori". Ova metrika je ključna za razvojne timove kako bi razumeli kako njihova aplikacija performira u stvarnim uslovima korišćenja, posebno kada su u pitanju zahtevnije operacije kao što su animacije, skrolovanje ili tranzicije između ekrana. Praćenje sporih kadrova omogućava programerima da identifikuju i optimizuju delove aplikacije koji narušavaju fluidnost, tako što prilagođavaju animacije, optimizuju renderovanje komponenti ili redukuju opterećenje procesora i grafičkog procesora.
+    \item Zamrznuti kadrovi (eng. Frozen frames) - ova metrika odnosi se na period kada aplikacija ne reaguje i ne osvežava svoj prikaz, što rezultira zaustavljanjem interaktivnosti i vizuelnog prikaza na korisničkom interfejsu. Ova pojava se obično dešava kada aplikacija naleti na teške ili blokirajuće operacije koje zaguše glavnu nit, čineći da aplikacija postane neoperativna za milisekunde ili čak sekunde. Takvi zamrznuti kadrovi mogu značajno narušiti korisničko iskustvo, jer korisnici očekuju brzu i glatku interakciju sa aplikacijama. Praćenje i analiziranje zamrznutih kadrova neophodno je za otkrivanje i razrešenje uzroka ovih performansnih problema. To uključuje identifikovanje i optimizaciju teških procesa koji opterećuju CPU (eng. Central Processing unit) ili preduzimanje koraka za asinhrono izvršavanje dugotrajnih zadataka. Time se osigurava da korisnički interfejs ostaje responzivan i prijatan za korišćenje, što je ključno za održavanje visokog nivoa zadovoljstva korisnika.
+\end{enumerate}
+
+Kao što se vidi na slici, korisnički interfejs alata Sentry pruža nam potpunu mogućnost da postavljamo metrike koje su nama relevantne. Dakle, prilikom postavljanja sistema za praćenje performansi, razvojni tim mora da definiše metrike koje želi da prati i da ih postavi u samom alatu. Sentry podržava i kreiranje našim metrika ukoliko shvatimo da nam treba metrika koja nije podržana od strane samog alata. 
+
+\subsection{Praćenje metrika}
+
+Nakon što smo uspešno integrisali sistem za praćenje performansi i postavili sve metrike koje želimo da pratimo neophodno je postaviti sistem za obavestavanje. Naime, vrlo je nepraktično da neko konstantno proverava sve metrike koje se prate i da reaguje ukoliko naiđe na nešto problematično. Ovakav pristup zahtevao bi da neko konstantno prolazi i gleda metrike kao i da zna tačno kako iste treba da se ponašaju. Jasno je da je ovakav pristup dugoročno neodrživ. Sentry ovo prevazilazi konceptom obavestenja ili uzbune (eng. Alert). Naime, mi kao korisnik alata možemo da definišemo granicu kada je neka metrika na nezadovoljavajućem nivou i da kazemo alatu da ukoliko ista ikada padne ispod te granice da se podigne uzbuna i da nas obavesti o problemu. Na ovaj način bismo morali jednom da postavimo ove okidače i da reagujemo samo kada se podigne uzbuna. U međuvremenu, praktično bismo mogli da zaboravimo na ove metrike.
 
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
