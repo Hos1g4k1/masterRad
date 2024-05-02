@@ -384,21 +384,46 @@ Sada ćemo da analiziramo dostupne metrike i da vidimo šta one u stvari predsta
     \item Vreme reaktiviranja aplikacije (eng. Warm startup time) - ova metrika predstavlja vreme da se aplikacija reaktivira i postane potpuno funkcionalna iz tzv. "toplog" stanja, kada je aplikacija već delimično učitana u memoriji uređaja, ali nije aktivna. Ovo može uključiti situacije kada je aplikacija minimizirana ili kada korisnik prebacuje između aplikacija. Ova metrika time se fokusira na brzinu kojom aplikacija može ponovo postati aktivna i spremna za interakciju, što je ključni faktor za korisničko iskustvo, posebno u situacijama kada korisnici očekuju brz odgovor aplikacije nakon prekida korišćenja. Praćenje i optimizacija ove metrike su važni za poboljšanje fluidnosti i responzivnosti aplikacije, što može značajno uticati na zadovoljstvo korisnika i percepciju performansi aplikacije. Developeri koriste ovu metriku za identifikaciju problema u upravljanju resursima ili kodnim blokovima koji mogu usporiti reaktivaciju aplikacije, te rade na njihovom otklanjanju kako bi optimizovali ukupno korisničko iskustvo.
     \item Spori kadrovi (eng. Slow frames) - dobre performanse aplikacijese često poistovećuju sa fluidnim radom iste. To se, pored posmatranja golim okom, može izmeriti i jedna od metrika koja se koristi za to jeste broj sporih kadrova. Odnosi se na broj kadrova (eng. frames) u animacijama ili prikazivanju sadržaja na ekranu koji se ne izvršavaju u optimalnom vremenskom intervalu, što dovodi do zaostajanja (eng. lagging) i seckanja (eng. stuttering). Tipično, aplikacije bi trebalo da održavaju stopu od 60 sličica po sekundi (eng. fps) za glatko i prirodno korisničko iskustvo. Kadrovi koji se izvršavaju sporije od ove stope klasifikuju se kao "spori". Ova metrika je ključna za razvojne timove kako bi razumeli kako njihova aplikacija performira u stvarnim uslovima korišćenja, posebno kada su u pitanju zahtevnije operacije kao što su animacije, skrolovanje ili tranzicije između ekrana. Praćenje sporih kadrova omogućava programerima da identifikuju i optimizuju delove aplikacije koji narušavaju fluidnost, tako što prilagođavaju animacije, optimizuju renderovanje komponenti ili redukuju opterećenje procesora i grafičkog procesora.
     \item Zamrznuti kadrovi (eng. Frozen frames) - ova metrika odnosi se na period kada aplikacija ne reaguje i ne osvežava svoj prikaz, što rezultira zaustavljanjem interaktivnosti i vizuelnog prikaza na korisničkom interfejsu. Ova pojava se obično dešava kada aplikacija naleti na teške ili blokirajuće operacije koje zaguše glavnu nit, čineći da aplikacija postane neoperativna za milisekunde ili čak sekunde. Takvi zamrznuti kadrovi mogu značajno narušiti korisničko iskustvo, jer korisnici očekuju brzu i glatku interakciju sa aplikacijama. Praćenje i analiziranje zamrznutih kadrova neophodno je za otkrivanje i razrešenje uzroka ovih performansnih problema. To uključuje identifikovanje i optimizaciju teških procesa koji opterećuju CPU (eng. Central Processing unit) ili preduzimanje koraka za asinhrono izvršavanje dugotrajnih zadataka. Time se osigurava da korisnički interfejs ostaje responzivan i prijatan za korišćenje, što je ključno za održavanje visokog nivoa zadovoljstva korisnika.
+    \item Korisničko nezadovoljstvo (eng. User misery) - ovo je interna Sentry metrika. Predstavlja broj različitih korisnika koji su iskusili vreme učitavanje četiri puta veće od podešene granice na nivou projekta. 
 \end{enumerate}
 
 Kao što se vidi na slici, korisnički interfejs alata Sentry pruža nam potpunu mogućnost da postavljamo metrike koje su nama relevantne. Dakle, prilikom postavljanja sistema za praćenje performansi, razvojni tim mora da definiše metrike koje želi da prati i da ih postavi u samom alatu. Sentry podržava i kreiranje našim metrika ukoliko shvatimo da nam treba metrika koja nije podržana od strane samog alata. 
+
+\subsection{Performanse ekrana}
+
+Alat Sentry daje nam podršku i da pratimo performanse pojedinačnih ekrana u našoj aplikaciji.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{docs/images/chapterFive/sentryHomeScreen.png}
+    \caption{Metrike za glavni ekran aplikacije}
+    \label{fig:addRuleForMetric}
+\end{figure}
+
+Na prethodnoj slici vidimo da za svaki ekran imamo listu transakcija koje uključuju navigiranje na isti i učitavanje svih potrebnih podataka za prikaz. Sentry nam daje informacije o tome koliko je trajalo dohvatanje svih potrebnih podataka sa servera (prikazano narandžastom bojom), i trajanje renderovanja korisničkog interfejsa (prikazano ljubičastom bojom).
 
 \subsection{Praćenje metrika}
 
 Nakon što smo uspešno integrisali sistem za praćenje performansi i postavili sve metrike koje želimo da pratimo neophodno je postaviti sistem za obavestavanje. Naime, vrlo je nepraktično da neko konstantno proverava sve metrike koje se prate i da reaguje ukoliko naiđe na nešto problematično. Ovakav pristup zahtevao bi da neko konstantno prolazi i gleda metrike kao i da zna tačno kako iste treba da se ponašaju. Jasno je da je ovakav pristup dugoročno neodrživ. Sentry ovo prevazilazi konceptom obavestenja ili uzbune (eng. Alert). Naime, mi kao korisnik alata možemo da definišemo granicu kada je neka metrika na nezadovoljavajućem nivou i da kazemo alatu da ukoliko ista ikada padne ispod te granice da se podigne uzbuna i da nas obavesti o problemu. Na ovaj način bismo morali jednom da postavimo ove okidače i da reagujemo samo kada se podigne uzbuna. U međuvremenu, praktično bismo mogli da zaboravimo na ove metrike.
 
-\begin{figure}[!h]
+\begin{figure}
     \centering
-    \subfloat{{\includegraphics[scale=0.4]{docs/images/chapterFive/addRuleOne.png} }}%
-    \qquad
-    \subfloat{{\includegraphics[scale=0.4]{docs/images/chapterFive/addRuleTwo.png} }}%
-    \label{fig:addRule}%
+    \includegraphics[scale=0.3]{docs/images/chapterFive/addRule.png}
+    \caption{Dodavanje uzbune za metriku}
+    \label{fig:addRuleForMetric}
 \end{figure}
+
+U konkretnom slučaju, dodali smo novu uzbunu za metriku \textit{Dužina trajanja transakcije}. U suštini, pravilo koje smo dodali glasi: "Ukoliko u intervalu od sat vremena, preko 95\% transakcija ima trajanje veće od 300ms okini uzbunu i obavesti korisnika putem mejla."
+
+\section{Optimizacija listi za prikazivanje}
+
+Liste su jedan od ključnih elementa u dizajnu mobilnih aplikacija, omogućavajući korisnicima efikasno i intuitivno pregledanje sadržaja. One služe kao ključna komponenta za organizovanje podataka u lako dostupan i razumljiv format, što je posebno važno u mobilnom okruženju gde je prostor ograničen i korisnička pažnja kratkotrajna. U programiranju mobilnih aplikacija, efektivna implementacija lista može značajno poboljšati korisničko iskustvo, pružajući brz pristup raznovrsnim informacijama. Bilo da se radi o listi kontakata, podešavanja ili kao u našem slučaju vremena po danima ili satima, liste omogućavaju korisnicima da lako navigiraju kroz aplikaciju i brzo pristupe željenim informacijama. Uz to, napredne tehnike poput lenjog učitavanja (eng. lazy loading) i beskonačnog skrolovanja (eng. infinite scrolling) mogu dalje optimizovati performanse i korisnički doživljaj, čineći liste još moćnijim alatom u arsenalu svakog programera mobilnih aplikacija.
+
+\subsection{Komponenta FlatList i njeni problemi}
+
+Komponenta FlatList u React Native radnom okviru je dizajnirana za efikasno prikazivanje dugačkih lista podataka, pružajući osnovne funkcionalnosti za upravljanje velikim količinama elemenata. Međutim, uprkos svojoj nameni, FlatList može susresti izazove sa performansama u određenim scenarijima. Problemi se najčešće javljaju kada lista sadrži složene elemente ili kada se učitava veliki broj podataka, što može dovesti do usporenja i povećane potrošnje memorije.
+
+Kada svaki element liste zahteva intenzivno procesiranje ili ima kompleksne vizualne komponente, FlatList može doživeti pad performansi. Takođe, česti re-renderi izazvani promenama u stanju ili propovima koji se ne upravljaju pažljivo mogu dodatno opteretiti procesor i memoriju. Da bi se ovi problemi minimizovali, preporučuje se pažljiva optimizacija renderovanja elemenata, upotreba tehnika kao što su memoizacija za skuplje komponente, i efikasno upravljanje stanjem da se izbegnu nepotrebna ažuriranja. Implementacija paginacije (eng. windowing) gde se renderuju samo trenutno vidljivi elementi takođe može značajno poboljšati performanse FlatList komponente. Ovim pristupima osigurava se da FlatList ostane efikasan alat za upravljanje listama u aplikacijama koje razvijate koristeći React Native.
 
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
