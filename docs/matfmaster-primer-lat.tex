@@ -425,6 +425,32 @@ Komponenta FlatList u React Native radnom okviru je dizajnirana za efikasno prik
 
 Kada svaki element liste zahteva intenzivno procesiranje ili ima kompleksne vizualne komponente, FlatList može doživeti pad performansi. Takođe, česti re-renderi izazvani promenama u stanju ili propovima koji se ne upravljaju pažljivo mogu dodatno opteretiti procesor i memoriju. Da bi se ovi problemi minimizovali, preporučuje se pažljiva optimizacija renderovanja elemenata, upotreba tehnika kao što su memoizacija za skuplje komponente, i efikasno upravljanje stanjem da se izbegnu nepotrebna ažuriranja. Implementacija paginacije (eng. windowing) gde se renderuju samo trenutno vidljivi elementi takođe može značajno poboljšati performanse FlatList komponente. Ovim pristupima osigurava se da FlatList ostane efikasan alat za upravljanje listama u aplikacijama koje razvijate koristeći React Native.
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{docs/images/chapterFive/flatlistExample.png}
+    \caption{Flatlist komponenta u kodu}
+    \label{fig:flatListExample}
+\end{figure}
+
+Sa slike iznad vidimo API FlatList komponente i možemo zaključiti da je isti veoma intuitivan. Naime, dva glavna polja jesu \textit{data} i \textit{renderItem}. Preko data polja prosleđujemo niz podataka našoj komponenti, dok preko polja renderItem govorimo na koji način treba da se prikaže svaki element tog niza. Polje keyExtractor nam služi kako bi listu optimizovali do neke mere, odnosno da svaki element liste ima svoj identifikator. Na ovaj način, komponenta razlikuje svaki pojedinačni element i pomoću tog znanja se odlučuje koje elemente treba ponovo renderovati kada dođe do promena u podacima.
+
+\subsection{Prvi pokušaj rešavanja ovog problema}
+
+Kako je problem sa performansama FlatList komponente bio prilično značajan, brzo je adresiran u krugovima programera mobilnih aplikacija. Kao rešenje ovog problema kreirana je RecyclerListView komponenta. Ona predstavlja komponentu veoma dobro optimizovanu za renderovanje ogromnog broja podataka. Inspirisana je RecyclerView komponentom na Androidu i UICollectionView na iOS operativnom sistemu. 
+
+\newline
+
+Ova komponenta je veoma performantna i bogata funkcionalnostima kao i ugrađena FlatList komponenta. Funkcioniše tako što se na pametan način vrši recikliranje komponenti koje su prethodno već renderovane i na taj način izbegava nepotrebno ponovno renderovanje. Ova tehnika poznata je kao reciklaža ćelija (eng. cell recycling) i dozvoljava nam da koristimo već renderovane komponente koje nisu više prisutne na ekranu za renderovanje novih.
+
+\newline
+
+Problem ove komponente jeste veoma neintuitivan API. Kao programer, morali ste potrošiti ogromnu količinu vremena da razumete kako sama komponenta radi da biste mogli da iskoristite prednosti koje ista pruža. Komponenta zahteva precizne predikcije za veličinu elemenata i ako iste nisu dobre performanse dosta padaju. Takođe, sav render se vrši na JavaScript niti što može dovesti na seckanja.
+
+\subsection{FlashList biblioteka}
+
+Rešenje problema pomenutih u prethodnim sekcijama ogleda se u biblioteci po imenu FlashList. Ona predstavlja performantnu alternativu za FlatList komponentu. Kao što smo rekli, FlatList komponenta nije imala zadovoljavajuće performanse, ali je bila laka za korišćenje, dok je RecyclerListView komponenta bila performantna, ali je njen API bio izrazito neintuitivan. Ideja biblioteke FlashList jeste da iskoristi najbolje iz oba pristupa i da kreira komponentu koja će biti veoma performanta, ali će zadržati API tako da korisnicima bude laka za korišćenje.
+
+
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
