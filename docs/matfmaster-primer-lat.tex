@@ -451,6 +451,22 @@ Problem ove komponente jeste veoma neintuitivan API. Kao programer, morali ste p
 Rešenje problema pomenutih u prethodnim sekcijama ogleda se u biblioteci po imenu FlashList. Ona predstavlja performantnu alternativu za FlatList komponentu. Kao što smo rekli, FlatList komponenta nije imala zadovoljavajuće performanse, ali je bila laka za korišćenje, dok je RecyclerListView komponenta bila performantna, ali je njen API bio izrazito neintuitivan. Ideja biblioteke FlashList jeste da iskoristi najbolje iz oba pristupa i da kreira komponentu koja će biti veoma performanta, ali će zadržati API tako da korisnicima bude laka za korišćenje.
 
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{docs/images/chapterFive/flashlistExample.png}
+    \caption{Flashlist komponenta u kodu}
+    \label{fig:flatListExample}
+\end{figure}
+
+Sa slike iznad vidimo kako izgleda korišćenje FlashList komponente u samom kodu. Prva stvar koju primećujemo jeste da je API skoro identičan sa FlatList komponentom. Jedina razlika jeste u estimatedItemSize polju koje je specifično za ovu biblioteku.
+
+\newline
+
+FlashList komponenta koristi estimatedItemSize polje kako bi odredila broj elemenata koji treba da budu prikazani na ekranu tokom inicijalnog renderovanja i prilikom skrolovanja. Kako sve ovo radi? Naime, umesto da se komponenta uništava kada neki element nestane sa ekrana, FlashList komponenta renderuje istu komponentu sa drugačijim parametrima. Prilikom korišćenja, bitno je da se ne koristi key polje u elementima liste jer će ovo sprečiti FlashList komponentu da radi recikliranje.
+
+
+
+
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
