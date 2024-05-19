@@ -464,7 +464,16 @@ Sa slike iznad vidimo kako izgleda korišćenje FlashList komponente u samom kod
 
 FlashList komponenta koristi estimatedItemSize polje kako bi odredila broj elemenata koji treba da budu prikazani na ekranu tokom inicijalnog renderovanja i prilikom skrolovanja. Kako sve ovo radi? Naime, umesto da se komponenta uništava kada neki element nestane sa ekrana, FlashList komponenta renderuje istu komponentu sa drugačijim parametrima. Prilikom korišćenja, bitno je da se ne koristi key polje u elementima liste jer će ovo sprečiti FlashList komponentu da radi recikliranje.
 
+\newline
 
+Na slikama ispod vidimo performanse prilikom korišćenja FlatList i FlashList komponenti. Možemo primetiti da je razlika u performansama drastična. Vidimo da prilikom korišćenja FlatList komponente imamo relativno često blokiranje JS niti, dok kod FlashList komponente to nije slučaj. Blokade se dešavaju na momente i to bas u momentu kada se dohvataju podaci sa backend servera (eng. Backend).
+
+\begin{figure}[!h]
+    \centering
+    \subfloat[\centering FlatList performanse]{{\includegraphics[width=6cm]{docs/images/chapterFive/flashListLowPerf.png} }}%
+    \qquad
+    \subfloat[\centering FlashList performanse]{{\includegraphics[width=6cm]{docs/images/chapterFive/fliperPerf.png} }}%
+\end{figure}
 
 
 % ------------------------------------------------------------------------------
