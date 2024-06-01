@@ -519,6 +519,16 @@ Prilikom razvijanja sistema za praćenje događaja uočavamo dva osnovna entitet
 
 Drugi bitan entitet smo rekli da je pratilac događaja. On predstavlja klasu koja u sebi sadrži sve događaje na koje isti reaguje. Takođe, za svaki od tih događaja vezana je i funkcija koja nam govori kako će ovaj pratilac reagovati na taj specifičan događaj. Ovakvih pratilaca može u našem sistemu biti neograničeno i svaki od njih može da reaguje na proizvoljan broj događaja na proizvoljan način. Na primer, možemo imati jedan pratilac koji čemo koristiti za testiranje sistema i on će reagovati na sve događaja tako što će da ih loguje u konzolu. U isto vreme, možemo da imamo drugi pratilac koji će takođe reagovati na sve događaje, međutim, on će ih prosleđivati u našu bazu podataka.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{docs/images/chapterSix/analyticsTracker.png}
+\caption{Klasa za pratilac događaja}
+\label{fig:analyticsTracker}
+\end{figure}
+
+Nakon što smo definisali ova dva entiteta potrebno nam je nešto što će da ih poveže i zapravo obezbedi željenu funkcionalnost. U našem slučaju to će da bude AnalyticsEventBus klasa. Ona će da bude realizovana kao obrazac Unikat (eng. Singleton). Dakle, kreiraće se samo jedna instanca ove klase i biće korišćena kroz celu aplikaciju. Ova klasa posedovaće niz svih pratilaca događaja koje smo kreirali. Takođe, omogućavaće dodavanje novih pratilaca. Glavna funkcionalnost ove klase biće funkcija za obradu nekog događaja. Kada se okine događaj, ova klasa će se pobrinuti da svaki pratilac koji treba da reaguje na taj događaj to zapravo i uradi. Kako sve to radi, videćemo malo kasnije.
+
+
 
 
 
