@@ -268,7 +268,6 @@ U ovoj sekciji ćemo se detaljno upoznati sa korisničkim interfejsom aplikacije
     \subfloat[\centering Glavni ekran aplikacije]{{\includegraphics[width=5cm]{docs/images/chapterFour/mainScreen.png} }}%
     \qquad
     \subfloat[\centering Ekran za pretragu destinacije]{{\includegraphics[width=5cm]{docs/images/chapterFour/searchScreen.png} }}%
-    \label{fig:example}%
 \end{figure}
 
 \newpage
@@ -348,7 +347,6 @@ Fliper (eng. Flipper) je platforma za debagovanje koja je posebno dizajnirana za
     \subfloat[\centering Osnovne metrike]{{\includegraphics[width=5cm]{docs/images/chapterFive/flipperBasic.png} }}%
     \qquad
     \subfloat[\centering Merenje FPS-a]{{\includegraphics[width=5cm]{docs/images/chapterFive/fliperPerf.png} }}%
-    \label{fig:example}%
 \end{figure}
 
 \section{Sentry}
@@ -374,7 +372,7 @@ Kada smo uspesno odradili integraciju alata Sentry sa našom aplikacijom, vreme 
     \centering
     \includegraphics[scale=0.2]{docs/images/chapterFive/sentryPerfMetrics.png}
     \caption{Metrike za performanse koje nam pruža alat Sentry}
-    \label{fig:sentryIntegration}
+    \label{fig:sentryMetrics}
 \end{figure}
 
 Sada ćemo da analiziramo dostupne metrike i da vidimo šta one u stvari predstavljaju.
@@ -397,7 +395,7 @@ Alat Sentry daje nam podršku i da pratimo performanse pojedinačnih ekrana u na
     \centering
     \includegraphics[scale=0.2]{docs/images/chapterFive/sentryHomeScreen.png}
     \caption{Metrike za glavni ekran aplikacije}
-    \label{fig:addRuleForMetric}
+    \label{fig:mainScreenMetrics}
 \end{figure}
 
 Na prethodnoj slici vidimo da za svaki ekran imamo listu transakcija koje uključuju navigiranje na isti i učitavanje svih potrebnih podataka za prikaz. Sentry nam daje informacije o tome koliko je trajalo dohvatanje svih potrebnih podataka sa servera (prikazano narandžastom bojom), i trajanje renderovanja korisničkog interfejsa (prikazano ljubičastom bojom).
@@ -429,7 +427,7 @@ Kada svaki element liste zahteva intenzivno procesiranje ili ima kompleksne vizu
     \centering
     \includegraphics[scale=0.5]{docs/images/chapterFive/flatlistExample.png}
     \caption{Flatlist komponenta u kodu}
-    \label{fig:flatListExample}
+    \label{fig:flatListExample1}
 \end{figure}
 
 Sa slike iznad vidimo API FlatList komponente i možemo zaključiti da je isti veoma intuitivan. Naime, dva glavna polja jesu \textit{data} i \textit{renderItem}. Preko data polja prosleđujemo niz podataka našoj komponenti, dok preko polja renderItem govorimo na koji način treba da se prikaže svaki element tog niza. Polje keyExtractor nam služi kako bi listu optimizovali do neke mere, odnosno da svaki element liste ima svoj identifikator. Na ovaj način, komponenta razlikuje svaki pojedinačni element i pomoću tog znanja se odlučuje koje elemente treba ponovo renderovati kada dođe do promena u podacima.
@@ -438,11 +436,9 @@ Sa slike iznad vidimo API FlatList komponente i možemo zaključiti da je isti v
 
 Kako je problem sa performansama FlatList komponente bio prilično značajan, brzo je adresiran u krugovima programera mobilnih aplikacija. Kao rešenje ovog problema kreirana je RecyclerListView komponenta. Ona predstavlja komponentu veoma dobro optimizovanu za renderovanje ogromnog broja podataka. Inspirisana je RecyclerView komponentom na Androidu i UICollectionView na iOS operativnom sistemu. 
 
-\newline
 
 Ova komponenta je veoma performantna i bogata funkcionalnostima kao i ugrađena FlatList komponenta. Funkcioniše tako što se na pametan način vrši recikliranje komponenti koje su prethodno već renderovane i na taj način izbegava nepotrebno ponovno renderovanje. Ova tehnika poznata je kao reciklaža ćelija (eng. cell recycling) i dozvoljava nam da koristimo već renderovane komponente koje nisu više prisutne na ekranu za renderovanje novih.
 
-\newline
 
 Problem ove komponente jeste veoma neintuitivan API. Kao programer, morali ste potrošiti ogromnu količinu vremena da razumete kako sama komponenta radi da biste mogli da iskoristite prednosti koje ista pruža. Komponenta zahteva precizne predikcije za veličinu elemenata i ako iste nisu dobre performanse dosta padaju. Takođe, sav render se vrši na JavaScript niti što može dovesti na seckanja.
 
@@ -460,22 +456,20 @@ Rešenje problema pomenutih u prethodnim sekcijama ogleda se u biblioteci po ime
 
 Sa slike iznad vidimo kako izgleda korišćenje FlashList komponente u samom kodu. Prva stvar koju primećujemo jeste da je API skoro identičan sa FlatList komponentom. Jedina razlika jeste u estimatedItemSize polju koje je specifično za ovu biblioteku.
 
-\newline
 
 FlashList komponenta koristi estimatedItemSize polje kako bi odredila broj elemenata koji treba da budu prikazani na ekranu tokom inicijalnog renderovanja i prilikom skrolovanja. Kako sve ovo radi? Naime, umesto da se komponenta uništava kada neki element nestane sa ekrana, FlashList komponenta renderuje istu komponentu sa drugačijim parametrima. Prilikom korišćenja, bitno je da se ne koristi key polje u elementima liste jer će ovo sprečiti FlashList komponentu da radi recikliranje.
 
-\newline
 
 Na slikama ispod vidimo performanse prilikom korišćenja FlatList i FlashList komponenti. Možemo primetiti da je razlika u performansama drastična. Vidimo da prilikom korišćenja FlatList komponente imamo relativno često blokiranje JS niti, dok kod FlashList komponente to nije slučaj. Blokade se dešavaju na momente i to bas u momentu kada se dohvataju podaci sa backend servera (eng. Backend).
 
 \begin{figure}[!h]
     \centering
-    \subfloat[\centering FlatList performanse]{{\includegraphics[width=6cm]{docs/images/chapterFive/flashListLowPerf.png} }}%
+    \subfloat[\centering FlatList performanse]{{\includegraphics[width=6cm]{docs/images/chapterFive/flashListLowPerf.png} }}
     \qquad
-    \subfloat[\centering FlashList performanse]{{\includegraphics[width=6cm]{docs/images/chapterFive/fliperPerf.png} }}%
+    \subfloat[\centering FlashList performanse]{{\includegraphics[width=6cm]{docs/images/chapterFive/fliperPerf.png} }}
 \end{figure}
 
-\chapter{Sistem za praćenje poslovnih metrika}
+\chapter{Sistem za praćenje događaja u mobilnoj aplikaciji}
 
 U savremenom poslovanju, praćenje poslovnih metrika igra ključnu ulogu u donošenju informisanih odluka i optimizaciji poslovnih odluka. Poslovne metrike omogućavaju kompanijama da prate performanse, identifikuju trendove i prepoznaju oblasti koje zahtevaju poboljšanja. U ovom poglavlju, fokusiraćemo se na značaj poslovnih metrika i predstaviti predlog za implementaciju sistema za praćenje događaja (eng, events) unutar React Native aplikacije.
 
@@ -486,17 +480,44 @@ Na primeru implementacije jednog ovakvog sistema razmatraćemo najbolje prakse z
 Često, prilikom izrade softvera kraj se proglašava onog momenta kada su sve funkcionalnosti implementirane. Ovakav pristup je po pravilu pogrešan. Greška se ogleda u činjenici da ne postoji sistem koji nije moguće unaprediti. Takođe, često je veoma teško uočiti prostor za poboljšanje ukoliko nemamo mehanizme koji nam to omogućavaju. Mehanizam kome se najčešće pribegava jeste čuvanje svih relevantnih događaja u bazama podataka. Ovi događaji se kasnije obrađuju i iz tog oblika se izvlače poslovni zaključci koji će kasnije voditi ka definisanju prostora za poboljšanje i novim funkcionalnostima u sistemu.
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[scale=0.5]{docs/images/chapterSix/dataFlow.png}
-    \caption{Ciklus unapređivanja aplikacije}
-    \label{fig:dataFlow}
+\centering
+\includegraphics[scale=0.5]{docs/images/chapterSix/dataFlow.png}
+\caption{Ciklus unapređivanja aplikacije}
+\label{fig:dataFlow}
 \end{figure}
 
-Na slici 6.1 vidimo ciklus unapređivanje proizvoda. Na samom početku imamo proizvod koji radi i koji korisnik upotrebljava. Taj korisnik tokom korišćenja našeg proizvoda okida neki događaj i ta informacija se smešta u bazi podataka. Informacije iz baze koriste analitičari podataka kako bi došli do zaključaka preko kojih se definišu delovi proizvoda koji se mogu unaprediti. Preko ovih delova proizvoda i analiziranih podataka definišemo konkretne funkcionalnosti koje inženjer implementira. U ovom momentu ponovo kreće ciklus. 
-
-\newline
+Na slici 6.1 vidimo ciklus unapređivanje proizvoda. Na samom početku imamo proizvod koji radi i koji korisnik upotrebljava. Taj korisnik tokom korišćenja našeg proizvoda okida neki događaj i ta informacija se smešta u bazi podataka. Informacije iz baze koriste analitičari podataka kako bi došli do zaključaka preko kojih se definišu delovi proizvoda koji se mogu unaprediti. Preko ovih delova proizvoda i analiziranih podataka definišemo konkretne funkcionalnosti koje inženjer implementira. U ovom momentu ponovo kreće ciklus.
 
 Da bismo bili u mogućnosti da sprovedemo sve ove korake u delo od esencijalnog značaja nam je da imamo sistem u okviru naše mobilne aplikacije koji će nam ovo omogućiti. Jedan takav sistem biće opisan u narednoj sekciji.
+
+\section{Arhitektura sistema za prećenje događaja}
+
+Na samom početku, pre pravljenja jednog ovakvog sistema neophodno je definisati koje probleme on treba da reši. Ovakav pristup je često veoma koristan jer nas podstiče da izađemo iz okvira implementacije i da se fokusiramo na ono što želimo da napravimo, odnosno na problem koji želimo da rešimo.
+\newline
+\newline
+Osnovne funkcionalnosti sistema za praćenje događaja su:
+\begin{itemize}
+\item Lako dodavanje novih događaja
+\item Mogućnost istovremenog upisivanja događaja na različite servise za čuvanje podataka
+\item Lak način za napređivanje događaja
+\item Lako testiranje sistema pre puštanja na produkciju
+\item Mogućnost da se na isti događaj reaguje na različite načine 
+\end{itemize}
+
+U nastavku ćemo predstaviti arhitekturu sistema koji zadovoljava sve gorepomenute kriterijume.
+
+\subsection{Osnovni entiteti}
+
+Prilikom razvijanja sistema za praćenje događaja uočavamo dva osnovna entiteta. U pitanju su događaj i pratilac događaja. Događaj nam je osnovni gradivni entitet na kom će se zasnivati sve dalje što budemo radili. On je implementiran kao interfejs koji mora imati polje eventName koje predstavlja ime tog eventa.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{docs/images/chapterSix/dataFlow.png}
+\caption{Interfejs za događaj}
+\label{fig:eventInterface}
+\end{figure}
+
+
 
 
 % ------------------------------------------------------------------------------
