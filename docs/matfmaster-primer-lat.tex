@@ -499,7 +499,7 @@ Osnovne funkcionalnosti sistema za praćenje događaja su:
 \begin{itemize}
 \item Lako dodavanje novih događaja
 \item Mogućnost istovremenog upisivanja događaja na različite servise za čuvanje podataka
-\item Lak način za napređivanje događaja
+\item Lak način za unapređivanje događaja
 \item Lako testiranje sistema pre puštanja na produkciju
 \item Mogućnost da se na isti događaj reaguje na različite načine 
 \end{itemize}
@@ -508,14 +508,16 @@ U nastavku ćemo predstaviti arhitekturu sistema koji zadovoljava sve gorepomenu
 
 \subsection{Osnovni entiteti}
 
-Prilikom razvijanja sistema za praćenje događaja uočavamo dva osnovna entiteta. U pitanju su događaj i pratilac događaja. Događaj nam je osnovni gradivni entitet na kom će se zasnivati sve dalje što budemo radili. On je implementiran kao interfejs koji mora imati polje eventName koje predstavlja ime tog eventa.
+Prilikom razvijanja sistema za praćenje događaja uočavamo dva osnovna entiteta. U pitanju su događaj i pratilac događaja. Događaj nam je osnovni gradivni entitet na kom će se zasnivati sve dalje što budemo radili. On je implementiran kao interfejs koji mora imati polje eventName koje predstavlja ime tog događaja. Pored imena, svaki pojedinačni događaj može biti obogaćen dodatnim poljima koja bliže određuju isti. Ovo je omogućeno tako što je sam događaj ništa više nego TypeScript objekat. Dakle, imamo skup polja koja imaju neke vrednosti. 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{docs/images/chapterSix/dataFlow.png}
+\includegraphics[scale=0.5]{docs/images/chapterSix/eventInterface.png}
 \caption{Interfejs za događaj}
 \label{fig:eventInterface}
 \end{figure}
+
+Drugi bitan entitet smo rekli da je pratilac događaja. On predstavlja klasu koja u sebi sadrži sve događaje na koje isti reaguje. Takođe, za svaki od tih događaja vezana je i funkcija koja nam govori kako će ovaj pratilac reagovati na taj specifičan događaj. Ovakvih pratilaca može u našem sistemu biti neograničeno i svaki od njih može da reaguje na proizvoljan broj događaja na proizvoljan način. Na primer, možemo imati jedan pratilac koji čemo koristiti za testiranje sistema i on će reagovati na sve događaja tako što će da ih loguje u konzolu. U isto vreme, možemo da imamo drugi pratilac koji će takođe reagovati na sve događaje, međutim, on će ih prosleđivati u našu bazu podataka.
 
 
 
