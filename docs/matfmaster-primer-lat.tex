@@ -528,7 +528,32 @@ Drugi bitan entitet smo rekli da je pratilac događaja. On predstavlja klasu koj
 
 Nakon što smo definisali ova dva entiteta potrebno nam je nešto što će da ih poveže i zapravo obezbedi željenu funkcionalnost. U našem slučaju to će da bude AnalyticsEventBus klasa. Ona će da bude realizovana kao obrazac Unikat (eng. Singleton). Dakle, kreiraće se samo jedna instanca ove klase i biće korišćena kroz celu aplikaciju. Ova klasa posedovaće niz svih pratilaca događaja koje smo kreirali. Takođe, omogućavaće dodavanje novih pratilaca. Glavna funkcionalnost ove klase biće funkcija za obradu nekog događaja. Kada se okine događaj, ova klasa će se pobrinuti da svaki pratilac koji treba da reaguje na taj događaj to zapravo i uradi. Kako sve to radi, videćemo malo kasnije.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.45]{docs/images/chapterSix/analyticsEventBus.png}
+\caption{Glavna klasa za sistem za praćenje događaja}
+\label{fig:analyticsEventBus}
+\end{figure}
 
+Na sledećoj slici biće prikazan UML dijagram koji definiše odnose između kreiranih klasa i interfejsa.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{docs/images/chapterSix/uml.png}
+\caption{UML dijagram}
+\label{fig:umlDiagram}
+\end{figure}
+
+\subsection{Primer korišćenja i funkcionisanja}
+
+U ovoj sekciji biće prikazan način korišćenja prethodno kreiranog sistema. Takođe, biće detaljno objašnjeno kako ceo proces funkcioniše.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{docs/images/chapterSix/uml.png}
+\caption{Primer korišćenja događaja}
+\label{fig:eventUsage}
+\end{figure}
 
 
 
