@@ -569,7 +569,12 @@ Pored prethodno pomenutih sistema za merenje performansi i poslovnih metrika apl
 
 Kao što smo i pre rekli, biblioteka Sentry integriše se u React Native mobilnoj aplikacije tako što se cela aplikacija obmotava samim SDK-jom (eng. Software development kit). Mi smo to uradili u App.tsx fajlu. Dakle, kada se desi neka greška unutar naše aplikacije ona će biti propagirana do samog vrha. Biblioteka Sentry će registrovati grešku, pridružiće joj što je moguće više parametara kako bi razvojni tim mogao da zaključi šta se zapravo desilo što brže i efikasnije. Nakon što je ovo odrađeno, ta greša se salje na Sentry plaformu gde ćemo je mi zapravo videti i dalje analizirati.
 
-
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.2]{docs/images/chapterSeven/sentryErrorLogs.png}
+\caption{Primer liste grešaka na plaformi Sentry}
+\label{fig:eventUsage}
+\end{figure}
 
 
 
