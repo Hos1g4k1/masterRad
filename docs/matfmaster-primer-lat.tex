@@ -550,10 +550,26 @@ U ovoj sekciji biće prikazan način korišćenja prethodno kreiranog sistema. T
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{docs/images/chapterSix/uml.png}
+\includegraphics[scale=0.30]{docs/images/chapterSix/eventUsage.png}
 \caption{Primer korišćenja događaja}
 \label{fig:eventUsage}
 \end{figure}
+
+Na slici iznad vidimo kako se loguje jedan event. Tu dohvatamo instancu naše unikat klase analyticsEventBus. Nad ovom instancom klase pozivamo \textit{log} metodu kojoj prosleđujemo jedan konkretan događaj koji je potrebno da se loguje. Vidimo da naš događaj, pored obaveznog polja \textit{eventName} ima i polje \textit{type} koje ga bliže određuje. \newline
+
+U ovom momentu, kreće da se izvršava \textit{log} metoda klase AnalyticsEventBus. Ranije smo pomenuli da svaki od pratilaca događaja, ukoliko reaguje na neki događaj mora da poseduje funkciju koja se poziva kada se okine taj događaj. U \textit{log} metodi dohvatamo sve funkcije koje treba da se pozovu za taj događaj. Dakle, prolazimo kroz sve pratioce događaja i ukoliko oni reaguju na naš događaj dodajemo funkciju u niz. Nakon ovoga prolazimo kroz dobijeni niz i pozivamo svaku funkciju iz istog pri čemu je parametar uvek isti, naš okinuti događaj. U konkretnoj implementaciji ovaj korak je optimizovan i ovaj niz se ne računa svaki put kada se događaj okine već samo prilikom dodavanja novog pratioca događaja. Kada se doda novi pratioc događaja, prolazimo kroz sve događaje na koje on reaguje i mapiramo ih u objekat koji je zajednički za sve pratioce. U ovom objektu ključevi su imena događaja, a vrednost su sve funkcije koje treba pozvati prilikom okidanja konkretnog događaja. \newline
+
+Ovom optimizacijom se značajno štede performanse. Recimo da je broj događaja označen sa M, broj pratioca sa N i recimo da je okinuto P događaja. Ukoliko bismo koristili pristup koji je prvi opisan, prilikom okidanja P događaja svaki put bismo preračunavali niz funkcija koje treba da se pozovu. Jedno računanje je složenosti O(N*M) jer svaki put prolazimo kroz N pratioca i za svakog pratioca prolazimo kroz M događaja. Dakle, ukupna složenost kreiranja bi bila O(P*N*M). Dok bismo u drugom pristupu imali složenost O(N*M) jer računanje radimo samo jednom, prilikom dodavanja pratioca.
+
+\chapter{Sistem za praćenje grešaka unutar mobilne aplikacije}
+
+Pored prethodno pomenutih sistema za merenje performansi i poslovnih metrika aplikacije, od esencijalnog značaja nam je da postavimo sistem za praćenje grešaka. Realnost je da većina aplikacija ima greške, odnosno da funkcionisanje odstupa od specifikacije. Veoma je bitno da možemo to da uočimo na sistematičan način i da adresiramo kako bismo u budućnosti otklonili ta neželjena ponašanja i obezbedili fluidno iskustvo za korisnike. Ovaj problem je veoma izazovan jer su aplikacije često veoma velike i većina slučaja upotrebe nije trivijalna i potrebno je da se ispuni priličan broj uslova da bismo to reprodukovali. Sve ovo testiranje i pronalaženje ovih problema čini težim. U svrhe olakšavanja pronalaženja problema unutar aplikacije ćemo odraditi integraciju sistema Sentry. Ovaj sistem smo već koristili u poglavlju o performansama. Tada smo odradili integraciju koja nam je dozvolila da pratimo performansne metrike. Sada će nam ta ista integracija omogućiti da beležimo sve greške koje su se dogodile u našoj aplikaciji uz propratne informacije koje će nam omogućiti da odradimo u kom delu sistema se problem dešava.
+
+\subsection{Kako ova integracija funkcioniše?}
+
+Kao što smo i pre rekli, biblioteka Sentry integriše se u React Native mobilnoj aplikacije tako što se cela aplikacija obmotava samim SDK-jom (eng. Software development kit). Mi smo to uradili u App.tsx fajlu. Dakle, kada se desi neka greška unutar naše aplikacije ona će biti propagirana do samog vrha. Biblioteka Sentry će registrovati grešku, pridružiće joj što je moguće više parametara kako bi razvojni tim mogao da zaključi šta se zapravo desilo što brže i efikasnije. Nakon što je ovo odrađeno, ta greša se salje na Sentry plaformu gde ćemo je mi zapravo videti i dalje analizirati.
+
+
 
 
 
