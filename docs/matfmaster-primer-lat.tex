@@ -571,14 +571,20 @@ Kao što smo i pre rekli, biblioteka Sentry integriše se u React Native mobilno
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.30]{docs/images/chapterSeven/sentryErrorLogs.png}
+\includegraphics[scale=0.4]{docs/images/chapterSeven/sentryErrorLogs.png}
 \caption{Primer liste grešaka na plaformi Sentry}
-\label{fig:eventUsage}
+\label{fig:sentryErrorList}
 \end{figure}
 
 Na slici iznad vidimo glavnu stranicu platofrme Sentry. Na istoj su izlistane sve greške koje su se desile unutar naše aplikacije. U nastavku ćemo analizirati glavne funkcionalnosti. 
 
+\section{Funkcionalnosti platforme Sentry}
 
+Kao što smo videli na slici 7.1, platforma Sentry nam pruža ogromnu količinu podataka o svakoj pojedinačnoj grešci koje je logovana na istoj. Na glavnoj stranici su izlistane sve greške koje su se desile unutar aplikacije i date su nam najosnovnije informacije o svakoj pojedinačnoj grešci. Ove informacije uključuju momenat dešavanja, naziv i opis greške, broj pojavljivanja greške i broj korisnika koji su je iskusili. Takođe, prikazan nam je prioritet greške kao i osoba kojoj je dodeljeno rešavanje. Ovo polje je posebno interesantno jer nam sama plaforma omogućava dodatnu integraciju sa servisom GitHub. Uz pomoć ovog servisa ovo polje će automatksi biti popunjeno, odnosno rešavanje problema biće dodeljeno onom članu razvojnog tima koji je poslednji vršio izmenu linije koda u kojoj se desila greška. \newline
+
+Zanimljiviji i svakako korisniji deo ove plaforme jeste sama stranica o grešci. Klikom na svaku pojedinačnu grešku bićemo navigirani na posebnu stranicu gde ćemo dobiti sve dostupne informacije o istoj kako bismo mogli da je rešimo. Ova stranica je veoma obimna i pruža ogromnu količinu informacija, tako da ćemo da je podelimo na manje celine i tako ih analiziramo.
+
+\subsection{Kako ova integracija funkcioniše?}
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
