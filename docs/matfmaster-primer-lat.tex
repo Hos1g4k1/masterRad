@@ -561,7 +561,7 @@ U ovom momentu, kreće da se izvršava \textit{log} metoda klase AnalyticsEventB
 
 Ovom optimizacijom se značajno štede performanse. Recimo da je broj događaja označen sa M, broj pratioca sa N i recimo da je okinuto P događaja. Ukoliko bismo koristili pristup koji je prvi opisan, prilikom okidanja P događaja svaki put bismo preračunavali niz funkcija koje treba da se pozovu. Jedno računanje je složenosti O(N*M) jer svaki put prolazimo kroz N pratioca i za svakog pratioca prolazimo kroz M događaja. Dakle, ukupna složenost kreiranja bi bila O(P*N*M). Dok bismo u drugom pristupu imali složenost O(N*M) jer računanje radimo samo jednom, prilikom dodavanja pratioca.
 
-\chapter{Sistem za praćenje grešaka unutar mobilne aplikacije}
+\chapter{Sistem za praćenje grešaka unutar aplikacije}
 
 Pored prethodno pomenutih sistema za merenje performansi i poslovnih metrika aplikacije, od esencijalnog značaja nam je da postavimo sistem za praćenje grešaka. Realnost je da većina aplikacija ima greške, odnosno da funkcionisanje odstupa od specifikacije. Veoma je bitno da možemo to da uočimo na sistematičan način i da adresiramo kako bismo u budućnosti otklonili ta neželjena ponašanja i obezbedili fluidno iskustvo za korisnike. Ovaj problem je veoma izazovan jer su aplikacije često veoma velike i većina slučaja upotrebe nije trivijalna i potrebno je da se ispuni priličan broj uslova da bismo to reprodukovali. Sve ovo testiranje i pronalaženje ovih problema čini težim. U svrhe olakšavanja pronalaženja problema unutar aplikacije ćemo odraditi integraciju sistema Sentry. Ovaj sistem smo već koristili u poglavlju o performansama. Tada smo odradili integraciju koja nam je dozvolila da pratimo performansne metrike. Sada će nam ta ista integracija omogućiti da beležimo sve greške koje su se dogodile u našoj aplikaciji uz propratne informacije koje će nam omogućiti da odradimo u kom delu sistema se problem dešava.
 
@@ -576,7 +576,7 @@ Kao što smo i pre rekli, biblioteka Sentry integriše se u React Native mobilno
 \label{fig:sentryErrorList}
 \end{figure}
 
-Na slici iznad vidimo glavnu stranicu platofrme Sentry. Na istoj su izlistane sve greške koje su se desile unutar naše aplikacije. U nastavku ćemo analizirati glavne funkcionalnosti. 
+Na slici iznad vidimo glavnu stranicu platofrme Sentry. Na istoj su izlistane sve greške koje su se desile unutar naše aplikacije. U nastavku ćemo analizirati glavne funkcionalnosti.
 
 \section{Funkcionalnosti platforme Sentry}
 
