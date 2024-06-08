@@ -595,7 +595,25 @@ Prva sekcija na stranici daje nam najosnivnije informacije o grešci koju analiz
 \label{fig:sentryErrorBasicInfo}
 \end{figure}
 
-Nakon ovih informacija, vidimo deo koda u kom se greška dogodila. Ovo je veoma korisna informacija jer sužava pretragu i daje nam ključne informacije kako bismo mogli da krenemo sa procesom debagovanja. 
+Nakon ovih informacija, vidimo deo koda u kom se greška dogodila. Ovo je veoma korisna informacija jer sužava pretragu i daje nam ključne informacije kako bismo mogli da krenemo sa procesom debagovanja. Ovde takođe imamo opciju da pogledamo celu putanju greške (eng. stacktrace). Ova opcija je naročito korisna kada je u pitanju greška unutar nekog eksternog sistema ili biblioteke. U tom slučaju, sama greška se manifestuje kod nas u aplikaciji, ali je rešavanje potrebno sprovesti van iste. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4]{docs/images/chapterSeven/SentyErrorStacktrace.png}
+\caption{Informacije o delu koda gde se greška javlja}
+\label{fig:sentryStacktrace}
+\end{figure}
+
+\subsection{Koncept mrvica hleba}
+
+Mrvice hleba (eng. breadcrumbs) unurar sistema Sentry predstavljaju sekvencu događaja ili akcija koji su se dogodili neposredno pre greške unutar naše aplikacije. Koncept je potekao od ostavljanja mrvica hleba koje će nam pomoći da dođemo do tačke kada je nešto krenulo po zlu. Ove mrvice mogu biti logovane automatski, ali takođe mi možemo dodati naše lične. Pomoću njih olakšavamo posao kako sebi tako i razvojnom timu prilikom reprodukcije i debagovanja greške.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4]{docs/images/chapterSeven/s.png}
+\caption{Informacije o delu koda gde se greška javlja}
+\label{fig:sentryStacktrace}
+\end{figure}
 
 
 % ------------------------------------------------------------------------------
