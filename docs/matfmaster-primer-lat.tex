@@ -584,7 +584,20 @@ Kao što smo videli na slici 7.1, platforma Sentry nam pruža ogromnu količinu 
 
 Zanimljiviji i svakako korisniji deo ove plaforme jeste sama stranica o grešci. Klikom na svaku pojedinačnu grešku bićemo navigirani na posebnu stranicu gde ćemo dobiti sve dostupne informacije o istoj kako bismo mogli da je rešimo. Ova stranica je veoma obimna i pruža ogromnu količinu informacija, tako da ćemo da je podelimo na manje celine i tako ih analiziramo.
 
-\subsection{Kako ova integracija funkcioniše?}
+\subsection{Najosnovnije informacije o grešci}
+
+Prva sekcija na stranici daje nam najosnivnije informacije o grešci koju analiziramo. Tu mozemo da vidimo sam tekst greške, fajl u kome se greška dogodila, broj pojavljivanja greške kao i broj korisnika kod kojih se greška manifestovala. Takođe, vidimo broj broj pojavljivanja greške kako u poslednja 24 časa, tako i u poslednjih mesec dana, kao i podatke o verziji aplikacije u kojoj smo prvi i poslednji put uočili grešku. Pomoću ovih informacija možemo da odredimo interni prioritet greške i da odlučimo da li ćemo prioritizovati njeno rešavanje ili ne.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4]{docs/images/chapterSeven/sentryErrorBasicData.png}
+\caption{Osnovni podaci o grešci}
+\label{fig:sentryErrorBasicInfo}
+\end{figure}
+
+Nakon ovih informacija, vidimo deo koda u kom se greška dogodila. Ovo je veoma korisna informacija jer sužava pretragu i daje nam ključne informacije kako bismo mogli da krenemo sa procesom debagovanja. 
+
+
 % ------------------------------------------------------------------------------
 \chapter{Zaključak}
 % ------------------------------------------------------------------------------
