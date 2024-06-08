@@ -619,6 +619,17 @@ Mrvice hleba (eng. breadcrumbs) unurar sistema Sentry predstavljaju sekvencu dog
 
 Često, greške koje se desavaju unutar sistema se ne nalaze u glavnim tokovima korišćenja (eng. flows), već u nekim specifičnim slučajevima upotrebe. Na primer, korisnik je kliknuo na push notifikaciju ili deeplink i preko neke od ovih funkcionalnosti bio navigiran na određenu stranicu i tom prilikom dešava se greška na ovoj stranici. Kada razvojni tim pokuša da reprodukuje ovo ponašanje greška se ne desi. Ovo je veoma čest slučaj i poenta je u tome da u velikim sistemima postoji mnogo načina da se dodje do istog dela sistema i praktično je nemoguće testirati ih sve. U ovim situacijama nam može biti korisno da dodamo naše lične breadcrumbs kako bismo olakšali određivanje tačne putanje kojom je korisnik došao do greške. Sentry plaforma nam pruža ovu mogućnost.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{docs/images/chapterSeven/addBreadcrumb.png}
+\caption{Dodavanje novog breadcrumb-a}
+\label{fig:addBreadcrumb}
+\end{figure}
+
+\subsection{Informacije o uređaju}
+
+Neretko, same greške imaju povezanost sa trenutnim stanjem uređaja. Na primer, ukoliko je internet konekcija slaba može doći do povećanog vremena čekanja za informacije sa servera ili čak do situacija kada te informacije uopšte ne stignu nazad. Takođe, ukoliko je novi baterije pri kraju to takođe može da izazove razne probleme u funkcionisanju aplikacije. Platforma Sentry nam pruža i ove informacije.
+
 
 
 
