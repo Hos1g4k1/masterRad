@@ -606,14 +606,20 @@ Nakon ovih informacija, vidimo deo koda u kom se greška dogodila. Ovo je veoma 
 
 \subsection{Koncept mrvica hleba}
 
-Mrvice hleba (eng. breadcrumbs) unurar sistema Sentry predstavljaju sekvencu događaja ili akcija koji su se dogodili neposredno pre greške unutar naše aplikacije. Koncept je potekao od ostavljanja mrvica hleba koje će nam pomoći da dođemo do tačke kada je nešto krenulo po zlu. Ove mrvice mogu biti logovane automatski, ali takođe mi možemo dodati naše lične. Pomoću njih olakšavamo posao kako sebi tako i razvojnom timu prilikom reprodukcije i debagovanja greške.
+Mrvice hleba (eng. breadcrumbs) unurar sistema Sentry predstavljaju sekvencu događaja ili akcija koji su se dogodili neposredno pre greške unutar naše aplikacije. Koncept je potekao od ostavljanja mrvica hleba koje će nam pomoći da dođemo do tačke kada je nešto krenulo po zlu. Ove mrvice mogu biti logovane automatski, ali takođe mi možemo dodati naše lične. Pomoću njih olakšavamo posao kako sebi tako i razvojnom timu prilikom reprodukcije i debagovanja greške. Dakle, u ovoj sekciji možemo da pratimo tačnu interakciju korisnika sa našom aplikacijom pre nego što je došlo do greške. Platforma Sentry prikazuje nam API pozive koji su okinuti, interakciju sa elementima korisničkog interfejsa (klik na dugme, selektovanje radio dugmeta, popunjavanje tekstualnog polja, ...). Ove informacije su od ključnog značaja kako bismo mogli da razumemo slučaj upotrebe kao i tok akcija koje dovode do nekog problema. \newline
+
+\newline
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{docs/images/chapterSeven/s.png}
-\caption{Informacije o delu koda gde se greška javlja}
-\label{fig:sentryStacktrace}
+\includegraphics[scale=0.4]{docs/images/chapterSeven/SentryBreadcrumbs.png}
+\caption{Breadcrumbs}
+\label{fig:sentryBreadcrumbs}
 \end{figure}
+
+Često, greške koje se desavaju unutar sistema se ne nalaze u glavnim tokovima korišćenja (eng. flows), već u nekim specifičnim slučajevima upotrebe. Na primer, korisnik je kliknuo na push notifikaciju ili deeplink i preko neke od ovih funkcionalnosti bio navigiran na određenu stranicu i tom prilikom dešava se greška na ovoj stranici. Kada razvojni tim pokuša da reprodukuje ovo ponašanje greška se ne desi. Ovo je veoma čest slučaj i poenta je u tome da u velikim sistemima postoji mnogo načina da se dodje do istog dela sistema i praktično je nemoguće testirati ih sve. U ovim situacijama nam može biti korisno da dodamo naše lične breadcrumbs kako bismo olakšali određivanje tačne putanje kojom je korisnik došao do greške. Sentry plaforma nam pruža ovu mogućnost.
+
+
 
 
 % ------------------------------------------------------------------------------
