@@ -630,7 +630,28 @@ Mrvice hleba (eng. breadcrumbs) unurar sistema Sentry predstavljaju sekvencu dog
 
 Neretko, same greške imaju povezanost sa trenutnim stanjem uređaja. Na primer, ukoliko je internet konekcija slaba može doći do povećanog vremena čekanja za informacije sa servera ili čak do situacija kada te informacije uopšte ne stignu nazad. Takođe, ukoliko je novi baterije pri kraju to takođe može da izazove razne probleme u funkcionisanju aplikacije. Platforma Sentry nam pruža i ove informacije.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{docs/images/chapterSeven/deviceInfo.png}
+\caption{Informacije o uređaju}
+\label{fig:deviceInfo}
+\end{figure}
 
+\section{Poboljšana arhitektura za praćenje grešaka}
+
+Sada, kada smo videli šta nam sve plaforma Sentry nudi i kako možemo da odradimo osnovnu inicijalizaciju vreme je da razmislimo o unapređivanju postojećeg rešenja. Za početak, potrebno je da definišemo koje sve tipove grešaka želimo da pratimo. To su sve one greške do kojih dolazi do prekida rada aplikacije ili do neželjenih ponašanja u korisničkom iskustvu. Ti tipovi grešaka su:
+
+\begin{itemize}
+\item Neobrađene greške (eng. ungandled errors) - ove greške se dešavaju u momentu kada aplikacija naiđe na grešku i ne zna kako da je obradi. Ove greške nisu veoma česte, ali ukoliko se dese veoma često dovode do potpunog prestanka rada aplikacije.
+\item JavaScript greške (eng. JS erros) - ove greške predstavljaju najveći deo svih grešaka unutar React Native aplikacija. U pitanju su stvari kao što su sintaksne greške, pristupanju poljima objekata pri čemu sam objekat ima vrednost undefined.
+\item Mrežne greške (eng. Network errors) - ova grupa obuhvata sve greške koje se događaju usled nemogućnosti aplikacije da komunicira sa serverom. Kao što smo ranije pominjali, to su problemi sa slabom internet konekcijom, ali i potpunim odsustvom mreže.
+\end{itemize}
+
+Kada smo ovo odradili, mozemo da napravimo omotač oko naše React Native aplikacije koje će nam služiti da obrađuje sve greške koje se dese unutar aplikacije na način koji mi definišemo. Ovo ćemo realizovati preko ErrorBoundary komponente. Ovo je jedan od standardnih obrazaca kod React i React Native aplikacije. U pitanju je komponenta koje služi kao omotač oko cele aplikacije. Kada se greška dogodi, biva propagirana kroz od dna do vrha stabla komponenti i na kraju biva uhvaćena u okviru ovog omotača. Mi tu obrađujemo i normalizujemo grešku i šaljemo je na Sentry plaformu. \newline
+
+\newline
+
+Sentry nam pruža ugrađenu podršku za ovo. Na slici ispod ćemo videti kako bi izgledala implementacija.
 
 
 % ------------------------------------------------------------------------------
