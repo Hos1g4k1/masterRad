@@ -41,7 +41,7 @@
 \usepackage{subfig}
 \usepackage{float}
 % Datoteka sa literaturom u BibTex tj. BibLaTeX/Biber formatu
-\bib{matfmaster-primer}
+\bib{matfmaster}
 
 % Ime kandidata na srpskom jeziku (u odabranom pismu)
 \autor{Lazar Čeliković}
@@ -54,7 +54,7 @@
 % Ime i afilijacija prvog člana komisije (u odabranom pismu)
 \komisijaA{dr Aleksandar \textsc{Kartelj}, vanredni profesor\\ Univerzitet u Beogradu, Matematički fakultet}
 % Ime i afilijacija drugog člana komisije (u odabranom pismu)
-\komisijaB{dr Staša \textsc{Vujučić Stanković}, docent\\ Univerzitet u Beogradu, Matematički fakultet}
+\komisijaB{dr Staša \textsc{Vujičić Stanković}, docent\\ Univerzitet u Beogradu, Matematički fakultet}
 % Ime i afilijacija trećeg člana komisije (opciono)
 % \komisijaC{}
 % Ime i afilijacija četvrtog člana komisije (opciono)
@@ -92,6 +92,22 @@ Mobilne aplikacije i aplikacije generalno često se razvijaju sa primarnim cilje
 
 % ------------------------------------------------------------------------------
 \chapter{Uvod}
+
+U današnjem digitalnom dobu, mobilne aplikacije predstavljaju ključan element poslovanja i komunikacije sa korisnicima. Upravljanje razvojem mobilnih aplikacija postaje sve kompleksnije, zahtevajući duboko razumevanje tehnologija, procesa i alata koji utiču na performanse i kvalitet aplikacija. Ovaj master rad istražuje različite aspekte ovog dinamičnog polja, sa posebnim fokusom na primenu radnog okvira React Native i sisteme za praćenje performansi, događaja i grešaka unutar mobilnih aplikacija.
+
+Prvo poglavlje, Pregled tehnologija za razvoj mobilnih aplikacija, pruža osnovni pregled glavnih tehnologija, alata i platformi koje su ključne za efikasan razvoj mobilnih aplikacija. Analiziraće se prednosti i izazovi različitih pristupa razvoja mobilnih aplikacija, sa ciljem identifikacije najboljih praksi.
+
+Drugo poglavlje, Osnove radnog okvira React Native, detaljno istražuje arhitekturu, karakteristike i primene React Native okvira u razvoju mobilnih aplikacija. Biće objašnjeno kako ovaj radni okvir funkcioniše ispod žita i zbog čega je to od presudnog značaja za dobro razumevanja performansi naše aplikacije.
+
+Treće poglavlje, Aplikacija za vremensku prognozu, služi kao konkretni primer primene React Native okvira u praksi. Fokus će biti na implementaciji aplikacije za vremensku prognozu, uključujući integraciju sa spoljnim API-jima i strategije za poboljšanje korisničkog iskustva.
+
+Četvrto poglavlje, Sistem za merenje performansi aplikacije, istražuje važnost merenja, analize i optimizacije performansi mobilnih aplikacija. Biće razmatrani ključni metodi, alati i tehnike za merenje performansi, sa fokusom na identifikaciju i rešavanje potencijalnih problema koji mogu uticati na performanse aplikacija. Biće dat pregled biblioteka FlatList i FlashList i detaljna analiza performansi koje nam pružaju. Takođe, u ovom poglavlju ćemo se upoznati sa alatom Sentry kog ćemo koristiti dalje kroz rad. 
+
+Peto poglavlje, Sistem za praćenje događaja u mobilnoj aplikaciji, analizira značaj praćenja korisničkih interakcija i događaja unutar mobilnih aplikacija. Biće data konkretna implementacija jednog ovakvog sistema. Nakog toga će biti analizirana primena dobijenih podataka za unapređenje korisničkog iskustva.
+
+Šesto poglavlje, Sistem za praćenje grešaka unutar aplikacije, istražuje važnost efikasnog otkrivanja, praćenja i rešavanja grešaka u mobilnim aplikacijama. U ovom poglavlju ćemo se vratiti alatu Sentry i dati pregled onoga što nam on pruža kako bismo praćenje grešaka olakšali maksimalno.
+
+Ovaj rad ima za cilj da pruži dublje razumevanje ključnih aspekata upravljanja razvojem mobilnih aplikacija, sa naglaskom na performanse i kvalitet. Kroz analizu tehnologija, primere implementacije i prakse za optimizaciju, rad će ponuditi vredan uvid u efikasno vođenje procesa razvoja mobilnih aplikacija u savremenom poslovnom okruženju.
 % ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
@@ -99,39 +115,39 @@ Mobilne aplikacije i aplikacije generalno često se razvijaju sa primarnim cilje
 \label{chp:pregledTehnologijaZaRazvojMobilnihAplikacija}
 
 % ------------------------------------------------------------------------------
-Mobilne aplikacije su doživele neverovatnu evoluciju od svog početka. Svedoci smo kako su one iz jednostavnih alata za komunikaciju ili zabavu prerastle u složene sisteme koji nam pomažu u svakodnevnom životu. Danas, aplikacije nisu samo način da ostanemo povezani s drugima, već i sredstvo za upravljanje finansijama, učenje novih veština, pa čak i za praćenje zdravlja i fitnessa. Razvoj tehnologija poput veštačke inteligencije i mašinskog učenja dodatno je unapredio funkcionalnost i intuitivnost aplikacija, pružajući korisnicima personalizovano iskustvo koje je prethodnih godina bilo nezamislivo. Ovaj napredak ne samo da je promenio način na koji interagujemo sa našim uređajima, već je i potpuno preoblikovao digitalni pejzaž, otvarajući nove mogućnosti za razvoj i inovacije u budućnosti. Ovaj napredak mobilnih aplikacija pratio je i razvoj tehnologija koje se koriste u izradi istih. Kroz vreme, došli smo do većeg broja tipova mobilnih aplikacija kao i do velikog broja radnih okvira koji nam omogućavaju lakši razvoj i održavanje aplikacija na kojima radimo.
+Mobilne aplikacije su doživele neverovatnu evoluciju od svog početka. Svedoci smo kako su one iz jednostavnih alata za komunikaciju ili zabavu prerasle u složene sisteme koji nam pomažu u svakodnevnom životu. Danas, aplikacije nisu samo način da ostanemo povezani s drugima, već i sredstvo za upravljanje finansijama, učenje novih veština, pa čak i za praćenje zdravlja i fitnesa. Razvoj tehnologija poput veštačke inteligencije i mašinskog učenja dodatno je unapredio funkcionalnost i intuitivnost aplikacija, pružajući korisnicima personalizovano iskustvo koje je prethodnih godina bilo nezamislivo. Ovaj napredak ne samo da je promenio način na koji interagujemo sa našim uređajima, već je i potpuno preoblikovao digitalni pejzaž, otvarajući nove mogućnosti za razvoj i inovacije u budućnosti. Ovaj napredak mobilnih aplikacija pratio je i razvoj tehnologija koje se koriste u izradi istih. Kroz vreme, došli smo do većeg broja tipova mobilnih aplikacija kao i do velikog broja radnih okvira koji nam omogućavaju lakši razvoj i održavanje aplikacija na kojima radimo.
 
 \section{Tipovi mobilnih aplikacija}
 
-Mobilne aplikacije mogu se kategorisati u nekoliko osnovnih tipova, svaki sa svojim specifičnim funkcijama i ciljevima. Delimo ih na nativne aplikacije(eng. native mobile applications), veb aplikacije (eng. web mobile applications), hibridne mobilne aplikacije i progrsivne veb alikacije (eng. progressive web applications - (PWA)). Svaki od ovih tipova ima svoje prednosti i mane, te izbor tipa aplikacije zavisi od specifičnih potreba i ciljeva projekta. U nastavku rada ćemo analizirati svaku od pomenutih kategorija.
+Mobilne aplikacije mogu se kategorisati u nekoliko osnovnih tipova, svaki sa svojim specifičnim funkcijama i ciljevima. Delimo ih na nativne aplikacije (eng. native mobile applications), veb aplikacije (eng. web mobile applications), hibridne mobilne aplikacije i progrsivne veb alikacije (eng. progressive web applications - (PWA)). Svaki od ovih tipova ima svoje prednosti i mane, te izbor tipa aplikacije zavisi od specifičnih potreba i ciljeva projekta. U nastavku rada ćemo analizirati svaku od pomenutih kategorija.
 
 \subsection{Nativne mobilne aplikacije}
 
-Nativne mobilne aplikacije \cite{nativeMobileApps} (eng. native mobile applications) su programi razvijeni za specifičan operativni sistem, kao što je iOS \cite{iosDocs} ili Android \cite{androidDocs}, koristeći programerske jezike koji su specifični za svaku od platformi. Tako imamo Swift i Objective C za iOS ili Kotlin i Javu za Android. Ove aplikacije se instaliraju direktno na mobilni uređaj preko prodavnice aplikacija na uređaju i optimizovane su da pružaju maksimalnu efikasnost i iskoristivost hardverskih karakteristika uređaja. Prednsoti ovog tipa mobilnih aplikacija su:
+Nativne mobilne aplikacije\cite{nativeMobileApps} (eng. native mobile applications) su programi razvijeni za specifičan operativni sistem, kao što je iOS\cite{iosDocs} ili Android\cite{androidDocs}, koristeći programske jezike koji su specifični za svaku od platformi. Tako imamo Swift i Objective C za iOS ili Kotlin i Javu za Android. Ove aplikacije se instaliraju direktno na mobilni uređaj preko prodavnice aplikacija na uređaju i optimizovane su da pružaju maksimalnu efikasnost i iskoristivost hardverskih karakteristika uređaja. Prednsoti ovog tipa mobilnih aplikacija su:
 
 \begin{itemize}
-    \item Budući da je ovaj tip aplikacija optimizovan za specifičnu platformu, po pravilu se mogu izvući neuporedivo više performanse u poređenju sa ostalim tipovima.
+    \item Budući da je ovaj tip aplikacija optimizovan za specifičnu platformu, po pravilu se mogu izvući neuporedivo više performanse u poređenju sa ostalim tipovima. Ovo se ostvaruje jer nema međuslojeva u komunikaciji već se ista vrši direktno između operativnog sistema i mobilne aplikacije kao što je prikazano na slici \ref{fig:nativeMobileApp}
     \item Fluidne animacije i intuitivan interfejs koji potiče od samog operativnog sistema rezultuju poboljšanim korisničkim iskustvom.
-    \item Mogućnost pristupa punom setu hardverskih i softverskih funkcija samog uređaja kao što su kamera, GPS, senzori
+    \item Mogućnost pristupa punom setu hardverskih i softverskih funkcija samog uređaja kao što su kamera, GPS, senzori.
     \item Nativne mobilne aplikacije se objavljuju na prodavnicama aplikacija kao sto su Play prodavnica (eng. Play Store) i App prodavnica (eng. App store). Tokom ovog procesa se vrši detaljno ispitivanje aplikacija i na ovaj način se povećava sigurnost.
 \end{itemize}
 Mane ovog tipa mobilnih aplikacija su:
 \begin{itemize}
-    \item Razvijanje posebne aplikacija za svaki operativni sistem povećava troškove kao i vreme koje je potrebno da se aplikacija pusti u korišćenje
+    \item Razvijanje posebne aplikacije za svaki operativni sistem povećava troškove kao i vreme koje je potrebno da se aplikacija pusti u korišćenje.
     \item Različiti operativni sistemi često iziskuju različite programske jezike za razvoj, što može otežati pronalaženje razvojnih timova.
-    \item Svaka promena ili ažuriranje aplikacija zahteva odvojeno slanje na odobrenje prodavnicu aplikacija za svaki operativni sistem. Ovaj proces je često vremenski zahtevan.
+    \item Svaka promena ili ažuriranje aplikacija zahteva odvojeno slanje na odobrenje prodavnici aplikacija za svaki operativni sistem. Ovaj proces je često vremenski zahtevan.
 \end{itemize}
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{docs/images/chapterTwo/nativnaAplikacija.png}
     \caption{Komunikacija nativne aplikacije i operativnog sistema}
-    \label{fig:nativnaAplikacija}
+    \label{fig:nativeMobileApp}
 \end{figure}
 
 \subsection{Veb aplikacije}
 
-Veb aplikacije (eng. web applications) su pristupačne preko internet pretraživača i ne zahtevaju preuzimanje i instalaciju na uređaj kao tradicionalne aplikacije. One su dizajnirane da budu kompatibilne sa različitim platformama i pružaju jedinstveno iskustvo korisnicima na različitim uređajima. One predstavljaju korisnu opciju za aplikacije koje zahtevaju brzu dostupnost i lako održavanje, ali kada je u pitanju duboka integracija sa uređajem i složene interakcije, ovaj tip aplikacije često zaostaje za mogućnostima koje pružaju nativne aplikacije. Prednosti veb mobilnih aplikacija:
+Veb aplikacijama (eng. web applications) pristupa se preko internet pretraživača i ne zahtevaju preuzimanje i instalaciju na uređaj kao tradicionalne aplikacije. One su dizajnirane da budu kompatibilne sa različitim platformama i pružaju jedinstveno iskustvo korisnicima na različitim uređajima. One predstavljaju korisnu opciju za aplikacije koje zahtevaju brzu dostupnost i lako održavanje, ali kada je u pitanju duboka integracija sa uređajem i složene interakcije, ovaj tip aplikacije često zaostaje za mogućnostima koje pružaju nativne aplikacije. Prednosti veb mobilnih aplikacija:
 
 \begin{itemize}
     \item Ovaj tip mobilnih aplikacija će raditi na bilo kom uređaju koji ima veb pretraživač. Ova osobina uklanja potrebu za posebnim verzijama za različite operativne sisteme.
@@ -142,7 +158,7 @@ Mane ovog tipa mobilnih aplikacija su:
 \begin{itemize}
     \item Veb mobilne aplikacije zavise od brzine i kvaliteta internet konekcije, a takođe ne mogu u potpunosti iskoristiti sve hardverske mogućnosti uređaja kao što to mogu nativne mobilne aplikacije.
     \item Korisnički interfejsi ovog tipa mobilnih aplikacija često su manje fluidni i intuitivni u odnosu na nativne mobilne aplikacije, što može uticati na ukupno korisničko iskustvo.
-    \item Funkcionalnosti i performanse mogu varirati u zavisnosti od pretraživača koji korisnik upotrebljava, što može rezultovati u nekonzistentnosti u korisničkom iskustvu.
+    \item Funkcionalnosti i performanse mogu varirati u zavisnosti od pretraživača koji korisnik upotrebljava, što može rezultovati u nekonzistentnosti u korisničkom iskustvu. Performanse delimično variraju i zbog činjenice da postoji međusloj komunikacije između same aplikacije i operativnog sistema što je i prikazano na slici \ref{fig:vebMobilnaAplikacija}.
 \end{itemize}
 
 \begin{figure}[h]
@@ -154,12 +170,12 @@ Mane ovog tipa mobilnih aplikacija su:
 
 \subsection{Progresivne veb mobilne aplikacije}
 
-Progresivne veb aplikacije \cite{pwa} (eng. Progressive Web Applications (PWA)) su vrsta aplikacija koje kombinuju najbolje osobine tradicionalnih veb aplikacija i native mobilnih aplikacija. One se izvršavaju u veb pretraživaču, ali pružaju korisničko iskustvo koje je blisko iskustvu koje pružaju nativne mobilne aplikacije. PWA su dizajnirane da budu brze, pouzdane, čak i u uslovima loše internet konekcije. Osnovne prednosti ovog tipa aplikacija su:
+Progresivne veb aplikacije\cite{pwa} (eng. Progressive Web Applications (PWA)) su vrsta aplikacija koje kombinuju najbolje osobine tradicionalnih veb aplikacija i nativnih mobilnih aplikacija. One se izvršavaju u veb pretraživaču, ali pružaju korisničko iskustvo koje je blisko iskustvu koje pružaju nativne mobilne aplikacije. PWA su dizajnirane da budu brze, pouzdane, čak i u uslovima loše internet konekcije. Osnovne prednosti ovog tipa aplikacija su:
 
 \begin{itemize}
-    \item Zahvaljujući servisnim radnicima \cite{serviceWorkers} (eng. service workers), progresivne veb aplikacije mogu raditi bez ili na slabim mrežnim konekcijama, pružajući osnovnu funkcionalnost kada nema internet konekcije.
+    \item Zahvaljujući servisnim radnicima\cite{serviceWorkers} (eng. service workers), progresivne veb aplikacije mogu raditi bez ili na slabim mrežnim konekcijama, pružajući osnovnu funkcionalnost kada nema internet konekcije.
     \item Korisnici mogu "instalirati" progresivne veb aplikacije na svoje uređaje, omogućavajući im da pristupe aplikaciji sa početnog ekrana, slično kao kod nativnih aplikacija.
-    \item Progresivne veb aplikacije imaju podršku za notifikacija (eng. push notification), što omogućava bolje zadržavanje korisnika (eng. retention).
+    \item Progresivne veb aplikacije imaju podršku za notifikacije (eng. push notification), što omogućava bolje zadržavanje korisnika (eng. retention).
     \item Progresivne veb aplikacije zahtevaju HTTPS\footnote{eng. Hypertext transfer protocol secure} za pokretanje, što omogućava sigurniju razmenu podataka između korisnika i aplikacije.
 \end{itemize}
 Mane ovog tipa mobilnih aplikacija su:
@@ -169,11 +185,11 @@ Mane ovog tipa mobilnih aplikacija su:
     \item Razvoj ovog tipa mobilnih aplikacija može biti složeniji od tradicionalnih veb aplikacija zbog potrebe za implementacijom servisnih radnika i upravljanjem keširanim podacima za offline rad.
 \end{itemize}
 
-U poređenju sa tradicionalnim web aplikacijama, PWA pružaju bolje korisničko iskustvo, veću pouzdanost i više funkcionalnosti koje su bliske native iskustvu, čineći ih izuzetno privlačnim izborom za razvoj aplikacija koje treba da budu efikasne i dostupne širom različitih platformi i uslova povezivanja.
+U poređenju sa tradicionalnim web aplikacijama, PWA pružaju bolje korisničko iskustvo, veću pouzdanost i više funkcionalnosti koje su bliske nativnom iskustvu, čineći ih izuzetno privlačnim izborom za razvoj aplikacija koje treba da budu efikasne i dostupne širom različitih platformi i uslova povezivanja.
 
 \subsection{Hibridne mobilne aplikacije}
 
-Hibridne mobilne aplikacije \cite{crossPlatformApps} (eng. crossplatform mobile application) predstavljaju spoj nativnih i veb tehnologija, omogućavajući razvoj aplikacija koje se mogu instalirati na uređaj, ali se izvršavaju u veb kontejneru. Ove aplikacije koriste kombinaciju HTML, CSS, i JavaScript za izradu korisničkog interfejsa, dok istovremeno koriste mostove (eng. bridge) poput Cordova ili Ionic \cite{ionicCordova} za pristup native funkcijama uređaja. Ovaj tip aplikacije biće implementiran u okviru ovog rada pa ćemo imati prilike detaljnije da se upoznamo sa karaktiristikama istih. Osnovne prednosti ovog tipa mobilnih aplikacija su:
+Hibridne mobilne aplikacije\cite{crossPlatformApps} (eng. crossplatform mobile application) predstavljaju spoj nativnih i veb tehnologija, omogućavajući razvoj aplikacija koje se mogu instalirati na uređaj, ali se izvršavaju u veb kontejneru. Primer ove komunikacije dat je na slici \ref{fig:hibridnaMobilnaAplikacija}. Ove aplikacije koriste kombinaciju HTML, CSS, i JavaScript za izradu korisničkog interfejsa, dok istovremeno koriste mostove (eng. bridge) poput Cordova ili Ionic\cite{ionicCordova} za pristup native funkcijama uređaja. Ovaj tip aplikacije biće implementiran u okviru ovog rada pa ćemo imati prilike detaljnije da se upoznamo sa karaktiristikama istih. Osnovne prednosti ovog tipa mobilnih aplikacija su:
 
 \begin{itemize}
     \item Razvoj se vrši koristeći veb tehnologije koje su mnogim programerima već poznate, što smanjuje vreme i troškove razvoja.
@@ -184,7 +200,7 @@ Mane ovog tipa mobilnih aplikacija su:
 \begin{itemize}
     \item Zbog dodatnog sloja apstrakcije i oslanjanja na veb tehnologije, performanse hibridnih aplikacija mogu biti lošije u odnosu na nativne aplikacije, posebno za zahtevne zadatke. Ovo je idealan razlog zbog koga bi trebalo razmotriti implementiranje sistema za praćenje performansi na početku razvoja aplikacije.
     \item Iako se ne trude da imitiraju izgled i osećaj nativnih aplikacija, hibridne mobilne aplikacije često ne mogu potpuno replicirati fludinost i odziv nativnog korisničkog interfejsa.
-    \item Ovaj tip mobilnij aplikacija zavisi od platformi kao što su Cordova ili Ionic, što može dovesti do problema ako se ti alati ne ažuriraju redovno ili ne podržavaju najnovije verzije operativnih sistema.
+    \item Ovaj tip mobilnih aplikacija zavisi od platformi kao što su Cordova ili Ionic, što može dovesti do problema ako se ti alati ne ažuriraju redovno ili ne podržavaju najnovije verzije operativnih sistema.
 \end{itemize}
 
 \begin{figure}[h]
@@ -196,25 +212,27 @@ Mane ovog tipa mobilnih aplikacija su:
 
 \chapter{Osnove radnog okvira React Native}
 
-React Native \cite[22]{reactNative} (eng. React Native) predstavlja JavaScript radni okvir (eng. framework) za kreiranje mobilnih aplikacija za iOS i Android operativne sisteme. Zasnovan je na React radnom okviru, sa izmenom da targetuje mobilne uređaje. Dakle, ovaj radni okvir omogućava nam da kreiramo mobilne aplikacije koje imaju nativni izgled kao i korisničko iskustvo, a sve to korišćenjem dobro poznatih veb tehnologija. React Native razvijen je 2015. godine od strane kompanije Meta Inc., ranije poznata kao Facebook Inc. Od tada, sam radni okvir se dosta izmenio i postao je jedan od najpopularnijih alata za ravoj mobilnih aplikacija.
+React Native\cite[22]{reactNative} (eng. React Native) predstavlja JavaScript radni okvir (eng. framework) za kreiranje mobilnih aplikacija za iOS i Android operativne sisteme. Zasnovan je na React radnom okviru, sa izmenom da targetuje mobilne uređaje. Dakle, ovaj radni okvir omogućava nam da kreiramo mobilne aplikacije koje imaju nativni izgled kao i korisničko iskustvo, a sve to korišćenjem dobro poznatih veb tehnologija. React Native razvijen je 2015. godine od strane kompanije Meta Inc., ranije poznata kao Facebook Inc. Od tada, sam radni okvir se dosta izmenio i postao je jedan od najpopularnijih alata za ravoj mobilnih aplikacija.
 
 \section{Kako React Native zapravo radi}
 
-Osnovna ideja iza ovog radnog okvira jeste da kombinuje dve zasebne celine - JavaScript kod sa jedne i nativni kod sa druge strane (Java/Kotlin za Android \cite{javaVsKotlin} i Ojective-C/Swift za iOS \cite{swiftVsObjectiveC}) i učini da njih dve međusobno sarađuju. Nativni kod će se izvršavati na samom uređaju, dok će za JavaScript kod biti neophodna virtuelna mašina. Ovo nam nije problematično na iOS uređajima iz razloga što oni poseduju ugrađeni JavaScript pokretač (eng JS engine) nazvan JavaScriptCore \cite{JSCore}. Android uređaji nemaju ugrađen ovaj pokretač, međutim React Native se brine za to i on donosi isto za Android uređaje. Napomenućemo ovde da ovo rezultuje time da se veličina same aplikacije povećava za Android.
+Osnovna ideja iza ovog radnog okvira jeste da kombinuje dve zasebne celine - JavaScript kod sa jedne i nativni kod sa druge strane (Java/Kotlin za Android \cite{javaVsKotlin} i Ojective-C/Swift za iOS\cite{swiftVsObjectiveC}) i učini da njih dve međusobno sarađuju. Nativni kod će se izvršavati na samom uređaju, dok će za JavaScript kod biti neophodna virtuelna mašina. Ovo nam nije problematično na iOS uređajima iz razloga što oni poseduju ugrađeni JavaScript pokretač (eng. JS engine) nazvan JavaScriptCore\cite{JSCore}. Android uređaji nemaju ugrađen ovaj pokretač, međutim React Native se brine za to i on donosi isto za Android uređaje. Napomenućemo ovde da ovo rezultuje time da se veličina same aplikacije povećava za Android.
 
 \subsection{Komunikacija između uređaja i JavaScript-a}
 
-Kako se programski jezici koji se koriste na samim uređajima razlikuju od JavaScript programskog jezika neophodno je da se kreira neki protokol kako bi oni mogli međusobno da komuniciraju. Ovo se postiže preko formata koji obe strane razumeju, a to je JSON \cite{JSON}. Sva komunikacija između ovih delova sistema obavlja se preko mosta (eng. Bridge).
+Kako se programski jezici koji se koriste na samim uređajima razlikuju od JavaScript programskog jezika neophodno je da se kreira neki protokol kako bi oni mogli međusobno da komuniciraju. Ovo se postiže preko formata koji obe strane razumeju, a to je JSON\cite{JSON}. Sva komunikacija između ovih delova sistema obavlja se preko mosta (eng. Bridge).
 
 \subsection{Niti korišćene u React Native radnom okviru}
 
-Kada korisnik pokrene React Native aplikaciju, sam uređaj će kreirati tri glavne niti \cite{threads} i ostale ukoliko za istim postoji potreba. Niti koje će biti kreirane su Glavna nit (eng. Main Thread), JavaScript nit (eng. JavaScript thread) i nit u senci (eng. Shadow Thread).
+Kada korisnik pokrene React Native aplikaciju, sam uređaj će kreirati tri glavne niti\cite{threads} i ostale ukoliko za istim postoji potreba. Niti koje će biti kreirane su Glavna nit (eng. Main Thread), JavaScript nit (eng. JavaScript thread) i nit u senci (eng. Shadow Thread).
 
 \begin{itemize}
-    \item Glavna nit \cite{RNArch} (eng. Main Thread) - ova nit poznata je i kao nit korisničkog interfejsa. To je osnovna nit svaki iOS ili Android aplikacije i predstavlja glavnu nativnu nit na kojoj će se naša aplikacije izvršavati. Njena odgovornost jeste da obrađuje korisničke interakcije sa uređajem kao i da ažurira sam korisnički interfejs na ekranu uređaja. U React Native radnom okviru sve nativne komponente se renderuju na ovoj niti i iz ovog razloga je veoma bitno da se izbegavaju složene operacije na ovoj niti kako ne bi došlo do blokiranja korisničkog interfejsa i smanjenja performansi.
+    \item Glavna nit\cite{RNArch} (eng. Main Thread) - ova nit poznata je i kao nit korisničkog interfejsa. To je osnovna nit svake iOS ili Android aplikacije i predstavlja glavnu nativnu nit na kojoj će se naša aplikacije izvršavati. Njena odgovornost jeste da obrađuje korisničke interakcije sa uređajem kao i da ažurira sam korisnički interfejs na ekranu uređaja. U React Native radnom okviru sve nativne komponente se renderuju na ovoj niti i iz ovog razloga je veoma bitno da se izbegavaju složene operacije na ovoj niti kako ne bi došlo do blokiranja korisničkog interfejsa i smanjenja performansi.
     \item JavaScript nit (eng. JavaScript Thread) - na ovoj niti će se izvršavati sav JavaScript i React kod naše aplikacije. Ona obrađuje logiku aplikacije, API pozive, vrši proračune i upravlja stanjem aplikacije. Ova nit je ključna za sve što nije povezano sa korisničkim interfejsom. Ova nit radi zasebno od glavne niti što nam omogućava da radimo kompleksna izračunavanja bez da blokiramo glavnu nit. 
-    \item Nit u senci (eng. Shadow Thread) - ova nit poznata je jos i kao nit rasoreda (eng. Layout Thread) . Odgovornost ove niti jeste da preračunava pozicije elemenata i da generiše stablo za prikazivanje koje je kodirano u JavaScript niti. Kada se ovo izračunavanje završi ti podaci se šalju glavnoj niti koja vrši prikazivanje. Njena uloga jeste da oslobodi glavnu nit ovog posla, koji može biti veoma zahtevan. Ovaj pristup nam omogućava da imamo fluidno korisničko iskustvo.
+    \item Nit u senci (eng. Shadow Thread) - ova nit poznata je jos i kao nit rasporeda (eng. Layout Thread) . Odgovornost ove niti jeste da preračunava pozicije elemenata i da generiše stablo za prikazivanje koje je kodirano u JavaScript niti. Kada se ovo izračunavanje završi ti podaci se šalju glavnoj niti koja vrši prikazivanje. Njena uloga jeste da oslobodi glavnu nit ovog posla, koji može biti veoma zahtevan. Ovaj pristup nam omogućava da imamo fluidno korisničko iskustvo.
 \end{itemize}
+
+Na slici \ref{fig:reactNativeArchitecture} možemo videti slikoviti prikaz svega što smo objasnili u prethodnom paragrafu.
 
 \begin{figure}[h]
     \centering
@@ -225,7 +243,7 @@ Kada korisnik pokrene React Native aplikaciju, sam uređaj će kreirati tri glav
 
 \section{Most u React Native radnom okviru}
 
-U arhitekturi radnog okvira React Native, most \cite[165 - 185]{reactNative} (eng. bridge) igra ključnu ulogu u omogućavanju komunikacije između JavaScript niti i nativnih delova aplikacije koji se izvršavaju na glavnoj niti. Ovaj most funkcioniše kao posrednik koji prenosi informacije između dve sredine koje inače ne bi mogle direktno da komuniciraju zbog različitih programskih jezika (JavaScript sa jedne i Objective-C i Java sa druge strane). Komunikacija se obalja asinhronom razmenom JSON poruka izmedju ova dva okruženja. JavaScript kod se izvršava u svom okruženju, dok se nativne komponente upravljaju kroz specifične platforme kao što su iOS ili Android. Most omogućava asinhronu komunikaciju između ova dva okruženja prenošenjem poruka, što znači da informacije mogu preći iz jednog okruženja u drugo bez blokiranja glavne niti ili usporavanja aplikacije. Kada JavaScript kod zahteva pristup nativnim funkcionalnostima (kao što su pristup kameri ili GPS-u) ili kada treba da se ažurira korisnički interfejs, most prenosi ove zahteve iz JavaScript-a u nativni sistem, i obratno, prenosi odgovore nazad. Ovaj mehanizam omogućava React Native aplikacijama da koriste prednosti kako veb tehnologija, tako i nativnih performansi, iako ponekad može predstavljati usko grlo u performansama ako se prevelik broj zahteva mora preneti preko mosta.
+U arhitekturi radnog okvira React Native, most\cite[165 - 185]{reactNative} (eng. bridge) igra ključnu ulogu u omogućavanju komunikacije između JavaScript niti i nativnih delova aplikacije koji se izvršavaju na glavnoj niti. Ovaj most funkcioniše kao posrednik koji prenosi informacije između dve sredine koje inače ne bi mogle direktno da komuniciraju zbog različitih programskih jezika (JavaScript sa jedne i Objective-C i Java sa druge strane). Komunikacija se obavlja asinhronom razmenom JSON poruka izmedju ova dva okruženja. JavaScript kod se izvršava u svom okruženju, dok se nativne komponente upravljaju kroz specifične platforme kao što su iOS ili Android. Primer ove komunikacije prikazan je na slici \ref{fig:reactNativeBridge}. Most omogućava asinhronu komunikaciju između ova dva okruženja prenošenjem poruka, što znači da informacije mogu preći iz jednog okruženja u drugo bez blokiranja glavne niti ili usporavanja aplikacije. Kada JavaScript kod zahteva pristup nativnim funkcionalnostima (kao što su pristup kameri ili GPS-u) ili kada treba da se ažurira korisnički interfejs, most prenosi ove zahteve iz JavaScript-a u nativni sistem, i obratno, prenosi odgovore nazad. Ovaj mehanizam omogućava React Native aplikacijama da koriste prednosti kako veb tehnologija, tako i nativnih performansi, iako ponekad može predstavljati usko grlo u performansama ako se prevelik broj zahteva mora preneti preko mosta.
 
 \begin{figure}[h]
     \centering
@@ -242,13 +260,13 @@ Sada ćemo proći kroz primer kako most izvodi komunikaciju između nativnog del
     \item Okida se nativni događaj. Recimo da je u pitanju klik na dugme.
     \item Serijalizovana poruka šalje se sa nativne strane kroz most sa svim neophodnim podacima
     \item JavaScript prima poruku, deserijalizuje je i odlučuje šta je sledeći korak koji je potrebno preduzeti. U ovom slučaju to je akcija koja je pridružena dugmetu.
-    \item Šalje se poruka sa JavaScript strane kroz most sa svim potrebnim informacijama vezanima za traženu akciju.
+    \item Šalje se poruka sa JavaScript strane kroz most sa svim potrebnim informacijama vezanim za traženu akciju.
     \item Nativna strana prima poruku, deserijalizuje je i vrši ponovno renderovanje korisničkog interfejsa.
 \end{enumerate}
 
 \subsection{Nedostaci mosta}
 
-Asinhrona priroda prenosa poruka između nativnog i JavaScript dela mobilne aplikacija dovodi do problema koji se manifestuju u ivičnim slučajevima. Na primer, pretpostavimo da imamo polje za unos teksta gde korisnik unosi broj kartice. Želimo da formatiramo taj unos tako što ćemo ubaciti prazan karakter posle svakog četvrtog karaktera u kartici. Ova logika biće implementirana na JavaScript strani. Problem koji se ovde uočava jeste taj da kada korisnik pritisne peti broj po redu nativna strana aplikacije to javlja JS strani. Broj se nadovezuje na prethodni broj kartice i to se javlja nativnoj strani koja će ovo prikazati. Ovo dovodi do toga da će prvo biti renderovan broj bez razmaka, a tek kasnije će se izvršiti formatiranje i preko mosta će biti poslata sledeća poruka koja će nativnoj strani reći da treba da renderuje i razmak. Naravno, ukoliko most nije previše opterećen u tom momentu korisnik ne bi mogao da primeti ovo. Međutim, u situaciji kada se ogroman broj operacija izvršava paralelno ovo je vrlo moguća situacija. Drugi problem koji možemo da primerimo jeste da se svaka poruka mora serijalizovati na jednoj i deserijalizovati na drugoj strani, što dovodi do povećane potrošnje resursa.
+Asinhrona priroda prenosa poruka između nativnog i JavaScript dela mobilne aplikacija dovodi do problema koji se manifestuju u ivičnim slučajevima (eng. edge cases). Na primer, pretpostavimo da imamo polje za unos teksta gde korisnik unosi broj kartice. Želimo da formatiramo taj unos tako što ćemo ubaciti prazan karakter posle svakog četvrtog karaktera u kartici. Ova logika biće implementirana na JavaScript strani. Problem koji se ovde uočava jeste taj da kada korisnik pritisne peti broj po redu nativna strana aplikacije to javlja JS strani. Broj se nadovezuje na prethodni broj kartice i to se javlja nativnoj strani koja će ovo prikazati. Ovo dovodi do toga da će prvo biti renderovan broj bez razmaka, a tek kasnije će se izvršiti formatiranje i preko mosta će biti poslata sledeća poruka koja će nativnoj strani reći da treba da renderuje i razmak. Naravno, ukoliko most nije previše opterećen u tom momentu korisnik ne bi mogao da primeti ovo. Međutim, u situaciji kada se ogroman broj operacija izvršava paralelno ovo je vrlo moguća situacija. Drugi problem koji možemo da primerimo jeste da se svaka poruka mora serijalizovati na jednoj i deserijalizovati na drugoj strani, što dovodi do povećane potrošnje resursa.
 
 \subsection{Rešenja prethodno pomenutih problema}
 
@@ -260,13 +278,15 @@ U poglavlju koje sledi u nastavku bliže ćemo se upoznati sa aplikacijom za vre
 
 \section{Korisnički interfejs aplikacije}
 
-U ovoj sekciji ćemo se detaljno upoznati sa korisničkim interfejsom aplikacije. Kada razmislimo malo o tome, korisnički interfejs jeste jedan od najznačajnijih delova same aplikacije. Vrlo je bitno da isti bude jednostavan za korišćenje, intuitivan, ali i prijatan za oko, odnosno lepo dizajniran. Sve ove osobine korisničkog interfejsa osiguraće nam da naši korisnici koriste aplikaciju iznova. U ovom konkretnom slučaju imamo aplikaciju koja se sastoji od dva ekrana. Prvi ekran jeste taj na kome se pokazuju svi parametri vremenske prognoze, dok je drugi ekran odgovoran za pretragu destinacije za koju nam je potrebna vremenska prognoza.
+U ovoj sekciji ćemo se detaljno upoznati sa korisničkim interfejsom aplikacije. Kada razmislimo malo o tome, korisnički interfejs jeste jedan od najznačajnijih delova same aplikacije. Vrlo je bitno da isti bude jednostavan za korišćenje, intuitivan, ali i prijatan za oko, odnosno lepo dizajniran. Sve ove osobine korisničkog interfejsa osiguraće nam da naši korisnici koriste aplikaciju iznova. U ovom konkretnom slučaju imamo aplikaciju koja se sastoji od dva ekrana i njih vidimo na slici \ref{fig:appScreens}. Prvi ekran jeste taj na kome se pokazuju svi parametri vremenske prognoze, dok je drugi ekran odgovoran za pretragu destinacije za koju nam je potrebna vremenska prognoza.
 
 \begin{figure}%
     \centering
     \subfloat[\centering Glavni ekran aplikacije]{{\includegraphics[width=5cm]{docs/images/chapterFour/mainScreen.png} }}%
     \qquad
     \subfloat[\centering Ekran za pretragu destinacije]{{\includegraphics[width=5cm]{docs/images/chapterFour/searchScreen.png} }}%
+    \caption{Ekrani aplikacije}
+    \label{fig:appScreens}
 \end{figure}
 
 \newpage
@@ -296,7 +316,7 @@ Drugi ekran u našoj aplikaciji služi za pretragu destinacije na kojoj korisnik
 U svrhe dohvatanja podataka potrebnih za izradu ove aplikacije korišćen je WeatherAPI \cite{WeatherAPI}. U pitanju je API koji nam daje nekoliko krajnjih tačaka (eng. endpoint). Konkretno, mi smo koristili dva. 
 
 \begin{enumerate}
-    \item Forecast API - ovaj API nam služi za dohvatanje podataka o vremenskoj prognozi. Odgovor servera sastoji se iz tri celine. Podaci o trenutnoj lokaciji, podaci o trenutnom vremenu i podaci o vremenskoj prognozi za naredne dane.
+    \item Forecast API - ovaj API nam služi za dohvatanje podataka o vremenskoj prognozi. Odgovor servera sastoji se iz tri celine. Podaci o trenutnoj lokaciji, podaci o trenutnom vremenu i podaci o vremenskoj prognozi za naredne dane. Primer ovog API poziva se vidi na slici \ref{fig:forecastAPI}.
     \item Search API - uloga ove krajnje tačke jeste da nam vrati sve lokacije koje počinju nekim prefiksom koji je korisnik uneo. 
 \end{enumerate}
 
@@ -313,7 +333,7 @@ U svrhe dohvatanja podataka potrebnih za izradu ove aplikacije korišćen je Wea
 
 U savremenom razvoju softvera, efikasnost i performanse jedan su od ključnih aspekata za uspeh na tržištu. Uspeh naše aplikacije direktno zavisi od zadovoljstva korisnika, a to zadovoljstvo nemoguće je postići ukoliko aplikacija nije performantna. Ovo jeste razlog za razmatranje i uvođenje sistema za merenje performansi koji nam može pružiti jasnu sliku o ponašanju aplikacije u različitim uslovima. 
 \newline
-U ovom poglavlju upoznaćemo se sa različitim sistemima za merenje performansi i detaljnije se zadržati na sistemu Sentry \cite{Sentry}. Proćićemo neophodne korake za integraciju ovog sistema u našu aplikaciju, a zatim se upoznati sa svime što nam isti pruža. Takođe, bavićemo se optimizovanim listama kao jedinom od ključnih koncepata u razvoju mobilne aplikacije.
+U ovom poglavlju upoznaćemo se sa različitim sistemima za merenje performansi i detaljnije se zadržati na sistemu Sentry\cite{Sentry}. Proćićemo neophodne korake za integraciju ovog sistema u našu aplikaciju, a zatim se upoznati sa svime što nam isti pruža. Takođe, bavićemo se optimizovanim listama kao jedinom od ključnih koncepata u razvoju mobilne aplikacije.
 
 \section{Alati za merenje performansi}
 
@@ -328,6 +348,8 @@ React Native Performance Monitor je ugrađeni alat koji dolazi u okviru React na
     \item Upotreba memorije - druga metrika koju možemo pratiti jeste količina radne memorije koju aplikacija koristi. Ovo nam je idealno za pronalaženje curenja memorije ili drugih problema vezanih za upravljanje memorijom.
 \end{enumerate}
 
+Primer izgleda i funkcionalnosti koje nam pruža ovaj ugrađeni debager prikazan je na slici \ref{fig:reactNativePerformanceMonitor}.
+
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.1]{docs/images/chapterFive/reactNativePerfMonitor.png}
@@ -339,13 +361,15 @@ Iako je React Native Performance Monitor koristan za osnovno praćenje performan
 
 \subsection{Fliper}
 
-Fliper \cite{Flipper} (eng. Flipper) je platforma za debagovanje koja je posebno dizajnirana za mobilne aplikacije, uključujući one razvijene pomoću React Native radnog okvira. Jedan od ključnih dodataka unutar Flipera jeste \textit{performance monitoring} dodatak koji omogućava programerima detaljan uvid u performanse aplikacije. Ovaj dodatak pruža kompletan set alata za analizu kako se aplikacija ponaša u realnom vremenu, omogućavajući programerima da identifikuju sporije delove aplikacije, analiziraju upotrebu resursa i dijagnostikuju probleme koji utiču na performanse. Uz mogućnost vizualnog prikaza performansi, kao što su FPS (eng. Frame Per Second) grafici i merni podaci o memoriji, Fliper nudi jednostavan i intuitivan interfejs za praćenje ključnih performansi aplikacije. Takođe, alat podržava razne dodatke koji se mogu lako integrisati i koristiti za specifične potrebe projekta, što Fliper čini nezamenjivim alatom u arsenalu modernih mobilnih developera.
+Fliper\cite{Flipper} (eng. Flipper) je platforma za debagovanje koja je posebno dizajnirana za mobilne aplikacije, uključujući one razvijene pomoću React Native radnog okvira. Jedan od ključnih dodataka unutar Flipera jeste \textit{performance monitoring} dodatak koji omogućava programerima detaljan uvid u performanse aplikacije. Ovaj dodatak pruža kompletan set alata za analizu kako se aplikacija ponaša u realnom vremenu, omogućavajući programerima da identifikuju sporije delove aplikacije, analiziraju upotrebu resursa i dijagnostikuju probleme koji utiču na performanse. Uz mogućnost vizualnog prikaza performansi, kao što su FPS (eng. Frame Per Second) grafici i merni podaci o memoriji, Fliper nudi jednostavan i intuitivan interfejs za praćenje ključnih performansi aplikacije. Prikaz ovih podataka može se videti na slici \ref{fig:flipperMetrics}. Takođe, alat podržava razne dodatke koji se mogu lako integrisati i koristiti za specifične potrebe projekta, što Fliper čini nezamenjivim alatom u arsenalu modernih mobilnih developera.
 
 \begin{figure}[!h]
     \centering
     \subfloat[\centering Osnovne metrike]{{\includegraphics[width=5cm]{docs/images/chapterFive/flipperBasic.png} }}%
     \qquad
     \subfloat[\centering Merenje FPS-a]{{\includegraphics[width=5cm]{docs/images/chapterFive/fliperPerf.png} }}%
+    \caption{Flipper metrike}
+    \label{fig:flipperMetrics}
 \end{figure}
 
 \section{Sentry}
@@ -354,7 +378,7 @@ U ovoj sekciji detaljno ćemo se upoznati sa alatom Sentry. On predstavlja veoma
 
 \subsection{Intregracija sistema Sentry}
 
-Prvi korak ka korišćenju ovog sistema jeste integracija istog u našu aplikaciju. Ovaj korak je vrlo jednostavan i detaljno je objašnjen u dokumentaciji samog servisa. Za sam početak, neophodno je da se instalira biblioteka preko paketnog menadžera (eng. package manager). Nakon instalacije, potrebno je konfigurisati Sentry u glavnom fajlu aplikacije, gde se inicijalizuje Sentry sa odgovarajućim DSN (eng. Data Source Name) koji povezuje aplikaciju sa Sentry projektnim okruženjem. Ova konfiguracija omogućava Sentry-ju da automatski hvata izuzetke i greške u aplikaciji, kao i da pruža opcionalne funkcionalnosti poput ručnog slanja izveštaja o greškama, praćenje performansi i analizu korisničkih sesija. Unutar same konfiguracije bitno je podesiti procenat transakcija koje želimo da prosleđujemo na Sentry. Ovo se postiže uzorkovanjem i koristi se opcija \textit{tracesSampleRate} koja uzima vrednosti od 0 do 1. Drugi bitan parametar konfiguracije jesu sve integracije koje su nam potrebne. Ovo predstavlja vezu između biblioteka koje koristimo u aplikaciji i Sentry alata. Na primer, u našoj aplikaciji je potrebno da se doda integracija za navigacione transakcije kako bi Sentry znao kako da obradi iste.
+Prvi korak ka korišćenju ovog sistema jeste integracija istog u našu aplikaciju. Ovaj korak je vrlo jednostavan i detaljno je objašnjen u dokumentaciji samog servisa. Za sam početak, neophodno je da se instalira biblioteka preko paketnog menadžera (eng. package manager). Nakon instalacije, potrebno je konfigurisati Sentry u glavnom fajlu aplikacije, gde se inicijalizuje Sentry sa odgovarajućim DSN (eng. Data Source Name) koji povezuje aplikaciju sa Sentry projektnim okruženjem. Ova konfiguracija omogućava Sentry-ju da automatski hvata izuzetke i greške u aplikaciji, kao i da pruža opcionalne funkcionalnosti poput ručnog slanja izveštaja o greškama, praćenje performansi i analizu korisničkih sesija. Unutar same konfiguracije bitno je podesiti procenat transakcija koje želimo da prosleđujemo na Sentry. Ovo se postiže uzorkovanjem i koristi se opcija \textit{tracesSampleRate} koja uzima vrednosti od 0 do 1. Drugi bitan parametar konfiguracije jesu sve integracije koje su nam potrebne. Ovo predstavlja vezu između biblioteka koje koristimo u aplikaciji i Sentry alata. Na primer, u našoj aplikaciji je potrebno da se doda integracija za navigacione transakcije kako bi Sentry znao kako da obradi iste. Sve pomenute informacije možemo videti i analizirati na slici \ref{fig:sentryIntegration}.
 
 \begin{figure}[h]
     \centering
@@ -365,7 +389,7 @@ Prvi korak ka korišćenju ovog sistema jeste integracija istog u našu aplikaci
 
 \subsection{Metrike alata Sentry za merenje performansi aplikacije}
 
-Kada smo uspesno odradili integraciju alata Sentry sa našom aplikacijom, vreme je da pogledamo šta sve imamo na raspolaganju. Ekran koji ćemo videti kada u okviru alata Sentry navigiramo na odeljak za performanse izgleda kao na slici u nastavku.
+Kada smo uspesno odradili integraciju alata Sentry sa našom aplikacijom, vreme je da pogledamo šta sve imamo na raspolaganju. Ekran koji ćemo videti kada u okviru alata Sentry navigiramo na odeljak za performanse izgleda kao na slici \ref{fig:sentryMetrics}.
 
 \begin{figure}[h]
     \centering
@@ -374,7 +398,7 @@ Kada smo uspesno odradili integraciju alata Sentry sa našom aplikacijom, vreme 
     \label{fig:sentryMetrics}
 \end{figure}
 
-Sada ćemo da analiziramo dostupne metrike \cite{SentryPerfMetrics} i da vidimo šta one u stvari predstavljaju.
+Sada ćemo da analiziramo dostupne metrike\cite{SentryPerfMetrics} i da vidimo šta one u stvari predstavljaju.
 
 \begin{enumerate}
     \item Vreme inicijalnog pokretanja (eng. Cold Startup time) - jedna od primarnih performansnih metrika u razvoju mobilnih aplikacije jeste vreme inicialnog pokretanja. Ova metrika meri vreme potrebno da se aplikacija pokrene i postane potpuno funkcionalna nakon što je korisnik pokrenuo aplikaciju s potpuno neaktivnog ili "hladnog" stanja, odnosno kada aplikacija nije u memoriji uređaja. Ovo uključuje vreme potrebno za učitavanje aplikacije u memoriju, inicijalizaciju aplikacije, učitavanje početnih resursa i prikaz prvog ekrana korisniku. Brže vreme pokretanja može značajno poboljšati percepciju aplikacije od strane korisnika, smanjujući frustraciju i povećavajući zadovoljstvo. Pored samog korisničkog iskustva, ova metrika se u praksi koristi i za definisanje uskih grla prilikom pokretanja aplikacije. Često se tu dovlače resursi i vrše kalkulacije koje nisu potrebne za samo pokretanje aplikacije i neophodno ih je odložiti za kasnije. Kao referentna vrednost za produkcijske verzije aplikacija uzima se 400ms.
@@ -388,7 +412,7 @@ Kao što se vidi na slici, korisnički interfejs alata Sentry pruža nam potpunu
 
 \subsection{Performanse ekrana}
 
-Alat Sentry daje nam podršku i da pratimo performanse pojedinačnih ekrana u našoj aplikaciji.
+Alat Sentry daje nam podršku i da pratimo performanse pojedinačnih ekrana u našoj aplikaciji i to vidimo na slici \ref{fig:mainScreenMetrics}.
 
 \begin{figure}[h]
     \centering
@@ -410,7 +434,7 @@ Nakon što smo uspešno integrisali sistem za praćenje performansi i postavili 
     \label{fig:addRuleForMetric}
 \end{figure}
 
-U konkretnom slučaju, dodali smo novu uzbunu za metriku \textit{Dužina trajanja transakcije}. U suštini, pravilo koje smo dodali glasi: "Ukoliko u intervalu od sat vremena, preko 95\% transakcija ima trajanje veće od 300ms okini uzbunu i obavesti korisnika putem mejla."
+U konkretnom slučaju, na slici \ref{fig:addRuleForMetric} dodali smo novu uzbunu za metriku \textit{Dužina trajanja transakcije}. U suštini, pravilo koje smo dodali glasi: "Ukoliko u intervalu od sat vremena, preko 95\% transakcija ima trajanje veće od 300ms okini uzbunu i obavesti korisnika putem mejla."
 
 \section{Optimizacija listi za prikazivanje}
 
@@ -418,9 +442,9 @@ Liste su jedan od ključnih elementa u dizajnu mobilnih aplikacija, omogućavaju
 
 \subsection{Komponenta FlatList i njeni problemi}
 
-Komponenta FlatList \cite{flatList} u React Native radnom okviru je dizajnirana za efikasno prikazivanje dugačkih lista podataka, pružajući osnovne funkcionalnosti za upravljanje velikim količinama elemenata. Međutim, uprkos svojoj nameni, FlatList može susresti izazove sa performansama u određenim scenarijima. Problemi se najčešće javljaju kada lista sadrži složene elemente ili kada se učitava veliki broj podataka, što može dovesti do usporenja i povećane potrošnje memorije.
+Komponenta FlatList\cite{flatList} u React Native radnom okviru je dizajnirana za efikasno prikazivanje dugačkih lista podataka, pružajući osnovne funkcionalnosti za upravljanje velikim količinama elemenata. Međutim, uprkos svojoj nameni, FlatList može susresti izazove sa performansama u određenim scenarijima. Problemi se najčešće javljaju kada lista sadrži složene elemente ili kada se učitava veliki broj podataka, što može dovesti do usporenja i povećane potrošnje memorije.
 
-Kada svaki element liste zahteva intenzivno procesiranje ili ima kompleksne vizualne komponente, FlatList može doživeti pad performansi. Takođe, česti re-renderi izazvani promenama u stanju ili propovima koji se ne upravljaju pažljivo mogu dodatno opteretiti procesor i memoriju. Da bi se ovi problemi minimizovali, preporučuje se pažljiva optimizacija renderovanja elemenata, upotreba tehnika kao što su memoizacija za skuplje komponente, i efikasno upravljanje stanjem da se izbegnu nepotrebna ažuriranja. Implementacija paginacije (eng. windowing) gde se renderuju samo trenutno vidljivi elementi takođe može značajno poboljšati performanse FlatList komponente. Ovim pristupima osigurava se da FlatList ostane efikasan alat za upravljanje listama u aplikacijama koje razvijate koristeći React Native.
+Kada svaki element liste zahteva intenzivno procesiranje ili ima kompleksne vizualne komponente, FlatList može doživeti pad performansi. Takođe, česti re-renderi izazvani promenama u stanju ili propovima koji se ne upravljaju pažljivo mogu dodatno opteretiti procesor i memoriju. Da bi se ovi problemi minimizovali, preporučuje se pažljiva optimizacija renderovanja elemenata, upotreba tehnika kao što su memoizacija za skuplje komponente, i efikasno upravljanje stanjem da se izbegnu nepotrebna ažuriranja. Implementacija paginacije (eng. windowing) gde se renderuju samo trenutno vidljivi elementi takođe može značajno poboljšati performanse FlatList komponente. Ovim pristupima osigurava se da FlatList ostane efikasan alat za upravljanje listama u aplikacijama koje razvijate koristeći React Native. Primer konkretne upotrebe vidimo na slici \ref{fig:flatListExample}. Ovo ćemo upotrebiti kasnije kao referencu za poređenje sa interfejsom drugih biblioteka.
 
 \begin{figure}[h!]
     \centering
@@ -433,7 +457,7 @@ Sa slike iznad vidimo API FlatList komponente i možemo zaključiti da je isti v
 
 \subsection{Prvi pokušaj rešavanja ovog problema}
 
-Kako je problem sa performansama FlatList komponente bio prilično značajan, brzo je adresiran u krugovima programera mobilnih aplikacija. Kao rešenje ovog problema kreirana je RecyclerListView komponenta \cite{RecyclerListView}. Ona predstavlja komponentu veoma dobro optimizovanu za renderovanje ogromnog broja podataka. Inspirisana je RecyclerView komponentom na Androidu i UICollectionView na iOS operativnom sistemu. 
+Kako je problem sa performansama FlatList komponente bio prilično značajan, brzo je adresiran u krugovima programera mobilnih aplikacija. Kao rešenje ovog problema kreirana je RecyclerListView komponenta\cite{RecyclerListView}. Ona predstavlja komponentu veoma dobro optimizovanu za renderovanje ogromnog broja podataka. Inspirisana je RecyclerView komponentom na Androidu i UICollectionView na iOS operativnom sistemu. 
 
 
 Ova komponenta je veoma performantna i bogata funkcionalnostima kao i ugrađena FlatList komponenta. Funkcioniše tako što se na pametan način vrši recikliranje komponenti koje su prethodno već renderovane i na taj način izbegava nepotrebno ponovno renderovanje. Ova tehnika poznata je kao reciklaža ćelija (eng. cell recycling) i dozvoljava nam da koristimo već renderovane komponente koje nisu više prisutne na ekranu za renderovanje novih.
@@ -443,14 +467,14 @@ Problem ove komponente jeste veoma neintuitivan API. Kao programer, morali ste p
 
 \subsection{FlashList biblioteka}
 
-Rešenje problema pomenutih u prethodnim sekcijama ogleda se u biblioteci po imenu FlashList \cite{FlashList}. Ona predstavlja performantnu alternativu za FlatList komponentu. Kao što smo rekli, FlatList komponenta nije imala zadovoljavajuće performanse, ali je bila laka za korišćenje, dok je RecyclerListView komponenta bila performantna, ali je njen API bio izrazito neintuitivan. Ideja biblioteke FlashList jeste da iskoristi najbolje iz oba pristupa i da kreira komponentu koja će biti veoma performanta, ali će zadržati API tako da korisnicima bude laka za korišćenje.
+Rešenje problema pomenutih u prethodnim sekcijama ogleda se u biblioteci po imenu FlashList\cite{FlashList}. Ona predstavlja performantnu alternativu za FlatList komponentu. Kao što smo rekli, FlatList komponenta nije imala zadovoljavajuće performanse, ali je bila laka za korišćenje, dok je RecyclerListView komponenta bila performantna, ali je njen API bio izrazito neintuitivan. Ideja biblioteke FlashList jeste da iskoristi najbolje iz oba pristupa i da kreira komponentu koja će biti veoma performanta, ali će zadržati API tako da korisnicima bude laka za korišćenje. Na slici \ref{fig:flashListExample} vidimo kako izgleda interfejs i možemo da zakljućimo da skoro da i nema promena u odnosu na FlatList biblioteku.
 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.5]{docs/images/chapterFive/flashlistExample.png}
     \caption{Flashlist komponenta u kodu}
-    \label{fig:flatListExample}
+    \label{fig:flashListExample}
 \end{figure}
 
 Sa slike iznad vidimo kako izgleda korišćenje FlashList komponente u samom kodu. Prva stvar koju primećujemo jeste da je API skoro identičan sa FlatList komponentom. Jedina razlika jeste u estimatedItemSize polju koje je specifično za ovu biblioteku.
@@ -459,13 +483,15 @@ Sa slike iznad vidimo kako izgleda korišćenje FlashList komponente u samom kod
 FlashList komponenta koristi estimatedItemSize polje kako bi odredila broj elemenata koji treba da budu prikazani na ekranu tokom inicijalnog renderovanja i prilikom skrolovanja. Kako sve ovo radi? Naime, umesto da se komponenta uništava kada neki element nestane sa ekrana, FlashList komponenta renderuje istu komponentu sa drugačijim parametrima. Prilikom korišćenja, bitno je da se ne koristi key polje u elementima liste jer će ovo sprečiti FlashList komponentu da radi recikliranje.
 
 
-Na slikama ispod vidimo performanse prilikom korišćenja FlatList i FlashList komponenti. Možemo primetiti da je razlika u performansama drastična. Vidimo da prilikom korišćenja FlatList komponente imamo relativno često blokiranje JS niti, dok kod FlashList komponente to nije slučaj. Blokade se dešavaju na momente i to bas u momentu kada se dohvataju podaci sa backend servera (eng. Backend).
+Na slici \ref{fig:flashVSFlat} vidimo performanse prilikom korišćenja FlatList i FlashList komponenti. Možemo primetiti da je razlika u performansama drastična. Vidimo da prilikom korišćenja FlatList komponente imamo relativno često blokiranje JS niti, dok kod FlashList komponente to nije slučaj. Blokade se dešavaju na momente i to bas u momentu kada se dohvataju podaci sa backend servera (eng. Backend).
 
 \begin{figure}[!h]
     \centering
     \subfloat[\centering FlatList performanse]{{\includegraphics[width=6cm]{docs/images/chapterFive/flashListLowPerf.png} }}
     \qquad
     \subfloat[\centering FlashList performanse]{{\includegraphics[width=6cm]{docs/images/chapterFive/fliperPerf.png} }}
+    \caption{Performanse FlatList i FlashList listi}
+    \label{fig:flashVSFlat}
 \end{figure}
 
 \chapter{Sistem za praćenje događaja u mobilnoj aplikaciji}
@@ -476,7 +502,7 @@ Na primeru implementacije jednog ovakvog sistema razmatraćemo najbolje prakse z
 
 \section{Značaj poslovnih metrika}
 
-Često, prilikom izrade softvera kraj se proglašava onog momenta kada su sve funkcionalnosti implementirane. Ovakav pristup je po pravilu pogrešan. Greška se ogleda u činjenici da ne postoji sistem koji nije moguće unaprediti. Takođe, često je veoma teško uočiti prostor za poboljšanje ukoliko nemamo mehanizme koji nam to omogućavaju. Mehanizam kome se najčešće pribegava jeste čuvanje svih relevantnih događaja u bazama podataka \cite{dataAnalytics}. Ovi događaji se kasnije obrađuju i iz tog oblika se izvlače poslovni zaključci koji će kasnije voditi ka definisanju prostora za poboljšanje i novim funkcionalnostima u sistemu.
+Često, prilikom izrade softvera kraj se proglašava onog momenta kada su sve funkcionalnosti implementirane. Ovakav pristup je po pravilu pogrešan. Greška se ogleda u činjenici da ne postoji sistem koji nije moguće unaprediti. Takođe, često je veoma teško uočiti prostor za poboljšanje ukoliko nemamo mehanizme koji nam to omogućavaju. Mehanizam kome se najčešće pribegava jeste čuvanje svih relevantnih događaja u bazama podataka\cite{dataAnalytics}. Ovi događaji se kasnije obrađuju i iz tog oblika se izvlače poslovni zaključci koji će kasnije voditi ka definisanju prostora za poboljšanje i novim funkcionalnostima u sistemu.
 
 \begin{figure}[h!]
 \centering
@@ -485,7 +511,7 @@ Na primeru implementacije jednog ovakvog sistema razmatraćemo najbolje prakse z
 \label{fig:dataFlow}
 \end{figure}
 
-Na slici 6.1 vidimo ciklus unapređivanje proizvoda. Na samom početku imamo proizvod koji radi i koji korisnik upotrebljava. Taj korisnik tokom korišćenja našeg proizvoda okida neki događaj i ta informacija se smešta u bazi podataka. Informacije iz baze koriste analitičari podataka kako bi došli do zaključaka preko kojih se definišu delovi proizvoda koji se mogu unaprediti. Preko ovih delova proizvoda i analiziranih podataka definišemo konkretne funkcionalnosti koje inženjer implementira. U ovom momentu ponovo kreće ciklus.
+Na slici \ref{fig:dataFlow} vidimo ciklus unapređivanje proizvoda. Na samom početku imamo proizvod koji radi i koji korisnik upotrebljava. Taj korisnik tokom korišćenja našeg proizvoda okida neki događaj i ta informacija se smešta u bazi podataka. Informacije iz baze koriste analitičari podataka kako bi došli do zaključaka preko kojih se definišu delovi proizvoda koji se mogu unaprediti. Preko ovih delova proizvoda i analiziranih podataka definišemo konkretne funkcionalnosti koje inženjer implementira. U ovom momentu ponovo kreće ciklus.
 
 Da bismo bili u mogućnosti da sprovedemo sve ove korake u delo od esencijalnog značaja nam je da imamo sistem u okviru naše mobilne aplikacije koji će nam ovo omogućiti. Jedan takav sistem biće opisan u narednoj sekciji.
 
@@ -507,7 +533,7 @@ U nastavku ćemo predstaviti arhitekturu sistema koji zadovoljava sve gorepomenu
 
 \subsection{Osnovni entiteti}
 
-Prilikom razvijanja sistema za praćenje događaja uočavamo dva osnovna entiteta. U pitanju su događaj i pratilac događaja. Događaj nam je osnovni gradivni entitet na kom će se zasnivati sve dalje što budemo radili. On je implementiran kao interfejs koji mora imati polje eventName koje predstavlja ime tog događaja. Pored imena, svaki pojedinačni događaj može biti obogaćen dodatnim poljima koja bliže određuju isti. Ovo je omogućeno tako što je sam događaj ništa više nego TypeScript objekat. Dakle, imamo skup polja koja imaju neke vrednosti. 
+Prilikom razvijanja sistema za praćenje događaja uočavamo dva osnovna entiteta. U pitanju su događaj i pratilac događaja. Događaj nam je osnovni gradivni entitet na kom će se zasnivati sve dalje što budemo radili. Njegovu implementaciju vidimo na slici \ref{fig:eventInterface} i on je implementiran kao interfejs koji mora imati polje eventName koje predstavlja ime tog događaja. Pored imena, svaki pojedinačni događaj može biti obogaćen dodatnim poljima koja bliže određuju isti. Ovo je omogućeno tako što je sam događaj ništa više nego TypeScript objekat. Dakle, imamo skup polja koja imaju neke vrednosti. 
 
 \begin{figure}[h!]
 \centering
@@ -516,7 +542,7 @@ Prilikom razvijanja sistema za praćenje događaja uočavamo dva osnovna entitet
 \label{fig:eventInterface}
 \end{figure}
 
-Drugi bitan entitet smo rekli da je pratilac događaja. On predstavlja klasu koja u sebi sadrži sve događaje na koje isti reaguje. Takođe, za svaki od tih događaja vezana je i funkcija koja nam govori kako će ovaj pratilac reagovati na taj specifičan događaj. Ovakvih pratilaca može u našem sistemu biti neograničeno i svaki od njih može da reaguje na proizvoljan broj događaja na proizvoljan način. Na primer, možemo imati jedan pratilac koji čemo koristiti za testiranje sistema i on će reagovati na sve događaja tako što će da ih loguje u konzolu. U isto vreme, možemo da imamo drugi pratilac koji će takođe reagovati na sve događaje, međutim, on će ih prosleđivati u našu bazu podataka.
+Drugi bitan entitet smo rekli da je pratilac događaja i njega vidimo na slici \ref{fig:analyticsTracker}. On predstavlja klasu koja u sebi sadrži sve događaje na koje isti reaguje. Takođe, za svaki od tih događaja vezana je i funkcija koja nam govori kako će ovaj pratilac reagovati na taj specifičan događaj. Ovakvih pratilaca može u našem sistemu biti neograničeno i svaki od njih može da reaguje na proizvoljan broj događaja na proizvoljan način. Na primer, možemo imati jedan pratilac koji čemo koristiti za testiranje sistema i on će reagovati na sve događaja tako što će da ih loguje u konzolu. U isto vreme, možemo da imamo drugi pratilac koji će takođe reagovati na sve događaje, međutim, on će ih prosleđivati u našu bazu podataka.
 
 \begin{figure}[h!]
 \centering
@@ -525,7 +551,7 @@ Drugi bitan entitet smo rekli da je pratilac događaja. On predstavlja klasu koj
 \label{fig:analyticsTracker}
 \end{figure}
 
-Nakon što smo definisali ova dva entiteta potrebno nam je nešto što će da ih poveže i zapravo obezbedi željenu funkcionalnost. U našem slučaju to će da bude AnalyticsEventBus klasa. Ona će da bude realizovana kao obrazac Unikat \cite{singleton} (eng. Singleton). Dakle, kreiraće se samo jedna instanca ove klase i biće korišćena kroz celu aplikaciju. Ova klasa posedovaće niz svih pratilaca događaja koje smo kreirali. Takođe, omogućavaće dodavanje novih pratilaca. Glavna funkcionalnost ove klase biće funkcija za obradu nekog događaja. Kada se okine događaj, ova klasa će se pobrinuti da svaki pratilac koji treba da reaguje na taj događaj to zapravo i uradi. Kako sve to radi, videćemo malo kasnije.
+Nakon što smo definisali ova dva entiteta potrebno nam je nešto što će da ih poveže i zapravo obezbedi željenu funkcionalnost. U našem slučaju to će da bude AnalyticsEventBus klasa i nju vidimo na slici \ref{fig:analyticsEventBus}. Ona će da bude realizovana kao obrazac Unikat\cite{singleton} (eng. Singleton). Dakle, kreiraće se samo jedna instanca ove klase i biće korišćena kroz celu aplikaciju. Ova klasa posedovaće niz svih pratilaca događaja koje smo kreirali. Takođe, omogućavaće dodavanje novih pratilaca. Glavna funkcionalnost ove klase biće funkcija za obradu nekog događaja. Kada se okine događaj, ova klasa će se pobrinuti da svaki pratilac koji treba da reaguje na taj događaj to zapravo i uradi. Kako sve to radi, videćemo malo kasnije.
 
 \begin{figure}[h!]
 \centering
@@ -534,7 +560,7 @@ Nakon što smo definisali ova dva entiteta potrebno nam je nešto što će da ih
 \label{fig:analyticsEventBus}
 \end{figure}
 
-Na sledećoj slici biće prikazan UML dijagram koji definiše odnose između kreiranih klasa i interfejsa.
+Na slici \ref{fig:umlDiagram} je prikazan UML dijagram koji definiše odnose između kreiranih klasa i interfejsa.
 
 \begin{figure}[h!]
 \centering
@@ -554,11 +580,11 @@ U ovoj sekciji biće prikazan način korišćenja prethodno kreiranog sistema. T
 \label{fig:eventUsage}
 \end{figure}
 
-Na slici iznad vidimo kako se loguje jedan event. Tu dohvatamo instancu naše unikat klase analyticsEventBus. Nad ovom instancom klase pozivamo \textit{log} metodu kojoj prosleđujemo jedan konkretan događaj koji je potrebno da se loguje. Vidimo da naš događaj, pored obaveznog polja \textit{eventName} ima i polje \textit{type} koje ga bliže određuje. \newline
+Na slici \ref{fig:eventUsage} vidimo kako se loguje jedan event. Tu dohvatamo instancu naše unikat klase analyticsEventBus. Nad ovom instancom klase pozivamo \textit{log} metodu kojoj prosleđujemo jedan konkretan događaj koji je potrebno da se loguje. Vidimo da naš događaj, pored obaveznog polja \textit{eventName} ima i polje \textit{type} koje ga bliže određuje. \newline
 
 U ovom momentu, kreće da se izvršava \textit{log} metoda klase AnalyticsEventBus. Ranije smo pomenuli da svaki od pratilaca događaja, ukoliko reaguje na neki događaj mora da poseduje funkciju koja se poziva kada se okine taj događaj. U \textit{log} metodi dohvatamo sve funkcije koje treba da se pozovu za taj događaj. Dakle, prolazimo kroz sve pratioce događaja i ukoliko oni reaguju na naš događaj dodajemo funkciju u niz. Nakon ovoga prolazimo kroz dobijeni niz i pozivamo svaku funkciju iz istog pri čemu je parametar uvek isti, naš okinuti događaj. U konkretnoj implementaciji ovaj korak je optimizovan i ovaj niz se ne računa svaki put kada se događaj okine već samo prilikom dodavanja novog pratioca događaja. Kada se doda novi pratioc događaja, prolazimo kroz sve događaje na koje on reaguje i mapiramo ih u objekat koji je zajednički za sve pratioce. U ovom objektu ključevi su imena događaja, a vrednost su sve funkcije koje treba pozvati prilikom okidanja konkretnog događaja. \newline
 
-Ovom optimizacijom se značajno štede performanse. Recimo da je broj događaja označen sa M, broj pratioca sa N i recimo da je okinuto P događaja. Ukoliko bismo koristili pristup koji je prvi opisan, prilikom okidanja P događaja svaki put bismo preračunavali niz funkcija koje treba da se pozovu. Jedno računanje je složenosti O(N*M) jer svaki put prolazimo kroz N pratioca i za svakog pratioca prolazimo kroz M događaja. Dakle, ukupna složenost kreiranja bi bila O(P*N*M) \cite{BigONotation}. Dok bismo u drugom pristupu imali složenost O(N*M) jer računanje radimo samo jednom, prilikom dodavanja pratioca.
+Ovom optimizacijom se značajno štede performanse. Recimo da je broj događaja označen sa M, broj pratioca sa N i recimo da je okinuto P događaja. Ukoliko bismo koristili pristup koji je prvi opisan, prilikom okidanja P događaja svaki put bismo preračunavali niz funkcija koje treba da se pozovu. Jedno računanje je složenosti O(N*M) jer svaki put prolazimo kroz N pratioca i za svakog pratioca prolazimo kroz M događaja. Dakle, ukupna složenost kreiranja bi bila O(P*N*M)\cite{BigONotation}. Dok bismo u drugom pristupu imali složenost O(N*M) jer računanje radimo samo jednom, prilikom dodavanja pratioca.
 
 \chapter{Sistem za praćenje grešaka unutar aplikacije}
 
@@ -575,7 +601,7 @@ Kao što smo i pre rekli, biblioteka Sentry integriše se u React Native mobilno
 \label{fig:sentryErrorList}
 \end{figure}
 
-Na slici iznad vidimo glavnu stranicu platofrme Sentry. Na istoj su izlistane sve greške koje su se desile unutar naše aplikacije. U nastavku ćemo analizirati glavne funkcionalnosti.
+Na slici \ref{fig:sentryErrorList} vidimo glavnu stranicu platofrme Sentry. Na istoj su izlistane sve greške koje su se desile unutar naše aplikacije. U nastavku ćemo analizirati glavne funkcionalnosti.
 
 \section{Funkcionalnosti platforme Sentry}
 
@@ -585,7 +611,7 @@ Zanimljiviji i svakako korisniji deo ove plaforme jeste sama stranica o grešci.
 
 \subsection{Najosnovnije informacije o grešci}
 
-Prva sekcija na stranici daje nam najosnivnije informacije o grešci koju analiziramo. Tu mozemo da vidimo sam tekst greške, fajl u kome se greška dogodila, broj pojavljivanja greške kao i broj korisnika kod kojih se greška manifestovala. Takođe, vidimo broj broj pojavljivanja greške kako u poslednja 24 časa, tako i u poslednjih mesec dana, kao i podatke o verziji aplikacije u kojoj smo prvi i poslednji put uočili grešku. Pomoću ovih informacija možemo da odredimo interni prioritet greške i da odlučimo da li ćemo prioritizovati njeno rešavanje ili ne.
+Prva sekcija na stranici daje nam najosnivnije informacije o grešci koju analiziramo. Tu mozemo da vidimo sam tekst greške, fajl u kome se greška dogodila, broj pojavljivanja greške kao i broj korisnika kod kojih se greška manifestovala. Takođe, vidimo broj broj pojavljivanja greške kako u poslednja 24 časa, tako i u poslednjih mesec dana, kao i podatke o verziji aplikacije u kojoj smo prvi i poslednji put uočili grešku. Pomoću ovih informacija možemo da odredimo interni prioritet greške i da odlučimo da li ćemo prioritizovati njeno rešavanje ili ne. Ove informacije prikazane su na slici \ref{fig:sentryErrorBasicInfo}.
 
 \begin{figure}[h!]
 \centering
@@ -594,7 +620,7 @@ Prva sekcija na stranici daje nam najosnivnije informacije o grešci koju analiz
 \label{fig:sentryErrorBasicInfo}
 \end{figure}
 
-Nakon ovih informacija, vidimo deo koda u kom se greška dogodila. Ovo je veoma korisna informacija jer sužava pretragu i daje nam ključne informacije kako bismo mogli da krenemo sa procesom debagovanja. Ovde takođe imamo opciju da pogledamo celu putanju greške (eng. stacktrace). Ova opcija je naročito korisna kada je u pitanju greška unutar nekog eksternog sistema ili biblioteke. U tom slučaju, sama greška se manifestuje kod nas u aplikaciji, ali je rešavanje potrebno sprovesti van iste. 
+Nakon ovih informacija, vidimo deo koda u kom se greška dogodila. Ovo je veoma korisna informacija jer sužava pretragu i daje nam ključne informacije kako bismo mogli da krenemo sa procesom debagovanja. Ovde takođe imamo opciju da pogledamo celu putanju greške (eng. stacktrace). Ova opcija je naročito korisna kada je u pitanju greška unutar nekog eksternog sistema ili biblioteke. U tom slučaju, sama greška se manifestuje kod nas u aplikaciji, ali je rešavanje potrebno sprovesti van iste. Primer jedne ovakve putanje vidimo na slici \ref{fig:sentryStacktrace}.
 
 \begin{figure}[h!]
 \centering
@@ -605,7 +631,7 @@ Nakon ovih informacija, vidimo deo koda u kom se greška dogodila. Ovo je veoma 
 
 \subsection{Koncept mrvica hleba}
 
-Mrvice hleba \cite{Breadcrumbs} (eng. breadcrumbs) unurar sistema Sentry predstavljaju sekvencu događaja ili akcija koji su se dogodili neposredno pre greške unutar naše aplikacije. Koncept je potekao od ostavljanja mrvica hleba koje će nam pomoći da dođemo do tačke kada je nešto krenulo po zlu. Ove mrvice mogu biti logovane automatski, ali takođe mi možemo dodati naše lične. Pomoću njih olakšavamo posao kako sebi tako i razvojnom timu prilikom reprodukcije i debagovanja greške. Dakle, u ovoj sekciji možemo da pratimo tačnu interakciju korisnika sa našom aplikacijom pre nego što je došlo do greške. Platforma Sentry prikazuje nam API pozive koji su okinuti, interakciju sa elementima korisničkog interfejsa (klik na dugme, selektovanje radio dugmeta, popunjavanje tekstualnog polja, ...). Ove informacije su od ključnog značaja kako bismo mogli da razumemo slučaj upotrebe kao i tok akcija koje dovode do nekog problema. \newline
+Mrvice hleba\cite{Breadcrumbs} (eng. breadcrumbs) unurar sistema Sentry predstavljaju sekvencu događaja ili akcija koji su se dogodili neposredno pre greške unutar naše aplikacije. Koncept je potekao od ostavljanja mrvica hleba koje će nam pomoći da dođemo do tačke kada je nešto krenulo po zlu. Ove mrvice mogu biti logovane automatski, ali takođe mi možemo dodati naše lične. Pomoću njih olakšavamo posao kako sebi tako i razvojnom timu prilikom reprodukcije i debagovanja greške. Dakle, u ovoj sekciji možemo da pratimo tačnu interakciju korisnika sa našom aplikacijom pre nego što je došlo do greške. Platforma Sentry prikazuje nam API pozive koji su okinuti, interakciju sa elementima korisničkog interfejsa (klik na dugme, selektovanje radio dugmeta, popunjavanje tekstualnog polja, ...) i ovo vidimo na slici \ref{fig:sentryBreadcrumbs}. Ove informacije su od ključnog značaja kako bismo mogli da razumemo slučaj upotrebe kao i tok akcija koje dovode do nekog problema. \newline
 
 \newline
 
@@ -616,7 +642,7 @@ Mrvice hleba \cite{Breadcrumbs} (eng. breadcrumbs) unurar sistema Sentry predsta
 \label{fig:sentryBreadcrumbs}
 \end{figure}
 
-Često, greške koje se desavaju unutar sistema se ne nalaze u glavnim tokovima korišćenja (eng. flows), već u nekim specifičnim slučajevima upotrebe. Na primer, korisnik je kliknuo na push notifikaciju ili deeplink \cite[133 - 139]{reactNative} i preko neke od ovih funkcionalnosti bio navigiran na određenu stranicu i tom prilikom dešava se greška na ovoj stranici. Kada razvojni tim pokuša da reprodukuje ovo ponašanje greška se ne desi. Ovo je veoma čest slučaj i poenta je u tome da u velikim sistemima postoji mnogo načina da se dodje do istog dela sistema i praktično je nemoguće testirati ih sve. U ovim situacijama nam može biti korisno da dodamo naše lične breadcrumbs kako bismo olakšali određivanje tačne putanje kojom je korisnik došao do greške. Sentry plaforma nam pruža ovu mogućnost.
+Često, greške koje se desavaju unutar sistema se ne nalaze u glavnim tokovima korišćenja (eng. flows), već u nekim specifičnim slučajevima upotrebe. Na primer, korisnik je kliknuo na push notifikaciju ili deeplink\cite[133 - 139]{reactNative} i preko neke od ovih funkcionalnosti bio navigiran na određenu stranicu i tom prilikom dešava se greška na ovoj stranici. Kada razvojni tim pokuša da reprodukuje ovo ponašanje greška se ne desi. Ovo je veoma čest slučaj i poenta je u tome da u velikim sistemima postoji mnogo načina da se dodje do istog dela sistema i praktično je nemoguće testirati ih sve. U ovim situacijama nam može biti korisno da dodamo naše lične breadcrumbs kako bismo olakšali određivanje tačne putanje kojom je korisnik došao do greške. Sentry plaforma nam pruža ovu mogućnost i to vidimo na slici \ref{fig:addBreadcrumb}.
 
 \begin{figure}[h!]
 \centering
@@ -627,7 +653,7 @@ Mrvice hleba \cite{Breadcrumbs} (eng. breadcrumbs) unurar sistema Sentry predsta
 
 \subsection{Informacije o uređaju}
 
-Neretko, same greške imaju povezanost sa trenutnim stanjem uređaja. Na primer, ukoliko je internet konekcija slaba može doći do povećanog vremena čekanja za informacije sa servera ili čak do situacija kada te informacije uopšte ne stignu nazad. Takođe, ukoliko je novi baterije pri kraju to takođe može da izazove razne probleme u funkcionisanju aplikacije. Platforma Sentry nam pruža i ove informacije.
+Neretko, same greške imaju povezanost sa trenutnim stanjem uređaja. Na primer, ukoliko je internet konekcija slaba može doći do povećanog vremena čekanja za informacije sa servera ili čak do situacija kada te informacije uopšte ne stignu nazad. Takođe, ukoliko je novi baterije pri kraju to takođe može da izazove razne probleme u funkcionisanju aplikacije. Platforma Sentry nam pruža i ove informacije kao što se vidi na slici \ref{fig:deviceInfo}.
 
 \begin{figure}[h!]
 \centering
@@ -650,7 +676,7 @@ Kada smo ovo odradili, mozemo da napravimo omotač oko naše React Native aplika
 
 \newline
 
-Sentry nam pruža ugrađenu podršku za ovo. Na slici ispod ćemo videti kako bi izgledala implementacija.
+Sentry nam pruža ugrađenu podršku za ovo. Na slici \ref{fig:errorBoundary} ćemo videti kako bi izgledala implementacija.
 
 \begin{figure}[h!]
 \centering
