@@ -1,0 +1,31 @@
+{
+  "homeScreen": {
+    "findOtherLocation": "Pronadji drugu lokaciju",
+    "nextThreeDaysForecast": "Vremenska prognoza u naredna tri dana",
+    "today": "Danas",
+    "tempGraph": "Temperatura",
+    "windGraph": "Vetar",
+    "precipitationGraph": "Padavine",
+    "myLocation": "Moja lokacija",
+    "monday": "Ponedeljak",
+    "tuesday": "Utorak",
+    "wednesday": "Sreda",
+    "thursday": "Četvrtak",
+    "friday": "Petak",
+    "saturday": "Subota",
+    "sunday": "Nedelja",
+    "changeLanguage": "Promeni jezik"
+  },
+  "searchScreen": {
+    "searchLocation": "Pretrazi proizvoljnu lokaciju"
+  },
+  "navigation": {
+    "homeScreen": "Home",
+    "searchScreen": "Pretraga",
+    "languageScreen": "Izaberi jezik"
+  },
+  "language": {
+    "english": "Engleski",
+    "serbianLat": "Srpski - latinica"
+  }
+}

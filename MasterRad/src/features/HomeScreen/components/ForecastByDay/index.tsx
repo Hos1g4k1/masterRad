@@ -9,6 +9,7 @@ import {colors} from '../../../../theme/colors';
 import Spacing from '../../../../components/Spacing';
 import Flex, {Row} from '../../../../components/Flex';
 import ExtremeTemp from '../../../../components/ExtremeTemp';
+import {useLocalization} from '../../../../localization/localization';
 
 type Props = {
   data: Array<ForecastDayDayType>;
@@ -16,6 +17,8 @@ type Props = {
 };
 
 const ForecastByDay = ({data, title}: Props) => {
+  const t = useLocalization();
+
   const renderTemperature = (temp: number, caption: string) => (
     <Spacing
       size={1}
@@ -36,6 +39,25 @@ const ForecastByDay = ({data, title}: Props) => {
     </Text>
   );
 
+  const mapDayName = (dayName: string) => {
+    switch (dayName) {
+      case 'Monday':
+        return t('translation:homeScreen.monday');
+      case 'Tuesday':
+        return t('translation:homeScreen.tuesday');
+      case 'Wednesday':
+        return t('translation:homeScreen.wednesday');
+      case 'Thursday':
+        return t('translation:homeScreen.thursday');
+      case 'Friday':
+        return t('translation:homeScreen.friday');
+      case 'Saturday':
+        return t('translation:homeScreen.saturday');
+      default:
+        return t('translation:homeScreen.sunday');
+    }
+  };
+
   const renderItem = ({
     item,
     index,
@@ -51,7 +73,9 @@ const ForecastByDay = ({data, title}: Props) => {
         <Row>
           <Spacing size={1} top style={{flex: 4}}>
             <Text style={styles.textStyle}>
-              {index === 0 ? 'Today' : dayName}
+              {index === 0
+                ? t('translation:homeScreen.today')
+                : mapDayName(dayName)}
             </Text>
           </Spacing>
           <Spacing size={3} left style={{flex: 1}}>

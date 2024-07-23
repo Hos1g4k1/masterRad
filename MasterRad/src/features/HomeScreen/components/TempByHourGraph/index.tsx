@@ -10,6 +10,7 @@ import {Row} from '../../../../components/Flex';
 import {colors} from '../../../../theme/colors';
 import analyticsEventBus from '../../../../utils/AnalyticsEventBus/AnalyticsEventBus';
 import {CLICKED_GRAPH_TYPE_EVENT} from '../../../../utils/AnalyticsTrackers/AnalyticsEventsNames';
+import {useLocalization} from '../../../../localization/localization';
 
 type Props = {
   data: Array<number>;
@@ -23,6 +24,8 @@ enum GRAPH_TYPE {
 }
 
 const TempByHourGraph = ({}: Props) => {
+  const t = useLocalization();
+
   const hourlyData = useSelector(selectForecastDataForTheNextTwentyFourHours);
   const [data, setData] = useState<{
     data: Array<number>;
@@ -112,7 +115,7 @@ const TempByHourGraph = ({}: Props) => {
               ? colors.primary
               : colors.white
           }
-          title="Temperature"
+          title={t('translation:homeScreen.tempGraph')}
           onPress={() => {
             setCurrentOption(GRAPH_TYPE.TEMPERATURE);
             analyticsEventBus.log({
@@ -127,7 +130,7 @@ const TempByHourGraph = ({}: Props) => {
           color={
             currentOption === GRAPH_TYPE.WIND ? colors.primary : colors.white
           }
-          title="Wind"
+          title={t('translation:homeScreen.windGraph')}
           onPress={() => {
             setCurrentOption(GRAPH_TYPE.WIND);
             analyticsEventBus.log({
@@ -143,7 +146,7 @@ const TempByHourGraph = ({}: Props) => {
             ? colors.primary
             : colors.white
         }
-        title="Precipitation"
+        title={t('translation:homeScreen.precipitationGraph')}
         onPress={() => {
           setCurrentOption(GRAPH_TYPE.PRECIPITATION);
           analyticsEventBus.log({

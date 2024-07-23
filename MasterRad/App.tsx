@@ -6,7 +6,7 @@ import store from './src/store';
 import NavigationComponent from './src/navigation';
 import * as Sentry from '@sentry/react-native';
 import Text from './src/components/Text';
-
+import 'intl-pluralrules';
 const routingInstrumentation = new Sentry.ReactNavigationInstrumentation({
   enableTimeToInitialDisplay: true,
 });

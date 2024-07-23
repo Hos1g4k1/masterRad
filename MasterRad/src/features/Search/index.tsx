@@ -15,7 +15,6 @@ import {setCurrentLocation} from '../HomeScreen/redux/forecast/reducer';
 const SearchScreen = () => {
   const [location, setLocation] = useState<string>('');
   const dispatch = useAppDispatch();
-  const loadingStatus = useSelector(selectLoadingStatus);
   const locations = useSelector(selectLocations);
   const navigation = useNavigation();
 

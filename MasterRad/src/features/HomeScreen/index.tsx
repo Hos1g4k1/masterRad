@@ -19,9 +19,11 @@ import DayWeatherList from './components/DayWeatherList';
 import {getRoundTemp} from '../../utils/temperature';
 import ForecastByDay from './components/ForecastByDay';
 import TempByHourGraph from './components/TempByHourGraph';
-import {goToSearchScreen} from '../../navigation/actions';
+import {goToLanguageScreen, goToSearchScreen} from '../../navigation/actions';
 import styles from './style';
 import {colors} from '../../theme/colors';
+import {useLocalization} from '../../localization/localization';
+import {selectCurrentLanguage} from '../../redux/languageReducer/selectors';
 
 const HomeScreen = () => {
   const currentLocationName = useSelector(selectCurrentLocation);
@@ -30,16 +32,19 @@ const HomeScreen = () => {
   const currentWeather = useSelector(selectCurrentWeather);
   const futureForecast = useSelector(selectForecastForNextThreeDays);
   const dispatch = useAppDispatch();
+  const lang = useSelector(selectCurrentLanguage);
+
+  const t = useLocalization();
 
   useEffect(() => {
-    dispatch(fetchForecast({location: currentLocationName}));
-  }, [currentLocationName, dispatch]);
+    dispatch(fetchForecast({location: currentLocationName, lang}));
+  }, [currentLocationName, dispatch, lang]);
 
   const renderLocationInfo = () => {
     return (
       <View style={{alignItems: 'center'}}>
         <Text variation="headline3" color="white">
-          My location
+          {t('translation:homeScreen.myLocation')}
         </Text>
         <Text variation="body2" color="white">
           {location?.name}
@@ -64,6 +69,11 @@ const HomeScreen = () => {
             title="L"
           />
         </Row>
+        <Button
+          onPress={goToLanguageScreen}
+          title={t('translation:homeScreen.changeLanguage')}
+          color={colors.primary}
+        />
       </View>
     );
   };
@@ -77,7 +87,7 @@ const HomeScreen = () => {
         {renderLocationInfo()}
       </Spacing>
       <Button
-        title="Find other location"
+        title={t('translation:homeScreen.findOtherLocation')}
         color={colors.primary}
         onPress={goToSearchScreen}
       />
@@ -88,7 +98,7 @@ const HomeScreen = () => {
       <Spacing size={2} top style={{flex: 1}}>
         <ForecastByDay
           data={futureForecast}
-          title="Forecast in the next three days"
+          title={t('translation:homeScreen.nextThreeDaysForecast')}
         />
       </Spacing>
     </ScrollView>
