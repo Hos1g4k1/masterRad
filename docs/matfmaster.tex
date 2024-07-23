@@ -315,11 +315,40 @@ Drugi ekran u našoj aplikaciji služi za pretragu destinacije na kojoj korisnik
 
 U kontekstu mobilnih aplikacija, lokalizacija i internacionalizacija su ključni koncepti koji se odnose na prilagođavanje aplikacije različitim jezičnim i kulturnim postavkama kako bi se omogućilo korisnicima širom sveta da je koriste na način koji im je najprihvatljiviji.
 
-Internacionalizacija je proces dizajniranja aplikacije na način koji omogućava jednostavno prilagođavanje različitim jezičnim i kulturnim postavkama bez značajnih izmena u samom kodu. To uključuje korišćenje standarda kao što su Unicode za podršku različitim jezicima, podršku za različite formate datuma, valuta i drugih lokalnih specifičnosti. Lokalizacija se odnosi na prilagođavanje internacionalizovane aplikacije specifičnom jeziku i kulturnim normama određenog regiona. Ovo uključuje prevođenje teksta, prilagođavanje formata datuma i vremena, valute, kao i prilagođavanje ikonica, slika i drugih sadržaja kako bi se bolje uklopili u ciljno okruženje.
+Internacionalizacija je proces dizajniranja aplikacije na način koji omogućava jednostavno prilagođavanje različitim jezičnim i kulturnim postavkama bez značajnih izmena u samom kodu. To uključuje korišćenje standarda kao što su Unicode za podršku različitim jezicima, podršku za različite formate datuma, valuta i drugih lokalnih specifičnosti. Sa druge strane, lokalizacija se odnosi na prilagođavanje internacionalizovane aplikacije specifičnom jeziku i kulturnim normama određenog regiona. Ovo uključuje prevođenje teksta, prilagođavanje formata datuma i vremena, valute, kao i prilagođavanje ikonica, slika i drugih sadržaja kako bi se bolje uklopili u ciljno okruženje.
 
 Kao što je napomenuto ranije u ovom poglavlju, aplikacija podržava promene jezika. U ovom momentu podržana su samo dva jezika - engleski i srpski. U ovoj sekciji biće prikazana implementacija i analziran pristup kojim je ovo postignuto.
 
-Implementacija je izvršena pomoću biblioteke i18next. Nakon instaliranja iste u projekat bilo je neophodno izvršiti konfigurisanje.
+Implementacija je izvršena pomoću biblioteke i18next. Nakon instaliranja iste u projekat bilo je neophodno izvršiti konfigurisanje kao što je prikazano na slici \ref{fig:localizationConf}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{docs/images/chapterFour/langConf.png}
+    \caption{Konfiguracija biblioteke za lokalizaciju}
+    \label{fig:localizationConf}
+\end{figure}
+
+Kao što je prikazano, biblioteci se daju fajlovi sa svim podržanim jezicima putem parametra resources. U ovom konkretnom slučaju to su JSON fajlovi koji sadrže prevode na srpski i engleski jezik. Putem parametra lng se postavlja početni jezik i on je podešen automatski na region koji je postavljen unutar podešavanja uređaja.
+
+Pored automatskog postavljanja jezika, aplikacija poseduje i zaseban ekran na kom su izlistani svi dostupni jezici i tu korisnik može menjati jezik po volji. Ovaj ekran je prikazan na slici \ref{fig:langScreen}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.15]{docs/images/chapterFour/languages.png}
+    \caption{Ekran za izbor jezika}
+    \label{fig:langScreen}
+\end{figure}
+
+Takođe, bitno je napomenuti da je implementacija izvedena tako da prilikom dodavanja novog jezika nije potreban rad sa inženjerske strane. Neophodno je dodati novi fajl za jezik koji se uvodi i prevesti sav tekst koji se koristi. Rezultat ove funckionalnosti prikazan je na slici \ref{fig:multiLanguages}.
+
+\begin{figure}
+    \centering
+    \subfloat[\centering Aplikacija na engleskom]{{\includegraphics[width=5cm]{docs/images/chapterFour/en.png} }}%
+    \qquad
+    \subfloat[\centering Aplikacija na srpskom]{{\includegraphics[width=5cm]{docs/images/chapterFour/srb.png} }}%
+    \caption{Aplikacija na više jezika}
+    \label{fig:multiLanguages}
+\end{figure}
 
 \subsection{WeatherAPI}
 
